@@ -23,16 +23,17 @@ Mail : char
 }
 
 class Exemplaire {
-État : char
+État : enum
 Clé : char 
 Disponibilités : char 
+compteur : int 
 }
 
 Class Resource { 
 Code :int 
 Titre :char
 Éditeur :char
-Genre : char
+Genre : enum
 Date_appartion :Date
 Nb_exemplaire : int
 }
