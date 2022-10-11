@@ -1,5 +1,4 @@
 @startuml
-
 class Adhesions {
 Encours : booléen 
 Début : Date
@@ -13,6 +12,7 @@ Adresse : char
 Mail : char
 Num_telephone : int
 Date_de_naissance : Date
+carte : str 
 }
 
 class Personel{
@@ -86,7 +86,7 @@ Etat_retour
 }
 
 Adherents "1..1" - "1..1" compte_utilisateur 
-Adherents "0..1" - "0..*" Exemplaire
+Emprun_en_cours "0..1" - "0..*" Exemplaire
 Adherents "1..1" - "1..1" Adhesions
 Adherents "1..1" - "0..1" sanction
 Adherents "1..1" - "0..Nmax" Emprun_en_cours 
@@ -96,6 +96,4 @@ compte_utilisateur "1..1" - "1..1" Personel
 Resource <|- œuvremusicale
 Resource <|- film
 Resource <|- livre
-
-
 @enduml
