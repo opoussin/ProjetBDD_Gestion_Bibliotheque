@@ -1,1 +1,94 @@
+@startuml
 
+class Adhesions {
+Encours : booléen 
+Début : Date
+Fin: Date
+}
+
+class Adherents{
+Nom : char
+Prenom : char 
+Adresse : char 
+Mail : char
+Num_telephone : int
+Date_de_naissance : Date
+}
+
+class Personel{
+Nom : char
+Prenom : char 
+Adresse : char 
+Mail : char
+}
+
+class Exemplaire {
+État : char
+Clé : char 
+Disponibilités : char 
+}
+
+Class Resource { 
+Code :int 
+Titre :char
+Éditeur :char
+Genre : char
+Date_appartion :Date
+Nb_exemplaire : int
+}
+
+Class contributeur{
+Rôle :char
+Nom :char
+Prenom :char
+Date_de_naissance:Date 
+Nationalité: char
+}
+
+class livre {
+ISBN : char
+Langue : char 
+Résumé: char 
+}
+
+class film {
+Synopsis: char
+Langue : char 
+Duré: time  
+}
+
+class œuvremusicale { 
+Durée: Time
+}
+
+Class compte_utilisateur{
+Login : {KEY}
+Mot_de_passe : Unique not null
+}
+
+Class sanction{
+Nb_retard
+Nb_degradation 
+En_sanction :Boolean 
+Durée_sanction 
+}
+
+Class Emprun_en_cours{
+Cle_exemplaire
+Durée_limite 
+Etat_retour
+}
+
+Adherents "1..1" - "1..1" compte_utilisateur 
+Adherents "0..1" - "0..*" Exemplaire
+Adherents "1..1" - "1..1" Adhesions
+Adherents "1..1" - "0..1" sanction
+Adherents "1..1" - "0..Nmax" Emprun_en_cours 
+Exemplaire "1..*" - "1..1" Resource
+contributeur "1..*" - "1..*" Resource
+
+Resource <|- œuvremusicale
+Resource <|- film
+Resource <|- livre
+
+@enduml
