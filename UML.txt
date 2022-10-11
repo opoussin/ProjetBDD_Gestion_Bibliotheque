@@ -83,6 +83,7 @@ Class Emprun_en_cours{
 Cle_exemplaire
 Durée_limite 
 Etat_retour
+Encour? : bool
 }
 
 Adherents "1..1" - "1..1" compte_utilisateur 
