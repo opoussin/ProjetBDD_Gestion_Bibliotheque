@@ -1,10 +1,10 @@
 # NF18_TP
 
 ## Membres
-ESCLEINE Justine
-REY Lauriane 
-HAN Yushi
-POUSSIN Océane
+ESCLEINE Justine,
+REY Lauriane, 
+HAN Yushi,
+POUSSIN Océane.
 
 ## Sujet
 Système de gestion d'une bibliothèque.
