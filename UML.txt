@@ -38,13 +38,7 @@ Date_appartion :Date
 Nb_exemplaire : int
 }
 
-Class contributeur{
-Rôle :char
-Nom :char
-Prenom :char
-Date_de_naissance:Date 
-Nationalité: char
-}
+
 
 class livre {
 ISBN : char
@@ -86,16 +80,24 @@ Durée_limite
 Etat_retour
 Encour? : bool
 }
-
-Adherents "1..1" - "1..1" compte_utilisateur 
-Emprun_en_cours "0..1" - "1..1" Exemplaire
-Adherents "1..1" - "0..Nmax" Emprun_en_cours 
-Exemplaire "1..*" - "1..1" Resource
-contributeur "1..*" - "1..*" Resource
-compte_utilisateur "1..1" - "1..1" Personel
-(Adherents , compte_utilisateur ) .. Adhesions
-(Adherents , Emprun_en_cours ) .. sanction
+Class contributeur{
+Rôle :char
+Nom :char
+Prenom :char
+Date_de_naissance:Date 
+Nationalité: char
+}
 Resource <|- œuvremusicale
 Resource <|- film
 Resource <|- livre
+
+
+Adherents "1..1" - "1..1" compte_utilisateur 
+(Adherents , compte_utilisateur ) .. Adhesions
+Emprun_en_cours "0..1" - "1..1" Exemplaire
+contributeur "1..*" - "1..*" Resource
+Adherents "1..1" - "0..Nmax" Emprun_en_cours 
+(Adherents , Emprun_en_cours ) .. sanction
+compte_utilisateur "1..1" - "1..1" Personel
+Exemplaire "1..*" - "1..1" Resource
 @enduml
