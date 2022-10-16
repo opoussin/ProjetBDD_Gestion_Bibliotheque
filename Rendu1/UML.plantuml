@@ -15,7 +15,7 @@ Date_de_naissance : Date
 carte : str 
 }
 
-class Personnel{
+class Personel{
 Nom : char
 Prenom : char 
 Adresse : char 
@@ -29,7 +29,7 @@ Disponibilités : char
 compteur : int 
 }
 
-Class Ressource { 
+Class Resource { 
 Code :int 
 Titre :char
 Éditeur :char
@@ -38,62 +38,60 @@ Date_appartion :Date
 Nb_exemplaire : int
 }
 
-
-
-class Livre {
+class livre {
 ISBN : char
 Langue : char 
 Résumé: char 
 }
 
-class Film {
+class film {
 Synopsis: char
 Langue : char 
-Durée_film: time  
+Duré: time  
 }
 
 class œuvremusicale { 
-Durée_oeuvre: Time
+Durée: Time
 }
 
-Class Compte_utilisateur{
-Login : {KEY}
-Mot_de_passe : Unique not null
+Class compte_utilisateur{
+Login : int
+Mot_de_passe : string
 }
 
-
-
-Class Sanction{
+Class sanction{
 Nb_retard
 Nb_degradation 
 En_sanction :Boolean 
 Durée_sanction 
 }
 
-
-
-Class Emprunt_en_cours{
-Durée_limite 
-Etat_retour: enum
+Class Emprun_en_cours{
+Cle_exemplaire : int
+Durée_limite : Date
+Etat_retour : enum
 }
-Class Contributeur{
+
+Class contributeur{
 Rôle :char
 Nom :char
 Prenom :char
 Date_de_naissance:Date 
 Nationalité: char
 }
-Ressource <|- œuvremusicale
-Ressource <|- Film
-Ressource <|- Livre
 
+Resource <|- œuvremusicale
+Resource <|- film
+Resource <|- livre
 
-Adherents "1..1" - "1..1" Compte_utilisateur 
-(Adherents , Compte_utilisateur ) .. Adhesions
-Emprunt_en_cours "0..1" - "1..1" Exemplaire
-Contributeur "1..*" - "1..*" Ressource
-Adherents "1..1" - "0..Nmax" Emprunt_en_cours 
-(Adherents , Emprunt_en_cours ) .. Sanction
-Compte_utilisateur "1..1" - "1..1" Personnel
-Exemplaire "1..*" - "1..1" Ressource
+Adherents "1..1" - "1..1" compte_utilisateur 
+(Adherents , compte_utilisateur ) .. Adhesions
+
+Emprun_en_cours "0..1" - "1..1" Exemplaire
+contributeur "1..*" - "1..*" Resource
+Adherents "1..1" - "0..Nmax" Emprun_en_cours 
+(Adherents , Emprun_en_cours ) .. sanction
+
+compte_utilisateur "1..1" - "1..1" Personel
+Exemplaire "1..*" - "1..1" Resource
 @enduml
