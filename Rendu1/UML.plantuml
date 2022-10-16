@@ -75,10 +75,8 @@ Durée_sanction
 
 
 Class Emprunt_en_cours{
-Cle_exemplaire
 Durée_limite 
-Etat_retour
-En_cours : bool
+Etat_retour: enum
 }
 Class Contributeur{
 Rôle :char
