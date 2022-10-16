@@ -1,0 +1,103 @@
+@startuml
+class Adhesions {
+Encours : booléen 
+Début : Date
+Fin: Date
+}
+
+class Adherents{
+Nom : char
+Prenom : char 
+Adresse : char 
+Mail : char
+Num_telephone : int
+Date_de_naissance : Date
+carte : str 
+}
+
+class Personel{
+Nom : char
+Prenom : char 
+Adresse : char 
+Mail : char
+}
+
+class Exemplaire {
+État : enum
+Clé : char 
+Disponibilités : char 
+compteur : int 
+}
+
+Class Resource { 
+Code :int 
+Titre :char
+Éditeur :char
+Genre : enum
+Date_appartion :Date
+Nb_exemplaire : int
+}
+
+
+
+class livre {
+ISBN : char
+Langue : char 
+Résumé: char 
+}
+
+class film {
+Synopsis: char
+Langue : char 
+Duré: time  
+}
+
+
+
+class œuvremusicale { 
+Durée: Time
+}
+
+Class compte_utilisateur{
+Login : {KEY}
+Mot_de_passe : Unique not null
+}
+
+
+
+Class sanction{
+Nb_retard
+Nb_degradation 
+En_sanction :Boolean 
+Durée_sanction 
+}
+
+
+
+Class Emprun_en_cours{
+Cle_exemplaire
+Durée_limite 
+Etat_retour
+Encour? : bool
+}
+Class contributeur{
+Rôle :char
+Nom :char
+Prenom :char
+Date_de_naissance:Date 
+Nationalité: char
+}
+Resource <|- œuvremusicale
+Resource <|- film
+Resource <|- livre
+
+
+Adherents "1..1" - "1..1" compte_utilisateur 
+(Adherents , compte_utilisateur ) .. Adhesions
+Emprun_en_cours "0..1" - "1..1" Exemplaire
+contributeur "1..*" - "1..*" Resource
+Adherents "1..1" - "0..Nmax" Emprun_en_cours 
+(Adherents , Emprun_en_cours ) .. sanction
+compte_utilisateur "1..1" - "1..1" Personel
+Exemplaire "1..*" - "1..1" Resource
+@enduml
