@@ -37,3 +37,35 @@ Pour gérer les possibles sanctions envers un adhérent, nous avons créé une t
 
 	- Sanction ( Nb_retard : int, Nb_degradation : int, En_sanction :Boolean, Durée_sanction: )
 
+
+
+
+
+Cardinalités:
+- Adherent --> Emprunt : 1 adhérent peut faire 0 ou n emprunts (Nmax nombre maximum)
+Emprunt -> adherent: un emprunt correspond à un seul adhérent
+- Emprunt -> Exemplaire : un emprunt correspond à un seul exemplaire
+Exemplaire -> Emprunt: un exemplaire peut appartenir à aucun ou un seul emprunt  
+- Adherent -> Compte utilisateur : un adhérent a un seul compte utilisateur
+COmpte utilisateur -> Adhérent: un compte correspond à un seul adhérent (utilisateur)
+- Compte -> Personnel: un compte pour un seul Personnel
+Personnel -> Compte: un personnel a un seul compte
+- Exemplaire - Ressource: un exemplaire correspond à une seule ressource
+Ressource -> Exemplaire: Un ressource peut avoir 1 ou plusieurs exemplaires
+- Contributeur -> Ressource : un contributeur contribue à au moins une ressource 
+- Ressource -> Contributeur: une ressource a au moins un contributeur
+
+
+
+
+
+
+Notes:
+- Pour les statistiques, un compteur du nombre d'emprunt est ajouté à la table exemplaires, ce compteur servira à calculer des statistiques dans la partie python 
+- L'historique des emprunts est gardé dans la table emprunt 
+- L'historique des adhésion est visible dans la table Adhésion
+- Les sanctions sont définies dans la table sanction, tant que le booleen indique que la sanction est en cours (mise à jour en fonction de la date de fin), le droit d'emprunt de l'utilisateur est suspendu 
+- Un personnel  n'est pas adhérent 
+- Exemplaire perdu ..? (je sais plus si on a dit que le compteur diminue ou non en attendant que le livre soit remboursé)
+
+
