@@ -56,4 +56,5 @@ Pour gérer les possibles sanctions envers un adhérent, nous avons créé une t
 - Les sanctions sont définies dans la table Sanction, tant que le booleen indique que la sanction est en cours (mise à jour en fonction de la date de fin), le droit d'emprunt de l'utilisateur est suspendu. 
 - Un membre du personnel de la bibliothèque n'est pas adhérent. 
 - On ajoutera dans l'énumération de l'état des exemplaires la mention "perdu". Lorsque le client aura remboursé la ressource, on ajoutera un nouvel exemplaire dans la table avec une clé distincte de celui qui a été perdu. On fera tout de même un décompte du nombre d'exemplaires (Nb_exemplaire) de la table Ressource pour avoir plus vite accès au nombre d'exemplaires d'une même ressource détenus par la bibliothèque. Si il la retrouve, on pourra tout simplement changer l'état. 
+- Pour pouvoir emprunter un livre, il faut vérifier que le livre soit neuf ou en bon état et que l'adhérent ne soit pas en cours de sanction.
 
