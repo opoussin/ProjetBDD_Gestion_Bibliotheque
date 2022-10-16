@@ -43,13 +43,13 @@ Pour gérer les possibles sanctions envers un adhérent, nous avons créé une t
 
 Cardinalités:
 - Adherent --> Emprunt : 1 adhérent peut faire 0 ou n emprunts (Nmax nombre maximum)
-Emprunt -> adherent: un emprunt correspond à un seul adhérent
+- Emprunt -> adherent: un emprunt correspond à un seul adhérent
 - Emprunt -> Exemplaire : un emprunt correspond à un seul exemplaire
-Exemplaire -> Emprunt: un exemplaire peut appartenir à aucun ou un seul emprunt  
+- Exemplaire -> Emprunt: un exemplaire peut appartenir à aucun ou un seul emprunt  
 - Adherent -> Compte utilisateur : un adhérent a un seul compte utilisateur
-COmpte utilisateur -> Adhérent: un compte correspond à un seul adhérent (utilisateur)
+- COmpte utilisateur -> Adhérent: un compte correspond à un seul adhérent (utilisateur)
 - Compte -> Personnel: un compte pour un seul Personnel
-Personnel -> Compte: un personnel a un seul compte
+- Personnel -> Compte: un personnel a un seul compte
 - Exemplaire - Ressource: un exemplaire correspond à une seule ressource
 - Ressource -> Exemplaire: Un ressource peut avoir 1 ou plusieurs exemplaires
 - Contributeur -> Ressource : un contributeur contribue à au moins une ressource 
