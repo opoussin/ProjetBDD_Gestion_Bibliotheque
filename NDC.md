@@ -51,7 +51,7 @@ COmpte utilisateur -> Adhérent: un compte correspond à un seul adhérent (util
 - Compte -> Personnel: un compte pour un seul Personnel
 Personnel -> Compte: un personnel a un seul compte
 - Exemplaire - Ressource: un exemplaire correspond à une seule ressource
-Ressource -> Exemplaire: Un ressource peut avoir 1 ou plusieurs exemplaires
+- Ressource -> Exemplaire: Un ressource peut avoir 1 ou plusieurs exemplaires
 - Contributeur -> Ressource : un contributeur contribue à au moins une ressource 
 - Ressource -> Contributeur: une ressource a au moins un contributeur
 
