@@ -79,9 +79,9 @@ Date_de_naissance:Date
 Nationalité: char
 }
 
-Resource <|- œuvremusicale
-Resource <|- Film
-Resource <|- Livre
+Ressource <|- œuvremusicale
+Ressource <|- Film
+Ressource <|- Livre
 
 Adherents "1..1" - "1..1" Compte_utilisateur 
 (Adherents , Compte_utilisateur ) .. Adhesions
