@@ -52,8 +52,6 @@ Langue : char
 Durée_film: time  
 }
 
-
-
 class œuvremusicale { 
 Durée_oeuvre: Time
 }
