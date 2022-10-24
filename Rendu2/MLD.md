@@ -27,13 +27,10 @@ Reservation(emprunt_enCours: Boolean,reserv_date : Date)
 
 
 
-<b>Héritage par la classee mère de la relation Ressource( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int ) avec :
-- Film( Synopsis: char, Langue : char , Durée_film: time  )
-- Livre( ISBN : char, Langue : char , Résumé: char )
-- œuvremusicale(Durée_oeuvre: Time) </b>
+<b>Héritage par la classee mère de la relation Ressource( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int ) avec : Film( Synopsis: char, Langue : char , Durée_film: time  ) ; Livre( ISBN : char, Langue : char , Résumé: char ) ; œuvremusicale(Durée_oeuvre: Time) </b>
 
 
-Ressource( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int, ISBN : char, Langue : char , Résumé: char, Synopsis: char, Langue : char , Durée_film: time, Durée_oeuvre: Time, Livre : boolean, Film: Boolean, œuvremusicale= Boolean )
+    Ressource( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int, ISBN : char, Langue : char , Résumé: char, Synopsis: char, Langue : char , Durée_film: time, Durée_oeuvre: Time, Livre : boolean, Film: Boolean, œuvremusicale= Boolean )
 Contraintes:
 - NOT (Livre AND Synopsis, Langue , Durée_film, Durée_oeuvre )
 - NOT (Film AND ISBN , Langue, Résumé, Durée_oeuvre )
@@ -44,13 +41,20 @@ Contraintes:
 - Film OR Livre OR œuvremusicale
 
 
-Contraintes : on devra vérifier que les nullités et non nullités de c, d, e et f en fonction du type t (cela peut se faire grâce à un CHECK en SQL)
-
-
-
 <b> Relation entre Contributeur et Ressource </b>
 
 Contributeur( Rôle :char, Nom :char, Prenom :char, Date_de_naissance:Date , Nationalité: char) 
-Contribue_livre(#Rôle =>Contributeur, #Code=>Livre ) 
-Contribue_film(#Rôle =>Contributeur, #Code=>Film ) 
-Contribue_musique(#Rôle =>Contributeur, #Code=>œuvremusicale ) 
+
+Contribue(#Rôle =>Contributeur, #Code=>Ressource ) 
+
+<b> Composition entre Exemplaire(État : enum,Clé : char , Disponibilités : char ,compteur : int )et Ressource( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int, ISBN : char, Langue : char , Résumé: char, Synopsis: char, Langue : char , Durée_film: time, Durée_oeuvre: Time, Livre : boolean, Film: Boolean, œuvremusicale= Boolean )</b>
+
+    Ressource( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int, ISBN : char, Langue : char , Résumé: char, Synopsis: char, Langue : char , Durée_film: time, Durée_oeuvre: Time, Livre : boolean, Film: Boolean, œuvremusicale= Boolean )
+
+    Exemplaire(#Clé : char , #Code =>Ressource, État : enum, Disponibilité : char ,compteur : int )
+
+
+
+
+
+
