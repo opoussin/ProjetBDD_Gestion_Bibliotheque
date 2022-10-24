@@ -1,6 +1,6 @@
 Adhesions(Encours : booléen ,Début : Date, Fin: Date)
 
-Adherents(Nom : char, Prenom : char , Adresse : char ,Mail : char,Num_telephone : int, Date_de_naissance : Date, carte : str )
+Adherents(Nom : char, Prenom : char , Adresse : char ,Mail : char,Num_telephone : int, Date_de_naissance : Date, Nb_retard : int, Nb_degradation: int, carte : str )
 
 Personnel(Nom : char, Prenom : char ,Adresse : char ,Mail : char)
 
@@ -12,24 +12,43 @@ Ressource(#Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion
 
 Compte_utilisateur( Login : int, Mot_de_passe : string)
 
-Sanction( Nb_retard, Nb_degradation , En_sanction :Boolean , Durée_sanction )
+Sanction(  , En_sanction :Boolean , Durée_sanction )
 
-Emprunt_en_cours(Durée_limite : Date, Etat_retour : enum)
-
-Contributeurs( Rôle :char, Nom :char, Prenom :char, Date_de_naissance:Date , Nationalité: char) 
+Sanction(En_sanction :Boolean )
 
 
-<b>Héritage par les classes filles de la relation Ressource - Film,Livre,OeuvreMusicale : </b>
+Retard(En_Retard :Boolean ,Debut_retard:date)
 
-Livre( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int, ISBN : char, Langue : char , Résumé: char )
+Degradation(En_Degradation :Boolean , Debut_degradation:date )
 
-Film( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int, Synopsis: char, Langue : char , Durée_film: time  ) avec 
+Emprunt(emprunt_enCours: Boolean, Durée_limite : Date, Etat_retour : enum)
 
-œuvremusicale( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int ,Durée_oeuvre: Time)
+Reservation(emprunt_enCours: Boolean,reserv_date : Date)
 
-Contrainte : INTERSECTION (PROJECTION(Livre,Code), PROJECTION(Film,Code), PROJECTION(œuvremusicale,Code)) = {}
 
-<b> Relation entre Contributeur et Film, Livre, œuvremusicale </b>
+
+<b>Héritage par la classee mère de la relation Ressource( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int ) avec :
+- Film( Synopsis: char, Langue : char , Durée_film: time  )
+- Livre( ISBN : char, Langue : char , Résumé: char )
+- œuvremusicale(Durée_oeuvre: Time) </b>
+
+
+Ressource( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int, ISBN : char, Langue : char , Résumé: char, Synopsis: char, Langue : char , Durée_film: time, Durée_oeuvre: Time, Livre : boolean, Film: Boolean, œuvremusicale= Boolean )
+Contraintes:
+- NOT (Livre AND Synopsis, Langue , Durée_film, Durée_oeuvre )
+- NOT (Film AND ISBN , Langue, Résumé, Durée_oeuvre )
+- NOT (œuvremusicale AND ISBN , Langue, Résumé, Synopsis, Langue , Durée_film )
+- Livre AND ISBN , Langue, Résumé
+- Film AND Synopsis, Langue , Durée_film
+- œuvremusicale AND Durée_oeuvre
+- Film OR Livre OR œuvremusicale
+
+
+Contraintes : on devra vérifier que les nullités et non nullités de c, d, e et f en fonction du type t (cela peut se faire grâce à un CHECK en SQL)
+
+
+
+<b> Relation entre Contributeur et Ressource </b>
 
 Contributeur( Rôle :char, Nom :char, Prenom :char, Date_de_naissance:Date , Nationalité: char) 
 Contribue_livre(#Rôle =>Contributeur, #Code=>Livre ) 
