@@ -12,6 +12,8 @@ Adresse : char
 Mail : char
 Num_telephone : int
 Date_de_naissance : Date
+Nb_retard: int
+Nb_degradation: int
 carte : str 
 }
 
@@ -60,16 +62,30 @@ Mot_de_passe : string
 }
 
 Class Sanction{
-Nb_retard
-Nb_degradation 
-En_sanction :Boolean 
-Durée_sanction 
+En_sanction :Boolean  
 }
 
-Class Emprunt_en_cours{
+Class Retard{
+En_Retard :Boolean 
+Debut_retard:date 
+}
+
+Class Degradation{
+En_Degradation :Boolean 
+Debut_degradation:date  
+}
+
+Class Emprunt{
+emprunt_enCours: Boolean
 Durée_limite : Date
 Etat_retour : enum
 }
+
+Class Reservation{
+emprunt_enCours: Boolean
+reserv_date : Date
+}
+
 
 Class Contributeurs{
 Rôle :char
