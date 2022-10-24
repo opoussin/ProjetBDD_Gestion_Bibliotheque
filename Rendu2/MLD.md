@@ -19,8 +19,13 @@ Emprunt_en_cours(Durée_limite : Date, Etat_retour : enum)
 Contributeurs( Rôle :char, Nom :char, Prenom :char, Date_de_naissance:Date , Nationalité: char) 
 Ressource( Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int)
 
-Livre( ISBN : char, Langue : char , Résumé: char )
 
-Film( Synopsis: char, Langue : char , Durée_film: time  )
+<b>Héritage par les classes filles de la relation Ressource - Film,Livre,OeuvreMusicale : </b>
 
-œuvremusicale(Durée_oeuvre: Time)
+Livre( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int, ISBN : char, Langue : char , Résumé: char )
+
+Film( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int, Synopsis: char, Langue : char , Durée_film: time  ) avec 
+
+œuvremusicale( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int ,Durée_oeuvre: Time)
+
+Contrainte : INTERSECTION (PROJECTION(Livre,Code), PROJECTION(Film,Code), PROJECTION(œuvremusicale,Code)) = {}
