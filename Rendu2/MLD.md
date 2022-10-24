@@ -1,24 +1,4 @@
-Adhesions(Encours : booléen ,Début : Date, Fin: Date)
 
-Adherents(Nom : char, Prenom : char , Adresse : char ,Mail : char,Num_telephone : int, Date_de_naissance : Date, Nb_retard : int, Nb_degradation: int, carte : str )
-
-Personnel(Nom : char, Prenom : char ,Adresse : char ,Mail : char)
-
-
-Compte_utilisateur( Login : int, Mot_de_passe : string)
-
-Sanction(  , En_sanction :Boolean , Durée_sanction )
-
-Sanction(En_sanction :Boolean )
-
-
-Retard(En_Retard :Boolean ,Debut_retard:date)
-
-Degradation(En_Degradation :Boolean , Debut_degradation:date )
-
-Emprunt(emprunt_enCours: Boolean, Durée_limite : Date, Etat_retour : enum)
-
-Reservation(emprunt_enCours: Boolean,reserv_date : Date)
 
 <b> Relation entre Adherents(Nom : char, Prenom : char , Adresse : char ,Mail : char,Num_telephone : int, Date_de_naissance : Date, Nb_retard : int, Nb_degradation: int, carte : str ); et Compte_utilisateur( Login : int, Mot_de_passe : string):</b>
 
