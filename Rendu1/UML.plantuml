@@ -87,7 +87,7 @@ reserv_date : Date
 }
 
 
-Class Contributeurs{
+Class Contributeur{
 Rôle :char
 Nom :char
 Prenom :char
@@ -99,14 +99,25 @@ Ressource <|- œuvremusicale
 Ressource <|- Film
 Ressource <|- Livre
 
-Adherents "1..1" - "1..1" Compte_utilisateur 
-(Adherents , Compte_utilisateur ) .. Adhesions
+Sanction <|- Degradation
+Sanction <|- Retard
 
-Emprunt_en_cours "0..1" - "1..1" Exemplaire
-Contributeurs "1..*" - "1..*" Ressource
-Adherents "1..1" - "0..Nmax" Emprunt_en_cours 
+Ressource *-- Exemplaire
+
+Adherents "1..1" - "1..1" Compte_utilisateur 
+Compte_utilisateur "1..1" - "1..1" Personnel
+Adherents "1..1" - "1..1" Adhesions
+
+
+Emprunt "0..1" - "1..1" Exemplaire
+Reservation "0..1" - "1..1" Exemplaire
+
+Contributeur "1..*" - "1..*" Ressource
+
+Adherents "1..1" - "0..Nmax" Emprunt 
+Adherents "1..1" - "0..Nmax" Reservation 
+
 (Adherents , Emprunt_en_cours ) .. Sanction
 
-Compte_utilisateur "1..1" - "1..1" Personnel
-Exemplaire "1..*" - "1..1" Ressource
+
 @enduml
