@@ -56,7 +56,7 @@
 
 Contributeur(#Rôle :char, #Nom :char, #Prenom :char, #Date_de_naissance:Date , Nationalité: char) 
 
-Contribue(#Rôle =>Contributeur, #Code=>Ressource ) 
+Contribue(#Rôle =>Contributeur, #Nom :char, #Prenom :char, #Date_de_naissance:Date, #Code=>Ressource ) 
 
 ## Composition entre Exemplaire et Ressource 
 <br>
