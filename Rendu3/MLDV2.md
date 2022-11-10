@@ -58,7 +58,7 @@ Nous avons choisi de faire un héritage par classe mère car la classe Ressource
 
 Contributeur(#Rôle :char, #Nom :char, #Prenom :char, #Date_de_naissance:Date , Nationalité: char) 
 
-Contribue(#Rôle =>Contributeur, #Nom :char, #Prenom :char, #Date_de_naissance:Date, #Code=>Ressource ) 
+Contribue(#Rôle =>Contributeur, #Nom :char=>Contributeur, #Prenom :char=>Contributeur, #Date_de_naissance:Date=>Contributeur, #Code=>Ressource ) 
 
 ## Composition entre Exemplaire et Ressource 
 <br>
