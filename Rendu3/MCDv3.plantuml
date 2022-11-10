@@ -110,6 +110,7 @@ enum Role{
   Auteurs
   Compositeurs
   Interprètes
+  Acteurs
   Réalisateurs
 }
 
