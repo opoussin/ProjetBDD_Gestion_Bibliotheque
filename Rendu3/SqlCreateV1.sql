@@ -13,7 +13,7 @@ CREATE TYPE type AS ENUM ('Oeuvremusicale', 'Film', 'Livre');
 
 CREATE TABLE Adherents(
   login VARCHAR,
-  FOREIGN KEY (login) REFERENCES Compte_utilisateur(login),
+  FOREIGN KEY ( login ) REFERENCES Compte_utilisateur(login),
   Nom VARCHAR NOT NULL,
   Prenom VARCHAR NOT NULL,
   Adresse VARCHAR NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE Adherents(
 );
 
 CREATE TABLE Personnel(
-  FOREIGN KEY login REFERENCES Compte_utilisateur(login),
+  FOREIGN KEY ( login ) REFERENCES Compte_utilisateur(login),
   Nom VARCHAR NOT NULL,
   Prenom VARCHAR NOT NULL,
   Adresse VARCHAR NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE Personnel(
 );
 
 CREATE TABLE Adhesions(
-  FOREIGN KEY login REFERENCES Adherents(login),
+  FOREIGN KEY ( login ) REFERENCES Adherents(login),
   Debut DATE NOT NULL,
   FIN DATE
 );
@@ -69,40 +69,40 @@ CREATE TABLE Contributeur (
 
 CREATE TABLE Contribue (
   Rôle role,
-  FOREIGN KEY Code REFERENCES Ressource(code),
-  FOREIGN KEY Type REFERENCES Ressource(Type),
-  FOREIGN KEY Nom REFERENCES Contributeur(Nom),
-  FOREIGN KEY Prenom REFERENCES Contributeur(Prenom),
-  FOREIGN KEY Date_de_naissance REFERENCES Contributeur(Date_de_naissance),
+  FOREIGN KEY ( Code ) REFERENCES Ressource(code),
+  FOREIGN KEY ( Type ) REFERENCES Ressource(Type),
+  FOREIGN KEY ( Nom ) REFERENCES Contributeur(Nom),
+  FOREIGN KEY ( Prenom ) REFERENCES Contributeur(Prenom),
+  FOREIGN KEY ( Date_de_naissance ) REFERENCES Contributeur(Date_de_naissance),
   CHECK ((Type='Livre' AND Rôle='Auteur') OR (Type='Film' AND (Rôle='Acteur' OR Rôle='Réalisateur')) OR (Type='Oeuvremusicale' AND (Rôle='Compositeur' OR Rôle='Interprète')))
 );
 
 CREATE TABLE Exemplaire(
   PRIMARY KEY Clé VARCHAR,
-  FOREIGN KEY Code REFERENCES Ressource(Code),
+  FOREIGN KEY ( Code ) REFERENCES Ressource(Code),
   État etat NOT NULL,
   Disponibilité BOOLEAN ,
   compteur INTEGER NOT NULL
 );
 
 CREATE TABLE EMPRUNT (
-  FOREIGN KEY Clé REFERENCES Exemplaire(Clé),
-  FOREIGN KEY login REFERENCES Adherents(login),
+  FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
+  FOREIGN KEY ( login ) REFERENCES Adherents(login),
   emprunt_enCours BOOLEAN,
   Durée_limite DATE,
   Etat_retour etat
 );
 
 CREATE TABLE Reservation (
-  FOREIGN KEY Clé REFERENCES Exemplaire(Clé),
-  FOREIGN KEY login REFERENCES Adherents(login),
+  FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
+  FOREIGN KEY ( login ) REFERENCES Adherents(login),
   état_reservation BOOLEAN,
   reserv_date DATE
 );
 
 CREATE TABLE Sanction(
-  FOREIGN KEY login REFERENCES Adhérents(login),
-  FOREIGN KEY Clé REFERENCES Exemplaire(Clé),
+  FOREIGN KEY ( login ) REFERENCES Adhérents(login),
+  FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
   En_sanction BOOLEAN,
   En_Retard BOOLEAN,
   Debut_retard DATE,
