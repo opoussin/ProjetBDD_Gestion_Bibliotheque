@@ -1,5 +1,5 @@
 CREATE TABLE Compte_utilisateur (
-  PRIMARY KEY login,
+  login VARCHAR  PRIMARY KEY ,
   Mot_de_passe VARCHAR
 );
 
@@ -12,7 +12,8 @@ CREATE TYPE etat AS ENUM ('Neuf', 'Bon', 'Abîmé','Perdu');
 CREATE TYPE type AS ENUM ('Oeuvremusicale', 'Film', 'Livre');
 
 CREATE TABLE Adherents(
-  FOREIGN KEY login REFERENCES Compte_utilisateur(login),
+  login VARCHAR,
+  FOREIGN KEY (login) REFERENCES Compte_utilisateur(login),
   Nom VARCHAR NOT NULL,
   Prenom VARCHAR NOT NULL,
   Adresse VARCHAR NOT NULL,
