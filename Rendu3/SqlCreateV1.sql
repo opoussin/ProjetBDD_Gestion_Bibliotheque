@@ -12,7 +12,7 @@ CREATE TYPE etat AS ENUM ('Neuf', 'Bon', 'Abîmé','Perdu');
 CREATE TYPE type AS ENUM ('Oeuvremusicale', 'Film', 'Livre');
 
 CREATE TABLE Adherents(
-  login VARCHAR,
+  login VARCHAR PRIMARY KEY,
   FOREIGN KEY ( login ) REFERENCES Compte_utilisateur(login),
   Nom VARCHAR NOT NULL,
   Prenom VARCHAR NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE Adhesions(
 );
 
 CREATE TABLE Ressource(
-  Code INTEGER PRIMARY KEY,
+  Code INTEGER,
   Titre VARCHAR,
   Éditeur VARCHAR,
   Genre genre,
@@ -56,16 +56,17 @@ CREATE TABLE Ressource(
   Durée_film TIME,
   Durée_oeuvre TIME,
   Type type,
-  CHECK ((Type = 'Livre' NOT NULL AND ISBN NOT NULL AND Langue_livre NOT NULL AND Résumé NOT NULL AND Durée_oeuvre IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL)
-        OR (Type = 'Oeuvremusicale' NOT NULL AND Durée_oeuvre NOT NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL )
-        OR (Type = 'Film' NOT NULL AND Synopsis NOT NULL AND Langue_film NOT NULL AND Durée_film NOT NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Durée_oeuvre IS NULL )),
+  PRIMARY KEY (Type, Code),
+CHECK ((Type = 'Livre' AND ISBN NOT NULL AND Langue_livre NOT NULL AND Résumé NOT NULL AND Durée_oeuvre IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL)
+        OR (Type = 'Oeuvremusicale' AND Durée_oeuvre NOT NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL )
+        OR (Type = 'Film' AND Synopsis NOT NULL AND Langue_film NOT NULL AND Durée_film NOT NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Durée_oeuvre IS NULL ))
 );
 
 CREATE TABLE Contributeur (
   Nom VARCHAR,
   Prenom VARCHAR,
   Date_de_naissance DATE,
-  PRIMARY KEY (Rôle, Nom, Prenom, Date_de_naissance),
+  PRIMARY KEY (Nom, Prenom, Date_de_naissance),
   Nationalité VARCHAR
 );
 
@@ -76,18 +77,17 @@ CREATE TABLE Contribue (
   Nom VARCHAR,
   Prenom VARCHAR,
   Date_de_naissance DATE,
-  FOREIGN KEY ( Code ) REFERENCES Ressource(code),
-  FOREIGN KEY ( Type ) REFERENCES Ressource(Type),
-  FOREIGN KEY ( Nom ) REFERENCES Contributeur(Nom),
-  FOREIGN KEY ( Prenom ) REFERENCES Contributeur(Prenom),
-  FOREIGN KEY ( Date_de_naissance ) REFERENCES Contributeur(Date_de_naissance),
+  FOREIGN KEY ( Code, Type) REFERENCES Ressource(Code, Type),
+  FOREIGN KEY ( Nom, Prenom, Date_de_naissance ) REFERENCES Contributeur(Nom,Prenom, Date_de_naissance),
+  PRIMARY KEY (Rôle,Type, Code, Nom, Prenom, Date_de_naissance),
   CHECK ((Type='Livre' AND Rôle='Auteur') OR (Type='Film' AND (Rôle='Acteur' OR Rôle='Réalisateur')) OR (Type='Oeuvremusicale' AND (Rôle='Compositeur' OR Rôle='Interprète')))
 );
 
 CREATE TABLE Exemplaire(
   Clé VARCHAR PRIMARY KEY,
+  Type type,
   Code INTEGER,
-  FOREIGN KEY ( Code ) REFERENCES Ressource(Code),
+  FOREIGN KEY ( Code, Type ) REFERENCES Ressource(Code, Type),
   État etat NOT NULL,
   Disponibilité BOOLEAN ,
   compteur INTEGER NOT NULL
@@ -115,15 +115,14 @@ CREATE TABLE Reservation (
 CREATE TABLE Sanction(
   Clé VARCHAR,
   login VARCHAR,
-  FOREIGN KEY ( login ) REFERENCES Adhérents(login),
+  FOREIGN KEY ( login ) REFERENCES Adherents(login),
   FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
   En_sanction BOOLEAN,
   En_Retard BOOLEAN,
   Debut_retard DATE,
   En_Degradation BOOLEAN,
   Debut_degradation DATE,
-  CHECK (En_Retard NOT NULL AND Debut_retard NOT NULL),
+CHECK (En_Retard NOT NULL AND Debut_retard NOT NULL),
   CHECK(En_Degradation NOT NULL AND Debut_degradation NOT NULL),
   CHECK((En_sanction NOT NULL AND En_Retard NOT NULL) OR (En_sanction NOT NULL AND En_Degradation NOT NULL))
 );
-
