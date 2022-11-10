@@ -112,8 +112,8 @@ Compte_utilisateur "1..1" - "1..1" Personnel
 Adherents "1..1" - "1..1" Adhesions
 
 
-Emprunt "0..1" - "1..1" Exemplaire
-Reservation "0..1" - "1..1" Exemplaire
+Emprunt "0..*" - "1..1" Exemplaire
+Reservation "0..*" - "1..1" Exemplaire
 
 Contributeur "1..*" - "1..*" Ressource
 
