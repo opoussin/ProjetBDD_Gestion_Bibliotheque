@@ -50,12 +50,10 @@ CREATE TABLE Ressource(
   Langue_film VARCHAR,
   Durée_film TIME,
   Durée_oeuvre TIME,
-  Livre BOOLEAN,
-  Film BOOLEAN,
-  Oeuvremusicale BOOLEAN
-  CHECK ((Livre NOT NULL AND ISBN NOT NULL AND Langue_livre NOT NULL AND Résumé NOT NULL AND Oeuvremusicale IS NULL AND Durée_oeuvre IS NULL AND Film IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL)
-        OR (Oeuvremusicale NOT NULL AND Durée_oeuvre NOT NULL AND Livre IS NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Film IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL )
-        OR (Film NOT NULL AND Synopsis NOT NULL AND Langue_film NOT NULL AND Durée_film NOT NULL AND Livre IS NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Oeuvremusicale IS NULL AND Durée_oeuvre IS NULL )),
+  Type type,
+  CHECK ((Type = 'Livre' NOT NULL AND ISBN NOT NULL AND Langue_livre NOT NULL AND Résumé NOT NULL AND Durée_oeuvre IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL)
+        OR (Type = 'Oeuvremusicale' NOT NULL AND Durée_oeuvre NOT NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL )
+        OR (Type = 'Film' NOT NULL AND Synopsis NOT NULL AND Langue_film NOT NULL AND Durée_film NOT NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Durée_oeuvre IS NULL )),
 );
 
 CREATE TABLE Contributeur (
