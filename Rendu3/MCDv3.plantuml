@@ -115,6 +115,7 @@ enum Genre{
   Polar 
   Thriller 
   Policier 
+  Bande dessinée
   Roman noir
   Biographie
   Conte
@@ -133,8 +134,10 @@ enum Genre{
   Fiction 
   Western
   Documentaires
-  Le classique
+  Classique
   Jazz
+  Famille
+  Musique de film
   Variété française
   Variété internationale
   Musiques du monde
