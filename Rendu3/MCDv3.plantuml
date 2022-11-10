@@ -1,0 +1,123 @@
+@startuml
+class Adhesions {
+Encours : booléen 
+Début : Date
+Fin: Date
+}
+
+class Adherents{
+Nom : char
+Prenom : char 
+Adresse : char 
+Mail : char
+Num_telephone : int
+Date_de_naissance : Date
+Nb_retard: int
+Nb_degradation: int
+carte : str 
+}
+
+class Personnel{
+Nom : char
+Prenom : char 
+Adresse : char 
+Mail : char
+}
+
+class Exemplaire {
+État : enum
+Clé : char 
+Disponibilités : char 
+compteur : int 
+}
+
+Class Ressource { 
+Code :int 
+Titre :char
+Éditeur :char
+Genre : enum
+Date_appartion :Date
+Nb_exemplaire : int
+}
+
+class Livre {
+ISBN : char
+Langue : char 
+Résumé: char 
+}
+
+class Film {
+Synopsis: char
+Langue : char 
+Durée_film: time  
+}
+
+class œuvremusicale { 
+Durée_oeuvre: Time
+}
+
+Class Compte_utilisateur{
+Login : int
+Mot_de_passe : string
+}
+
+Class Sanction{
+En_sanction :Boolean  
+}
+
+Class Retard{
+En_Retard :Boolean 
+Debut_retard:date 
+}
+
+Class Degradation{
+En_Degradation :Boolean 
+Debut_degradation:date  
+}
+
+Class Emprunt{
+emprunt_enCours: Boolean
+Durée_limite : Date
+Etat_retour : enum
+}
+
+Class Reservation{
+emprunt_enCours: Boolean
+reserv_date : Date
+}
+
+
+Class Contributeur{
+Rôle :char
+Nom :char
+Prenom :char
+Date_de_naissance:Date 
+Nationalité: char
+}
+
+Ressource <|- œuvremusicale
+Ressource <|- Film
+Ressource <|- Livre
+
+Sanction <|- Degradation
+Sanction <|- Retard
+
+Ressource *-- Exemplaire
+
+Adherents "1..1" - "1..1" Compte_utilisateur 
+Compte_utilisateur "1..1" - "1..1" Personnel
+Adherents "1..1" - "1..1" Adhesions
+
+
+Emprunt "0..1" - "1..1" Exemplaire
+Reservation "0..1" - "1..1" Exemplaire
+
+Contributeur "1..*" - "1..*" Ressource
+
+Adherents "1..1" - "0..Nmax" Emprunt 
+Adherents "1..1" - "0..Nmax" Reservation 
+
+(Adherents , Emprunt ) .. Sanction
+
+
+@enduml
