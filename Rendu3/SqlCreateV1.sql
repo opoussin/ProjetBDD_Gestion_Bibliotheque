@@ -88,7 +88,7 @@ CREATE TABLE EMPRUNT (
   FOREIGN KEY Clé REFERENCES Exemplaire(Clé),
   FOREIGN KEY login REFERENCES Adherents(login),
   emprunt_enCours BOOLEAN,
-   Durée_limite DATE,
+  Durée_limite DATE,
   Etat_retour etat
 );
 
@@ -106,7 +106,7 @@ CREATE TABLE Sanction(
   En_Retard BOOLEAN,
   Debut_retard DATE,
   En_Degradation BOOLEAN,
-  Debut_degradation DATE
+  Debut_degradation DATE,
   CHECK (En_Retard NOT NULL AND Debut_retard NOT NULL),
   CHECK(En_Degradation NOT NULL AND Debut_degradation NOT NULL),
   CHECK((En_sanction NOT NULL AND En_Retard NOT NULL) OR (En_sanction NOT NULL AND En_Degradation NOT NULL))
