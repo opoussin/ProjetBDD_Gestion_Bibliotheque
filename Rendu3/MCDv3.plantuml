@@ -106,6 +106,42 @@ enum Etat{
 
 }
 
+enum Genre{
+  Roman
+  Nouvelle
+  Fantastique
+  science-fiction
+  Fantasy
+  Polar 
+  Thriller 
+  Policier 
+  Roman noir
+  Biographie
+  Conte
+  Légende 
+  Essai
+  Poésie
+  Manga
+  Théâtre 
+  Aventure 
+  Guerre 
+  Histoire 
+  Action
+  Comédie
+  Drame 
+  Comédie dramatique
+  Fiction 
+  Western
+  Documentaires
+  Le classique
+  Jazz
+  Variété française
+  Variété internationale
+  Musiques du monde
+  Rap
+  Musique électronique
+}
+
 Ressource <|- œuvremusicale
 Ressource <|- Film
 Ressource <|- Livre
