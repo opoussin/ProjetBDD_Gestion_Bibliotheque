@@ -4,6 +4,12 @@ CREATE TABLE Compte_utilisateur (
 )
 
 
+
+CREATE TYPE genre AS ENUM ('Roman', 'Nouvelle', 'Fantastique','Science-fiction', 'Fantasy', 'Polar','Thriller', 'Roman noir', 'Biographie','Conte', 'Légende', 'Essai','Poésie', 'Manga', 'Théâtre','Aventure', 'Guerre', 'Histoire','Action', 'Comédie', 'Drame','Comédie dramatique', 'Fiction', 'Western', 'Documentaires', 'Classique','Jazz', 'Variété française', 'Variété internationale','Musiques du monde', 'Rap', 'Musique électronique','Bande dessinée','Famille','Musique de film');
+
+
+CREATE TYPE etat AS ENUM ('Neuf', 'Bon', 'Abîmé','Perdu');
+
 CREATE TABLE Adherents(
   FOREIGN KEY login REFERENCES Compte_utilisateur(login),
   Nom VARCHAR NOT NULL,
@@ -105,3 +111,4 @@ CREATE TABLE Sanction(
   CHECK(En_Degradation NOT NULL AND Debut_degradation NOT NULL),
   CHECK((En_sanction NOT NULL AND En_Retard NOT NULL) OR (En_sanction NOT NULL AND En_Degradation NOT NULL))
 )
+
