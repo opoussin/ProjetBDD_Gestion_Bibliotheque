@@ -9,6 +9,8 @@ CREATE TYPE role AS ENUM ('Auteur', 'Compositeur', 'Interprète','Acteur','Réal
 
 CREATE TYPE etat AS ENUM ('Neuf', 'Bon', 'Abîmé','Perdu');
 
+CREATE TYPE type AS ENUM ('Oeuvremusicale', 'Film', 'Livre');
+
 CREATE TABLE Adherents(
   FOREIGN KEY login REFERENCES Compte_utilisateur(login),
   Nom VARCHAR NOT NULL,
