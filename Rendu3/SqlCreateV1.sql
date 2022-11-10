@@ -56,10 +56,7 @@ CREATE TABLE Ressource(
   Durée_film TIME,
   Durée_oeuvre TIME,
   Type type,
-  PRIMARY KEY (Type, Code),
-CHECK ((Type = 'Livre' AND ISBN NOT NULL AND Langue_livre NOT NULL AND Résumé NOT NULL AND Durée_oeuvre IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL)
-        OR (Type = 'Oeuvremusicale' AND Durée_oeuvre NOT NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL )
-        OR (Type = 'Film' AND Synopsis NOT NULL AND Langue_film NOT NULL AND Durée_film NOT NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Durée_oeuvre IS NULL ))
+  PRIMARY KEY (Type, Code)
 );
 
 CREATE TABLE Contributeur (
@@ -89,7 +86,7 @@ CREATE TABLE Exemplaire(
   Code INTEGER,
   FOREIGN KEY ( Code, Type ) REFERENCES Ressource(Code, Type),
   État etat NOT NULL,
-  Disponibilité BOOLEAN ,
+  Disponibilité BOOLEAN NOT NULL,
   compteur INTEGER NOT NULL
 );
 
@@ -98,7 +95,7 @@ CREATE TABLE EMPRUNT (
   login VARCHAR,
   FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
   FOREIGN KEY ( login ) REFERENCES Adherents(login),
-  emprunt_enCours BOOLEAN,
+  emprunt_enCours BOOLEAN NOT NULL,
   Durée_limite DATE,
   Etat_retour etat
 );
@@ -108,7 +105,7 @@ CREATE TABLE Reservation (
   login VARCHAR,
   FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
   FOREIGN KEY ( login ) REFERENCES Adherents(login),
-  état_reservation BOOLEAN,
+  état_reservation BOOLEAN NOT NULL,
   reserv_date DATE
 );
 
@@ -117,12 +114,12 @@ CREATE TABLE Sanction(
   login VARCHAR,
   FOREIGN KEY ( login ) REFERENCES Adherents(login),
   FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
-  En_sanction BOOLEAN,
-  En_Retard BOOLEAN,
+  En_sanction BOOLEAN NOT NULL,
+  En_Retard BOOLEAN NOT NULL,
   Debut_retard DATE,
-  En_Degradation BOOLEAN,
+  En_Degradation BOOLEAN NOT NULL,
   Debut_degradation DATE,
-CHECK (En_Retard NOT NULL AND Debut_retard NOT NULL),
-  CHECK(En_Degradation NOT NULL AND Debut_degradation NOT NULL),
-  CHECK((En_sanction NOT NULL AND En_Retard NOT NULL) OR (En_sanction NOT NULL AND En_Degradation NOT NULL))
+CHECK ((En_Retard is true AND (Debut_retard NOT NULL)) OR (En_Degradation is true AND (Debut_degradation NOT NULL))),
+  CHECK((En_sanction is true AND En_Retard is true) OR (En_sanction is true AND En_Degradation is true))
 );
+
