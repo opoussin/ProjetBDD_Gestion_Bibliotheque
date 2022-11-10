@@ -25,7 +25,7 @@ Mail : char
 }
 
 class Exemplaire {
-État : enum
+Etat : enum
 Clé : char 
 Disponibilités : char 
 compteur : int 
@@ -78,7 +78,7 @@ Debut_degradation:date
 Class Emprunt{
 emprunt_enCours: Boolean
 Durée_limite : Date
-Etat_retour : enum
+Etat_retour : Etat
 }
 
 Class Reservation{
@@ -96,6 +96,14 @@ Nationalité: char
 }
 
 Class Contribue{
+}
+
+enum Etat{
+  neuf
+  bon
+  abîmé
+  perdu 
+
 }
 
 Ressource <|- œuvremusicale
