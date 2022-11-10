@@ -26,6 +26,7 @@ CREATE TABLE Adherents(
 );
 
 CREATE TABLE Personnel(
+  login VARCHAR,
   FOREIGN KEY ( login ) REFERENCES Compte_utilisateur(login),
   Nom VARCHAR NOT NULL,
   Prenom VARCHAR NOT NULL,
@@ -34,13 +35,14 @@ CREATE TABLE Personnel(
 );
 
 CREATE TABLE Adhesions(
+  login VARCHAR,
   FOREIGN KEY ( login ) REFERENCES Adherents(login),
   Debut DATE NOT NULL,
   FIN DATE
 );
 
 CREATE TABLE Ressource(
-  PRIMARY KEY Code INTEGER,
+  Code INTEGER PRIMARY KEY,
   Titre VARCHAR,
   Éditeur VARCHAR,
   Genre genre,
@@ -69,6 +71,11 @@ CREATE TABLE Contributeur (
 
 CREATE TABLE Contribue (
   Rôle role,
+  Code INTEGER,
+  Type type,
+  Nom VARCHAR,
+  Prenom VARCHAR,
+  Date_de_naissance DATE,
   FOREIGN KEY ( Code ) REFERENCES Ressource(code),
   FOREIGN KEY ( Type ) REFERENCES Ressource(Type),
   FOREIGN KEY ( Nom ) REFERENCES Contributeur(Nom),
@@ -78,7 +85,8 @@ CREATE TABLE Contribue (
 );
 
 CREATE TABLE Exemplaire(
-  PRIMARY KEY Clé VARCHAR,
+  Clé VARCHAR PRIMARY KEY,
+  Code INTEGER,
   FOREIGN KEY ( Code ) REFERENCES Ressource(Code),
   État etat NOT NULL,
   Disponibilité BOOLEAN ,
@@ -86,6 +94,8 @@ CREATE TABLE Exemplaire(
 );
 
 CREATE TABLE EMPRUNT (
+  Clé VARCHAR,
+  login VARCHAR,
   FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
   FOREIGN KEY ( login ) REFERENCES Adherents(login),
   emprunt_enCours BOOLEAN,
@@ -94,6 +104,8 @@ CREATE TABLE EMPRUNT (
 );
 
 CREATE TABLE Reservation (
+  Clé VARCHAR,
+  login VARCHAR,
   FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
   FOREIGN KEY ( login ) REFERENCES Adherents(login),
   état_reservation BOOLEAN,
@@ -101,6 +113,8 @@ CREATE TABLE Reservation (
 );
 
 CREATE TABLE Sanction(
+  Clé VARCHAR,
+  login VARCHAR,
   FOREIGN KEY ( login ) REFERENCES Adhérents(login),
   FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
   En_sanction BOOLEAN,
