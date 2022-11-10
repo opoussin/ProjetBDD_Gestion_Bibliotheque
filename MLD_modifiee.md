@@ -35,7 +35,7 @@
 **Contraintes**
 - Début NOT NULL
 
-##Héritage par la classe mère de la relation Ressource; Film, Livre, œuvremusicale
+## Héritage par la classe mère de la relation Ressource; Film, Livre, œuvremusicale
 
 **Rappel :** Ressource( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int ) avec : Film( Synopsis: char, Langue : char , Durée_film: time  ) ; Livre( ISBN : char, Langue : char , Résumé: char ) ; œuvremusicale(Durée_oeuvre: Time)
 
