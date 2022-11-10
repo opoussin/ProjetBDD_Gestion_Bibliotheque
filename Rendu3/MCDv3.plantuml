@@ -95,6 +95,9 @@ Date_de_naissance:Date
 Nationalité: char
 }
 
+Class Contribue{
+}
+
 Ressource <|- œuvremusicale
 Ressource <|- Film
 Ressource <|- Livre
@@ -119,5 +122,6 @@ Adherents "1..1" - "0..Nmax" Reservation
 
 (Adherents , Emprunt ) .. Sanction
 
+(Contributeur , Ressource ) .. Contribue
 
 @enduml
