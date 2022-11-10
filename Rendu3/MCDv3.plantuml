@@ -88,7 +88,6 @@ reserv_date : Date
 
 
 Class Contributeur{
-Rôle :char
 Nom :char
 Prenom :char
 Date_de_naissance:Date 
@@ -96,13 +95,14 @@ Nationalité: char
 }
 
 Class Contribue{
+Role : enum
 }
 
 enum Etat{
-  neuf
-  bon
-  abîmé
-  perdu 
+  Neuf
+  Bon
+  Abîmé
+  Perdu 
 
 }
 
