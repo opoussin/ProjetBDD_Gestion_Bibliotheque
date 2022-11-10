@@ -37,6 +37,8 @@
 
 ## Héritage par la classe mère de la relation Ressource; Film, Livre, œuvremusicale
 
+Nous avons choisi de faire un héritage par classe mère car la classe Ressource est en association avec la classe Contributeur et les classes filles Livre, œuvremusicale et Film ne sont liées à aucune autre Classe. 
+
 **Rappel :** Ressource( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int ) avec : Film( Synopsis: char, Langue : char , Durée_film: time  ) ; Livre( ISBN : char, Langue : char , Résumé: char ) ; œuvremusicale(Durée_oeuvre: Time)
 
     Ressource( #Code :int , Titre :char, Éditeur :char, Genre : enum, Date_appartion :Date, Nb_exemplaire : int, ISBN : char, Langue : char , Résumé: char, Synopsis: char, Langue : char , Durée_film: time, Durée_oeuvre: Time, Livre : boolean, Film: Boolean, œuvremusicale= Boolean )
@@ -82,6 +84,8 @@ Contribue(#Rôle =>Contributeur, #Nom :char, #Prenom :char, #Date_de_naissance:D
 
 ## Héritage par la classe mère de la relation Sanction avec Retard et Degradation:   
 <br>
+
+Nous avons choisi de faire un héritage par classe mère car la classe Sanction est une classe d'association entre Emprunt et Adhérent  et les classes filles Retard et Dégradation ne sont liées à aucune autre classe. 
 
 **Rappel :** Sanction(En_sanction :Boolean ) avec Retard(En_Retard : Boolean,Debut_retard:date) et Degradation(En_Degradation :Boolean , Debut_degradation:date ): 
 
