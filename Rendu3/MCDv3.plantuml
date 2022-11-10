@@ -110,7 +110,6 @@ enum Role{
   Auteurs
   Compositeurs
   Interprètes
-  Perdu
   Réalisateurs
 }
 
