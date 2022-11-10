@@ -3,10 +3,9 @@ CREATE TABLE Compte_utilisateur (
   Mot_de_passe VARCHAR
 );
 
-
-
 CREATE TYPE genre AS ENUM ('Roman', 'Nouvelle', 'Fantastique','Science-fiction', 'Fantasy', 'Polar','Thriller', 'Roman noir', 'Biographie','Conte', 'Légende', 'Essai','Poésie', 'Manga', 'Théâtre','Aventure', 'Guerre', 'Histoire','Action', 'Comédie', 'Drame','Comédie dramatique', 'Fiction', 'Western', 'Documentaires', 'Classique','Jazz', 'Variété française', 'Variété internationale','Musiques du monde', 'Rap', 'Musique électronique','Bande dessinée','Famille','Musique de film');
 
+CREATE TYPE role AS ENUM ('Auteurs', 'Compositeurs', 'Interprètes','Réalisateurs');
 
 CREATE TYPE etat AS ENUM ('Neuf', 'Bon', 'Abîmé','Perdu');
 
