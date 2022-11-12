@@ -19,3 +19,39 @@ INSERT INTO Ressource VALUES ('OM1','Requiem', 'NULL', 'Classique', '1793','2', 
 
 INSERT INTO Ressource VALUES (‘OM1’,’Les 4 Saisons', ‘NULL', 'Classique', '1725','1', 'NULL', 'NULL', 'NULL','NULL','NULL','NULL','0:53:00', 'Oeuvremusicale');
 
+INSERT INTO Exemplaire VALUES (Clé VARCHAR PRIMARY KEY, Type type, Code INTEGER, État etat NOT NULL,Disponibilité BOOLEAN NOT NULL , compteur INTEGER NOT NULL)
+
+INSERT INTO Exemplaire VALUES ('L1_01', 'Livre', 'L1', 'neuf',true , 3);
+INSERT INTO Exemplaire VALUES ('L1_02', 'Livre', 'L1', 'bon',true , 3);
+INSERT INTO Exemplaire VALUES ('L1_03', 'Livre', 'L1', 'bon',true , 3);
+
+INSERT INTO Exemplaire VALUES ('L2_01', 'Livre', 'L2', 'bon',true , 2);
+INSERT INTO Exemplaire VALUES ('L2_02', 'Livre', 'L2', 'bon',true , 2);
+
+INSERT INTO Exemplaire VALUES ('L3_01', 'Livre', 'L3', 'bon',true , 4);
+INSERT INTO Exemplaire VALUES ('L3_02', 'Livre', 'L3', 'bon',true , 4);
+INSERT INTO Exemplaire VALUES ('L3_03', 'Livre', 'L3', 'bon',true , 4);
+INSERT INTO Exemplaire VALUES ('L3_04', 'Livre', 'L3', 'bon',true , 4);
+
+INSERT INTO Exemplaire VALUES ('L4_01', 'Livre', 'L4', 'bon',true , 3);
+INSERT INTO Exemplaire VALUES ('L4_02', 'Livre', 'L4', 'bon',true , 3);
+INSERT INTO Exemplaire VALUES ('L4_03', 'Livre', 'L4', 'bon',true , 3);
+
+INSERT INTO Exemplaire VALUES ('F1_01', 'Film', 'F1', 'neuf',true , 1);
+
+INSERT INTO Exemplaire VALUES ('F2_01', 'Film', 'F2', 'neuf',true , 1);
+
+INSERT INTO Exemplaire VALUES ('F3_01', 'Film', 'F3', 'neuf',true , 3);
+INSERT INTO Exemplaire VALUES ('F3_02', 'Film', 'F3', 'neuf',true , 3);
+INSERT INTO Exemplaire VALUES ('F3_03', 'Film', 'F3', 'neuf',true , 3);
+
+
+INSERT INTO Exemplaire VALUES ('F4_01', 'Film', 'F4', 'neuf',true , 2);
+INSERT INTO Exemplaire VALUES ('F4_02', 'Film', 'F4', 'neuf',true , 2);
+
+INSERT INTO Exemplaire VALUES ('OM1_01', 'Oeuvremusicale', 'OM1', 'neuf',true , 2);
+INSERT INTO Exemplaire VALUES ('OM1_02', 'Oeuvremusicale', 'OM1', 'neuf',true , 2);
+
+INSERT INTO Exemplaire VALUES ('OM2_01', 'Oeuvremusicale', 'OM2', 'neuf',true , 1);
+
+
