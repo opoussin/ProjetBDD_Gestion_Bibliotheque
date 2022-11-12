@@ -46,7 +46,7 @@ CREATE TABLE Ressource(
   Titre VARCHAR,
   Éditeur VARCHAR,
   Genre genre,
-  Date_appartion DATE,
+  Date_appartion INTEGER,
   Nb_exemplaire INTEGER,
   ISBN VARCHAR,
   Langue_livre VARCHAR,
