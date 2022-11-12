@@ -35,5 +35,5 @@ INSERT INTO Ressource VALUES ('F4','Le Fabuleux Destin d’’Amélie Poulain', 
 
 INSERT INTO Ressource VALUES ('OM1','Requiem', 'NULL', 'Classique', 1793,2, 'NULL', 'NULL', 'NULL','NULL','NULL','NULL','1:00:30', 'Oeuvremusicale');
 
-INSERT INTO Ressource VALUES (‘OM1’,’Les 4 Saisons', ‘NULL', 'Classique', 1725,1, 'NULL', 'NULL', 'NULL','NULL','NULL','NULL','0:53:00', 'Oeuvremusicale');
+INSERT INTO Ressource VALUES ('OM2','Les 4 Saisons', 'NULL', 'Classique', 1725,1, 'NULL', 'NULL', 'NULL','NULL','NULL','NULL','0:53:00', 'Oeuvremusicale');
 
