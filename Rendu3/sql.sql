@@ -22,7 +22,7 @@ CREATE TABLE Adherents(
   Date_de_naissance DATE,
   Nb_retard INTEGER,
   Nb_degradation INTEGER,
-  carte VARCHAR
+  carte VARCHAR UNIQUE
 );
 
 CREATE TABLE Personnel(
