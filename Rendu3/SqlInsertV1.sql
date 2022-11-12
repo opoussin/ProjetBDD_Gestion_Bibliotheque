@@ -15,6 +15,18 @@ INSERT INTO Adhesions VALUES ('agatheo', '2022-11-13', '2024-11-17');
 INSERT INTO Adhesions VALUES ('arthurdr', '2022-11-13', '2024-11-17');
 INSERT INTO Adhesions VALUES ('juleskin', '2022-11-15');
 
+INSERT INTO Contributeur VALUES ('Baudelaire','Charles', '1821-04-09','français');
+INSERT INTO Contributeur VALUES ('Camus','Albert', '1913-11-07','français');
+INSERT INTO Contributeur VALUES ('Baudelaire','Charles', '1821-04-09','français');
+INSERT INTO Contributeur VALUES ('Hugo','Victor', '1802-02-26','français');
+INSERT INTO Contributeur VALUES ('Süskind','Patrick', '1949-03-26','Allemande');
+INSERT INTO Contributeur VALUES ('Kassovitz','Mathieu ', '1967-08-03','français');
+INSERT INTO Contributeur VALUES ('Cassel','Vincent', '1966-11-23','français');
+INSERT INTO Contributeur VALUES ('Tarantino','Quentin', '1963-03-27','Américain');
+INSERT INTO Contributeur VALUES ('Berberian','Alain', '1953-07-02','français');
+INSERT INTO Contributeur VALUES ('Jeunet','Jean-Pierre', '1953-09-03','français');
+INSERT INTO Contributeur VALUES ('Mozart','Wolfgang Amadeus', '1756-01-27','autrichien');
+INSERT INTO Contributeur VALUES ('Vivaldi','Antonio Lucio', '1678-03-04','italien');
 
 INSERT INTO Ressource VALUES ('L1','Les Fleurs du Mal', 'Pierre Brunel', 'Poésie', 1868,3, '9782702182888', 'Français', 'recueil de poèmes de Charles Baudelaire reprenant la quasi-totalité de sa production en vers de 1840 jusque sa mort survenue fin août 1867','NULL','NULL','NULL','NULL', 'Livre');
 
