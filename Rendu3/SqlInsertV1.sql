@@ -1,1 +1,14 @@
-
+INSERT INTO Compte_utilisateur VALUES ('apommep', 'arnaudpp');
+INSERT INTO Compte_utilisateur VALUES ('pduranta', 'durantpa');
+INSERT INTO Compte_utilisateur VALUES ('agatheo', 'orangecompi');
+INSERT INTO Compte_utilisateur VALUES ('denised', 'dumasdenise');
+INSERT INTO Compte_utilisateur VALUES ('lgp1', 'lgp1002');
+INSERT INTO Compte_utilisateur VALUES ('lgp1', 'lgp1002');
+INSERT INTO Compte_utilisateur VALUES ('lgp1', 'lgp1002');
+INSERT INTO Compte_utilisateur VALUES ('lgp1', 'lgp1002');
+INSERT INTO Adherents VALUES ('pduranta', 'durant', 'pierre', '7 Pl. de l Ancien Hôpital, 60200 Compiègne ', 'pierred@gmail.com', 0606065487 , '1988-06-06', 0,0, 'crap02');
+INSERT INTO Adherents VALUES ('agatheo', 'orange', 'agathe', '13 Rue Winston Churchill, 60200 Compiègne ', 'agatheorange@gmail.com', 0785652544 , '2000-10-26', 0,0, 'crap01');
+INSERT INTO Personnel VALUES ('apommep', 'pomme', 'arnaud', '8 Imp. de la Menardière 60200 Compiegne', 'arpomme@gmail.com');
+INSERT INTO Personnel VALUES ('denised', 'dumas', 'denise', '2-4 All. des Étangs, 60350 Vieux-Moulin', 'denisedumas@gmail.com');
+INSERT INTO Adhesions VALUES ('pduranta', '2022-11-12', '2024-11-16');
+INSERT INTO Adhesions VALUES ('agatheo', '2022-11-13', '2024-11-17');
