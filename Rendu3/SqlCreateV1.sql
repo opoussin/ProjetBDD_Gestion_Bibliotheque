@@ -22,7 +22,7 @@ CREATE TABLE Adherents(
   Date_de_naissance DATE,
   Nb_retard INTEGER,
   Nb_degradation INTEGER,
-  carte VARCHAR
+  carte VARCHAR UNIQUE
 );
 
 CREATE TABLE Personnel(
@@ -42,11 +42,11 @@ CREATE TABLE Adhesions(
 );
 
 CREATE TABLE Ressource(
-  Code INTEGER,
+  Code VARCHAR,
   Titre VARCHAR,
   Éditeur VARCHAR,
   Genre genre,
-  Date_appartion DATE,
+  Date_appartion INTEGER,
   Nb_exemplaire INTEGER,
   ISBN VARCHAR,
   Langue_livre VARCHAR,
@@ -56,7 +56,11 @@ CREATE TABLE Ressource(
   Durée_film TIME,
   Durée_oeuvre TIME,
   Type type,
-  PRIMARY KEY (Type, Code)
+  PRIMARY KEY (Type, Code),
+CHECK ((Type = 'Livre' AND ISBN is NOT NULL AND Langue_livre is NOT NULL AND Résumé is NOT NULL AND Durée_oeuvre IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL)
+        OR (Type = 'Oeuvremusicale' AND Durée_oeuvre is NOT NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL )
+        OR (Type = 'Film' AND Synopsis is NOT NULL AND Langue_film is NOT NULL AND Durée_film is NOT NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Durée_oeuvre IS NULL ))
+
 );
 
 CREATE TABLE Contributeur (
@@ -69,7 +73,7 @@ CREATE TABLE Contributeur (
 
 CREATE TABLE Contribue (
   Rôle role,
-  Code INTEGER,
+  Code VARCHAR,
   Type type,
   Nom VARCHAR,
   Prenom VARCHAR,
@@ -83,7 +87,7 @@ CREATE TABLE Contribue (
 CREATE TABLE Exemplaire(
   Clé VARCHAR PRIMARY KEY,
   Type type,
-  Code INTEGER,
+  Code VARCHAR,
   FOREIGN KEY ( Code, Type ) REFERENCES Ressource(Code, Type),
   État etat NOT NULL,
   Disponibilité BOOLEAN NOT NULL,
@@ -119,7 +123,7 @@ CREATE TABLE Sanction(
   Debut_retard DATE,
   En_Degradation BOOLEAN NOT NULL,
   Debut_degradation DATE,
-CHECK ((En_Retard is true AND (Debut_retard NOT NULL)) OR (En_Degradation is true AND (Debut_degradation NOT NULL))),
+CHECK ((En_Retard is true AND (Debut_retard is NOT NULL)) OR (En_Degradation is true AND (Debut_degradation is NOT NULL))),
   CHECK((En_sanction is true AND En_Retard is true) OR (En_sanction is true AND En_Degradation is true))
 );
 
