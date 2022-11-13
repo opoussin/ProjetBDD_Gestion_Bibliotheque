@@ -16,7 +16,7 @@ INSERT INTO Personnel VALUES ('denised', 'dumas', 'denise', '2-4 All. des Étang
 INSERT INTO Adhesions VALUES ('pduranta', '2022-11-12', '2024-11-16');
 INSERT INTO Adhesions VALUES ('agatheo', '2022-11-13', '2024-11-17');
 INSERT INTO Adhesions VALUES ('arthurdr', '2022-11-13', '2024-11-17');
-INSERT INTO Adhesions VALUES ('juleskin', '2022-11-15');
+INSERT INTO Adhesions VALUES ('juleskin', '2022-11-15', 'NULL');
 
 INSERT INTO Ressource VALUES ('L1','Les Fleurs du Mal', 'Pierre Brunel', 'Poésie', 1868,3, '9782702182888', 'Français', 'recueil de poèmes de Charles Baudelaire reprenant la quasi-totalité de sa production en vers de 1840 jusque sa mort survenue fin août 1867','NULL','NULL','NULL','NULL', 'Livre');
 
