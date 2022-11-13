@@ -42,7 +42,7 @@ CREATE TABLE Adhesions(
 );
 
 CREATE TABLE Ressource(
-  Code INTEGER,
+  Code VARCHAR,
   Titre VARCHAR,
   Éditeur VARCHAR,
   Genre genre,
@@ -73,7 +73,7 @@ CREATE TABLE Contributeur (
 
 CREATE TABLE Contribue (
   Rôle role,
-  Code INTEGER,
+  Code VARCHAR,
   Type type,
   Nom VARCHAR,
   Prenom VARCHAR,
@@ -87,7 +87,7 @@ CREATE TABLE Contribue (
 CREATE TABLE Exemplaire(
   Clé VARCHAR PRIMARY KEY,
   Type type,
-  Code INTEGER,
+  Code VARCHAR,
   FOREIGN KEY ( Code, Type ) REFERENCES Ressource(Code, Type),
   État etat NOT NULL,
   Disponibilité BOOLEAN NOT NULL,
