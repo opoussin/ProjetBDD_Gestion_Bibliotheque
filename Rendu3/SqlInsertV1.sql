@@ -4,29 +4,19 @@ INSERT INTO Compte_utilisateur VALUES ('agatheo', 'orangecompi');
 INSERT INTO Compte_utilisateur VALUES ('denised', 'dumasdenise');
 INSERT INTO Compte_utilisateur VALUES ('arthurdr', 'papableu');
 INSERT INTO Compte_utilisateur VALUES ('juleskin', 'gateau05');
+
 INSERT INTO Adherents VALUES ('pduranta', 'durant', 'pierre', '7 Pl. de l Ancien Hôpital, 60200 Compiègne ', 'pierred@gmail.com', 0606065487 , '1988-06-06', 0,0, 'crap02');
 INSERT INTO Adherents VALUES ('agatheo', 'orange', 'agathe', '13 Rue Winston Churchill, 60200 Compiègne ', 'agatheorange@gmail.com', 0785652544 , '2000-10-26', 0,0, 'crap01');
 INSERT INTO Adherents VALUES ('arthurdr', 'drome', 'arthur', '17 Rue Winston Churchill, 60200 Compiègne ', 'dromearth@gmail.com', 0685651525 , '2001-01-17', 0,0, 'crap00');
 INSERT INTO Adherents VALUES ('juleskin', 'kimp', 'jules', '12 All. des Avenues, 60200 Compiègne', 'juleskin@orange.com', 0752652530 , '1999-04-11', 0,0, 'crap03');
+
 INSERT INTO Personnel VALUES ('apommep', 'pomme', 'arnaud', '8 Imp. de la Menardière 60200 Compiegne', 'arpomme@gmail.com');
 INSERT INTO Personnel VALUES ('denised', 'dumas', 'denise', '2-4 All. des Étangs, 60350 Vieux-Moulin', 'denisedumas@gmail.com');
+
 INSERT INTO Adhesions VALUES ('pduranta', '2022-11-12', '2024-11-16');
 INSERT INTO Adhesions VALUES ('agatheo', '2022-11-13', '2024-11-17');
 INSERT INTO Adhesions VALUES ('arthurdr', '2022-11-13', '2024-11-17');
 INSERT INTO Adhesions VALUES ('juleskin', '2022-11-15');
-
-INSERT INTO Contributeur VALUES ('Baudelaire','Charles', '1821-04-09','français');
-INSERT INTO Contributeur VALUES ('Camus','Albert', '1913-11-07','français');
-INSERT INTO Contributeur VALUES ('Baudelaire','Charles', '1821-04-09','français');
-INSERT INTO Contributeur VALUES ('Hugo','Victor', '1802-02-26','français');
-INSERT INTO Contributeur VALUES ('Süskind','Patrick', '1949-03-26','Allemande');
-INSERT INTO Contributeur VALUES ('Kassovitz','Mathieu ', '1967-08-03','français');
-INSERT INTO Contributeur VALUES ('Cassel','Vincent', '1966-11-23','français');
-INSERT INTO Contributeur VALUES ('Tarantino','Quentin', '1963-03-27','Américain');
-INSERT INTO Contributeur VALUES ('Berberian','Alain', '1953-07-02','français');
-INSERT INTO Contributeur VALUES ('Jeunet','Jean-Pierre', '1953-09-03','français');
-INSERT INTO Contributeur VALUES ('Mozart','Wolfgang Amadeus', '1756-01-27','autrichien');
-INSERT INTO Contributeur VALUES ('Vivaldi','Antonio Lucio', '1678-03-04','italien');
 
 INSERT INTO Ressource VALUES ('L1','Les Fleurs du Mal', 'Pierre Brunel', 'Poésie', 1868,3, '9782702182888', 'Français', 'recueil de poèmes de Charles Baudelaire reprenant la quasi-totalité de sa production en vers de 1840 jusque sa mort survenue fin août 1867','NULL','NULL','NULL','NULL', 'Livre');
 
@@ -48,6 +38,32 @@ INSERT INTO Ressource VALUES ('F4','Le Fabuleux Destin d’’Amélie Poulain', 
 INSERT INTO Ressource VALUES ('OM1','Requiem', 'NULL', 'Classique', 1793,2, 'NULL', 'NULL', 'NULL','NULL','NULL','NULL','1:00:30', 'Oeuvremusicale');
 
 INSERT INTO Ressource VALUES ('OM2','Les 4 Saisons', 'NULL', 'Classique', 1725,1, 'NULL', 'NULL', 'NULL','NULL','NULL','NULL','0:53:00', 'Oeuvremusicale');
+
+INSERT INTO Contributeur VALUES ('Baudelaire','Charles', '1821-04-09','français');
+INSERT INTO Contributeur VALUES ('Camus','Albert', '1913-11-07','français');
+INSERT INTO Contributeur VALUES ('Hugo','Victor', '1802-02-26','français');
+INSERT INTO Contributeur VALUES ('Süskind','Patrick', '1949-03-26','Allemande');
+INSERT INTO Contributeur VALUES ('Kassovitz','Mathieu ', '1967-08-03','français');
+INSERT INTO Contributeur VALUES ('Cassel','Vincent', '1966-11-23','français');
+INSERT INTO Contributeur VALUES ('Tarantino','Quentin', '1963-03-27','Américain');
+INSERT INTO Contributeur VALUES ('Berberian','Alain', '1953-07-02','français');
+INSERT INTO Contributeur VALUES ('Chabat','Alain', '1958-11-24','français');
+INSERT INTO Contributeur VALUES ('Jeunet','Jean-Pierre', '1953-09-03','français');
+INSERT INTO Contributeur VALUES ('Mozart','Wolfgang Amadeus', '1756-01-27','autrichien');
+INSERT INTO Contributeur VALUES ('Vivaldi','Antonio Lucio', '1678-03-04','italien');
+
+INSERT INTO Contribue  VALUES ('Auteur','L1','Livre','Baudelaire','Charles', '1821-04-09');
+INSERT INTO Contribue  VALUES ('Auteur','L2','Livre','Camus','Albert', '1913-11-07');
+INSERT INTO Contribue  VALUES ('Auteur','L3','Livre','Hugo','Victor', '1802-02-26');
+INSERT INTO Contribue  VALUES ('Auteur','L4','Livre','Süskind','Patrick', '1949-03-26');
+INSERT INTO Contribue  VALUES ('Réalisateur','F1','Film','Kassovitz','Mathieu ', '1967-08-03');
+INSERT INTO Contribue  VALUES ('Acteur','F1','Film','Cassel','Vincent', '1966-11-23');
+INSERT INTO Contribue  VALUES ('Réalisateur','F2','Film','Tarantino','Quentin', '1963-03-27');
+INSERT INTO Contribue  VALUES ('Réalisateur','F3','Film','Berberian','Alain', '1953-07-02');
+INSERT INTO Contribue  VALUES ('Acteur','F3','Film','Chabat','Alain', '1958-11-24');
+INSERT INTO Contribue  VALUES ('Réalisateur','F4','Film','Jeunet','Jean-Pierre', '1953-09-03');
+INSERT INTO Contribue  VALUES ('Compositeur','OM1','Oeuvremusicale','Mozart','Wolfgang Amadeus', '1756-01-27');
+INSERT INTO Contribue  VALUES ('Compositeur','OM2','Oeuvremusicale','Vivaldi','Antonio Lucio', '1678-03-04');
 
 INSERT INTO Exemplaire VALUES ('L1_01', 'Livre', 'L1', 'neuf',true , 3);
 INSERT INTO Exemplaire VALUES ('L1_02', 'Livre', 'L1', 'bon',true , 3);
