@@ -116,6 +116,7 @@ CREATE TABLE Reservation (
 CREATE TABLE Sanction(
   Clé VARCHAR,
   login VARCHAR,
+  PRIMARY KEY (Clé, login),
   FOREIGN KEY ( login ) REFERENCES Adherents(login),
   FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
   En_sanction BOOLEAN NOT NULL,
