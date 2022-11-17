@@ -152,6 +152,7 @@ row = cur.fetchone()
                     row = cur.fetchone()
                     print(" La ressource '%s' est disponible en %d exemplaires " %(ressource_disp, row[0]))
                     
+                    
 
 
 
