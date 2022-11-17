@@ -29,9 +29,9 @@
             #Consultation de l'histoirique
             elif (choix == 2) :
                 sql5="SELECT * FROM Emprunt E Join Adherents A ON E.login = A.login WHERE E.login=%s" %user_login
-                cur.execute(sql4)
-                row4 = cur.fetchone()
-                print(row4)
+                cur.execute(sql5)
+                row5 = cur.fetchone()
+                print(row5)
                 print("\n")
                 
             #Recommandation selon les intérêts
