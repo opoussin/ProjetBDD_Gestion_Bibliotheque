@@ -29,7 +29,7 @@ row = cur.fetchone()
             choix = int(input(" Que voulez-vous faire : \n 1. Gestion des ressources \n 2. Gestion des adhérents \n 3. Gestion des Emprunts, Reservations et Sanctions\n 0. Sortir"))
             #menu des actions sur les ressources
             if (choix == 1) :
-                choix_2 = int(input(" Que voulez-vous faire : \n 1. Ajouter une ressource \n 2. Modifier une ressource \n 3. Supprimer une ressource\n 4. Ajouter un exemplaire d'une ressource \n 5. Modifier un exemplaire"))
+                choix_2 = int(input(" Que voulez-vous faire : \n 1. Ajouter une ressource \n  2. Ajouter un exemplaire d'une ressource \n 5. Modifier un exemplaire"))
                 #ajouter une ressource
                 if (choix_2==1) :
                     Type=raw_input("Entrez le type de ressource : Film, Livre ou Oeuvremusicale ")
@@ -57,9 +57,20 @@ row = cur.fetchone()
                         sql_ajout_OM="INSERT INTO Ressource VALUES (%s,%s,%s,%s,%d,%d,NULL,NULL,NULL,NULL,NULL,NULL,%s,%s)" % (Code, Titre, Éditeur, Genre, Date_appartion, Nb_exemplaire,Durée_oeuvre, Type)
                         cur.execute(sql_ajout_OM)
                         print("La ressource '%s' a bien été ajoutée") %Titre
-                    
-                    
-                    
+
+                #ajout d'un exemplaire : ajout dans la table exemplaire et modification du nombre de 'exemplaire de la table ressource
+                elif (choix_2==2):
+                    Clé= raw_input("Entrez la clé de l'exemplaire : ")
+                    Code_E= raw_input("Entrez le code de la ressource : ")
+                    sql_type="SELECT Type FROM Ressource WHERE Ressource.Code = %s" %Code_E
+                    cur.execute(sql_type)
+                    row = cur.fetchone()
+                    État= raw_input("Entrez l'état de l'exemplaire : ")
+                    sql_type="SELECT Type FROM Ressource WHERE Ressource.Code = %s" %Code_E
+                    cur.execute(sql_type)
+                    row = cur.fetchone()
+                    sql_ajout_exemplaire="INSERT INTO Exemplaire VALUES (%s,%s,%s,%s,%b,%d)"%(Clé,row[0], Code_E, État, true,0)
+
 
 
             #menu des actions sur les adhérents
