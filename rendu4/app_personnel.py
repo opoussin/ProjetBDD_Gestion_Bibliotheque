@@ -32,20 +32,25 @@ row = cur.fetchone()
                 choix_2 = int(input(" Que voulez-vous faire : \n 1. Ajouter une ressource \n 2. Modifier une ressource \n 3. Supprimer une ressource\n 4. Ajouter un exemplaire d'une ressource \n 5. Modifier un exemplaire"))
                 #ajouter une ressource
                 if (choix_2==1) :
+                    Type=raw_input("Entrez le type de ressource : Film, Livre ou Oeuvremusicale ")
                     Code=raw_input("Entrez le code de la ressource : ")
-                    Titre VARCHAR,
-  Éditeur VARCHAR,
-  Genre genre,
-  Date_appartion INTEGER,
-  Nb_exemplaire INTEGER,
-  ISBN VARCHAR,
-  Langue_livre VARCHAR,
-  Résumé VARCHAR,
-  Synopsis VARCHAR,
-  Langue_film VARCHAR,
-  Durée_film TIME,
-  Durée_oeuvre TIME,
-  Type type,
+                    Titre=raw_input("Entrez le titre de la ressource : ")
+                    Éditeur= =raw_input("Entrez l'éditeur de la ressource : ")
+                    Genre=raw_input("Entrez le genre de la ressource : ")
+                    Date_appartion=raw_input("Entrez la date d'apparition de la ressource : ")
+                    Nb_exemplaire=int(input("Entrez le nombre d'exemplaire de la ressource : "))
+                    if (Type=='Livre'):
+                        ISBN=raw_input("Entrez l'ISBN du livre : ")
+                        Langue_livre=raw_input("Entrez la langue du livre : ")
+                        Résumé=raw_input("Entrez le résumé du livre : "),
+                    elif(Type=='Film'):
+                        Synopsis=raw_input("Entrez le synopsis du film : ")
+                        Langue_film=raw_input("Entrez la langue du film : ")
+                        Durée_film=raw_input("Entrez la durée du film sous le format HH:MM:SS : ")
+                    elif(Type=='Oeuvremusicale'):
+                        Durée_oeuvre=raw_input("Entrez la durée dde l'oeuvre sous le format HH:MM:SS : ")
+                
+                    
                     
                     
 
