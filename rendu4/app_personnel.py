@@ -37,19 +37,26 @@ row = cur.fetchone()
                     Titre=raw_input("Entrez le titre de la ressource : ")
                     Éditeur= =raw_input("Entrez l'éditeur de la ressource : ")
                     Genre=raw_input("Entrez le genre de la ressource : ")
-                    Date_appartion=raw_input("Entrez la date d'apparition de la ressource : ")
+                    Date_appartion=int(input("Entrez l'année de date d'apparition de la ressource : "))
                     Nb_exemplaire=int(input("Entrez le nombre d'exemplaire de la ressource : "))
                     if (Type=='Livre'):
                         ISBN=raw_input("Entrez l'ISBN du livre : ")
                         Langue_livre=raw_input("Entrez la langue du livre : ")
                         Résumé=raw_input("Entrez le résumé du livre : "),
+                        sql_ajout_livre="INSERT INTO Ressource VALUES (%s,%s,%s,%s,%d,%d,%s,%s,%s,NULL,NULL,NULL,NULL,%s)" % (Code, Titre, Éditeur, Genre, Date_appartion, Nb_exemplaire,ISBN,Langue_livre,Résumé, Type)
+                        cur.execute(sql_ajout_livre)
                     elif(Type=='Film'):
                         Synopsis=raw_input("Entrez le synopsis du film : ")
                         Langue_film=raw_input("Entrez la langue du film : ")
                         Durée_film=raw_input("Entrez la durée du film sous le format HH:MM:SS : ")
+                        sql_ajout_film="INSERT INTO Ressource VALUES (%s,%s,%s,%s,%d,%d,NULL,NULL,NULL,%s,%s,%s,NULL,%s)" % (Code, Titre, Éditeur, Genre, Date_appartion, Nb_exemplaire,Synopsis,Langue_film,Durée_film, Type)
+                        cur.execute(sql_ajout_film)
+
                     elif(Type=='Oeuvremusicale'):
                         Durée_oeuvre=raw_input("Entrez la durée dde l'oeuvre sous le format HH:MM:SS : ")
-                
+                        sql_ajout_OM="INSERT INTO Ressource VALUES (%s,%s,%s,%s,%d,%d,NULL,NULL,NULL,NULL,NULL,NULL,%s,%s)" % (Code, Titre, Éditeur, Genre, Date_appartion, Nb_exemplaire,Durée_oeuvre, Type)
+                        cur.execute(sql_ajout_OM)
+                        print("La ressource '%s' a bien été ajoutée") %Titre
                     
                     
                     
