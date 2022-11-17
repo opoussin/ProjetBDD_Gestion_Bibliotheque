@@ -116,7 +116,12 @@ row = cur.fetchone()
                 
                 elif(choix_2==5):
                     ressource_disp=raw_input("Titre de la ressource dont vous souhaitez vérifier la disponibilité")
-                    sql_disponibilité = SELECT 
+                    sql_disponibilité = "SELECT COUNT(Exemplaire.Disponibilité) FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code WHERE (Ressource.Titre=%s AND Exemplaire.Disponibilité=%b  "%(ressource_disp,true)
+                    cur.execute(sql_disponibilité)
+                    row = cur.fetchone()
+                    print(" La ressource '%s' est disponible en %d exemplaires " %(ressource_disp, row[0]))
+                    
+
 
 
                     
