@@ -8,15 +8,15 @@ INSERT INTO Compte_utilisateur VALUES ('juleskin', 'gateau05');
 INSERT INTO Adherents VALUES ('pduranta', 'durant', 'pierre', '7 Pl. de l Ancien Hôpital, 60200 Compiègne ', 'pierred@gmail.com', 0606065487 , '1988-06-06', 0,0, 'crap02');
 INSERT INTO Adherents VALUES ('agatheo', 'orange', 'agathe', '13 Rue Winston Churchill, 60200 Compiègne ', 'agatheorange@gmail.com', 0785652544 , '2000-10-26', 0,0, 'crap01');
 INSERT INTO Adherents VALUES ('arthurdr', 'drome', 'arthur', '17 Rue Winston Churchill, 60200 Compiègne ', 'dromearth@gmail.com', 0685651525 , '2001-01-17', 0,0, 'crap00');
-INSERT INTO Adherents VALUES ('juleskin', 'kimp', 'jules', '12 All. des Avenues, 60200 Compiègne', 'juleskin@orange.com', 0752652530 , '1999-04-11', 0,0, 'crap03');
+INSERT INTO Adherents VALUES ('juleskin', 'kimp', 'jules', '12 All. des Avenues, 60200 Compiègne', 'juleskin@orange.com', 0752652530 , '1967-04-11', 0,0, 'crap03');
 
 INSERT INTO Personnel VALUES ('apommep', 'pomme', 'arnaud', '8 Imp. de la Menardière 60200 Compiegne', 'arpomme@gmail.com');
 INSERT INTO Personnel VALUES ('denised', 'dumas', 'denise', '2-4 All. des Étangs, 60350 Vieux-Moulin', 'denisedumas@gmail.com');
 
-INSERT INTO Adhesions VALUES ('pduranta', '2022-11-12', '2024-11-16');
-INSERT INTO Adhesions VALUES ('agatheo', '2022-11-13', '2024-11-17');
-INSERT INTO Adhesions VALUES ('arthurdr', '2022-11-13', '2024-11-17');
-INSERT INTO Adhesions VALUES ('juleskin', '2022-11-15', NULL);
+INSERT INTO Adhesions VALUES ('pduranta', '2020-5-4', '2022-5-16');
+INSERT INTO Adhesions VALUES ('agatheo', '2021-8-13', '2023-8-17');
+INSERT INTO Adhesions VALUES ('arthurdr', '2021-8-13', '2023-8-17');
+INSERT INTO Adhesions VALUES ('juleskin', '2022-12-15', NULL);
 
 INSERT INTO Ressource VALUES ('L1','Les Fleurs du Mal', 'Pierre Brunel', 'Poésie', 1868,3, '9782702182888', 'Français', 'recueil de poèmes de Charles Baudelaire reprenant la quasi-totalité de sa production en vers de 1840 jusque sa mort survenue fin août 1867',NULL,NULL,NULL,NULL, 'Livre');
 
@@ -38,6 +38,8 @@ INSERT INTO Ressource VALUES ('F4','Le Fabuleux Destin d’’Amélie Poulain', 
 INSERT INTO Ressource VALUES ('OM1','Requiem', NULL, 'Classique', 1793,2, NULL, NULL, NULL,NULL,NULL,NULL,'1:00:30', 'Oeuvremusicale');
 
 INSERT INTO Ressource VALUES ('OM2','Les 4 Saisons', NULL, 'Classique', 1725,1, NULL, NULL, NULL,NULL,NULL,NULL,'0:53:00', 'Oeuvremusicale');
+
+INSERT INTO Ressource VALUES ('OM3','Marche hongroise', NULL, 'Classique', 1824,1, NULL, NULL, NULL,NULL,NULL,NULL,'0:43:00', 'Oeuvremusicale');
 
 INSERT INTO Contributeur VALUES ('Baudelaire','Charles', '1821-04-09','français');
 INSERT INTO Contributeur VALUES ('Camus','Albert', '1913-11-07','français');
