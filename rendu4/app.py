@@ -199,27 +199,18 @@ if (!row) :
                     cur.execute(sql_sanction)
                     conn.commit()
             elif choix_2 == 3:
-
                 cle = input("Entrez la clé de l'exemplaire : ")
-
                 login = input("Entrez le login de la personne qui réserve la ressource : ")
-
-               date_effective = input("Entrez la date effective de la réservation sous la forme YYYY-MM-DD : ")
-
-             sql01 = "UPDATE Exemplaire SET  Disponibilité =%b WHERE Clé='%s'" % (False, cle)
-
+                date_effective = input("Entrez la date effective de la réservation sous la forme YYYY-MM-DD : ")
+                sql01 = "UPDATE Exemplaire SET  Disponibilité =%b WHERE Clé='%s'" % (False, cle)
                 cur.execute(sql01)
-
                 conn.commit()
-
                 Sql_reserv = "INSERT INTO Reservation VALUES (%s, %s,%b, %s)" % (cle , login, True, date_effective)
-
                 cur.execute(Sql_reserv)
-
                 conn.commit()
 
             elif choix_2 == 4:
-                choix_3= int(input("Que voulez-vous faire 1. Ajouter une réservation 2. Modifié une réservation))
+                choix_3= int(input("Que voulez-vous faire 1. Ajouter une réservation 2. Modifié une réservation"))
                 if choix_3 ==1 : 
                     cle = input("Entrez la clé de l'exemplaire : ")
                     login = input("Entrez le login de la personne qui réserve la ressource : ")
