@@ -34,8 +34,11 @@ row = cur.fetchone()
 
 
 
-
+                #ajouter une ressource
                 if (choix_2==1)
+                    
+
+
             #menu des actions sur les adhérents
              if (choix == 2)
                 choix_2 = int(input(" Que voulez-vous faire : \n 1. Ajouter un adhérent \n 2. Modifier les informations personnelles d'un adhérent \n 3. Modifier l'adhésion d'un adhérent \n 4. Accéder aux informations d'un adhérent \n 5. Afficher la liste des adhérents"))
