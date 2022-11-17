@@ -87,10 +87,25 @@ row = cur.fetchone()
 
                 #modification d'un exemplaire : on ne veut pas changer le code de la ressource, donc le type non plus, et la clé non plus: juste l'état et la Disponibilité
                 elif (choix_2==3):
+
+                     #affichage des titres et de la clé de tous les exemplaires
+                    sql_consult_exemplaire="SELECT Ressource.Titre, Exemplaire.Clé FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code"
+                    cur.execute(sql_consult_exemplaire)
+                    result = cursor.fetchall()
+                    for row in result:
+                        print(row)
+                        print("\n")
+
                     Clé= raw_input("Entrez la clé de l'exemplaire à modifier: ")
                     sql_lecture="SELECT * FROM Exemplaire WHERE Clé=%s" %Clé
                     cur.execute(sql_lecture)
                     row = cur.fetchone()
+                    while(!row):
+                        print("Cet exemplaire n'existe pas ")
+                        Clé= raw_input("Entrez la clé de l'exemplaire à modifier: ")
+                        sql_lecture="SELECT * FROM Exemplaire WHERE Clé=%s" %Clé
+                        cur.execute(sql_lecture)
+                        row = cur.fetchone()
                     print( "Type: %s, Code: %s, État: %s, Disponibilité: %b, compteur: %d \n" %(row[1],row[2],row[3],row[4],row[5]))
                     État= raw_input("Entrez le nouvel état de l'exemplaire : ")
                     disp=int(input("est-ce que l'exemplaire est encore disponible? 1 oui, 0 Non")
@@ -103,10 +118,26 @@ row = cur.fetchone()
                     print("L'exemplaire a été modifié")
 
                  elif (choix_2==4):
+                    #affichage des titres de toutes les ressources
+                    sql_consult="SELECT Titre FROM Ressource"
+                    cur.execute(sql_consult)
+                    result = cursor.fetchall()
+                    for row in result:
+                        print(row)
+                        print("\n")
                     Titre= raw_input("Entrez le Titre de la ressource à consulter: ")
                     sql_lecture="SELECT * FROM Ressource WHERE Titre=%s" %Titre
                     cur.execute(sql_lecture)
                     row = cur.fetchone()
+
+                    #test si la ressource existe, sinon on redemande 
+                    while (!row)
+                        print(" Cette ressource n'existe pas ")
+                        Titre= raw_input("Entrez le Titre de la ressource à consulter: ")
+                        sql_lecture="SELECT * FROM Ressource WHERE Titre=%s" %Titre
+                        cur.execute(sql_lecture)
+                        row = cur.fetchone()
+
                     if (row[13]=='Livre'):
                         print( "Titre: %s, Éditeur: %s, Genre: %s, Date_apparition: %d, Nb_exemplaire: %d, ISBN: %s, Langue_livre: %s, Résumé: %s  \n" %(row[1],row[2],row[3],row[4],row[5], row[6],row[7],row[8]))
                     elif (row[13]=='Film'):
