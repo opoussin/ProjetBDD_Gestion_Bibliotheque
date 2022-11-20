@@ -11,7 +11,7 @@ cur.execute(sql)
 row = cur.fetchone()
 
 #login faux : 
-while(!row) :
+while(not row) :
     print( "le login n'est pas bon")
     login_user = input("Entrez votre login : ")
     sql = "SELECT login FROM Adherents, Personnel WHERE login=%s" %login_user
@@ -23,7 +23,7 @@ while(!row) :
 sql2="SELECT login FROM Adherents WHERE login=%s" %login_user
 cur.execute(sql2)
 row = cur.fetchone()
-if (!row) :
+if (not row) :
     choix = -1
     while(choix!=0) :
         choix = int(input(" Que voulez-vous faire : \n 1. Gestion des ressources \n 2. Gestion des adhérents \n 3. Gestion des Emprunts, Reservations et Sanctions\n 0. Sortir"))
@@ -35,7 +35,7 @@ if (!row) :
                 Type=raw_input("Entrez le type de ressource : Film, Livre ou Oeuvremusicale ")
                 Code=raw_input("Entrez le code de la ressource : ")
                 Titre=raw_input("Entrez le titre de la ressource : ")
-                Éditeur= =raw_input("Entrez l'éditeur de la ressource : ")
+                Éditeur= raw_input("Entrez l'éditeur de la ressource : ")
                 Genre=raw_input("Entrez le genre de la ressource : ")
                 Date_appartion=int(input("Entrez l'année de date d'apparition de la ressource : "))
                 Nb_exemplaire=int(input("Entrez le nombre d'exemplaire de la ressource : "))
@@ -98,7 +98,7 @@ if (!row) :
                 sql_lecture="SELECT * FROM Exemplaire WHERE Clé=%s" %Clé
                 cur.execute(sql_lecture)
                 row = cur.fetchone()
-                while(!row):
+                while(not row):
                     print("Cet exemplaire n'existe pas ")
                     Clé= raw_input("Entrez la clé de l'exemplaire à modifier: ")
                     sql_lecture="SELECT * FROM Exemplaire WHERE Clé=%s" %Clé
@@ -106,16 +106,16 @@ if (!row) :
                     row = cur.fetchone()
                 print( "Type: %s, Code: %s, État: %s, Disponibilité: %b, compteur: %d \n" %(row[1],row[2],row[3],row[4],row[5]))
                 État= raw_input("Entrez le nouvel état de l'exemplaire : ")
-                disp=int(input("est-ce que l'exemplaire est encore disponible? 1 oui, 0 Non")
-                    if(disp==1)
+                disp=int(input("est-ce que l'exemplaire est encore disponible? 1 oui, 0 Non"))
+                if(disp==1) :
                         sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= %s SET État=%s, Disponibilité=%b" %(Clé,true)
                         cur.execute(sql_nb_exemplaire)
-                    elif(disp==0)
+                elif(disp==0) :
                         sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= %s SET État=%s, Disponibilité=%b" %(Clé,false)
                         cur.execute(sql_nb_exemplaire)
                 print("L'exemplaire a été modifié")
 
-                elif (choix_2==4):
+            elif (choix_2==4):
                 #affichage des titres de toutes les ressources
                 sql_consult="SELECT Titre FROM Ressource"
                 cur.execute(sql_consult)
@@ -129,7 +129,7 @@ if (!row) :
                 row = cur.fetchone()
 
                 #test si la ressource existe, sinon on redemande 
-                while (!row)
+                while (not row) :
                     print(" Cette ressource n'existe pas ")
                     Titre= raw_input("Entrez le Titre de la ressource à consulter: ")
                     sql_lecture="SELECT * FROM Ressource WHERE Titre=%s" %Titre
@@ -257,7 +257,6 @@ else :
     row3 = cur.fetchone()
     if (row3 == "TRUE") :
         print("Désolé, vous êtes en sanction\n")
-        break
     #Si l'adhérent n'est pas en sanction : entrer dans le menu adhérents
     else : 
         #menu adhérents
