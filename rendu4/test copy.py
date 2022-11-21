@@ -2,7 +2,7 @@
 
 import psycopg2
 
-conn = psycopg2.connect("dbname='mydb' user='me' host='localhost' password='secret'")
+conn = psycopg2.connect("dbname='dbnf18a057' user='nf18a057' host='tuxa.sme.utc' password='XufOtXd0'")
 cur = conn.cursor()
 
 login_user = input("Entrez votre login : ")
@@ -178,11 +178,11 @@ if (not row) :
                 cur.execute(sql22)
                 row = cur.fetchone()
                 while not row :
-                print( "le login n'est pas bon")
-                login_user = input("Entrez le login : ")
-                sql22 = "SELECT login FROM Adherents WHERE login='%s'" %(login2,login2)
-                cur.execute(sql22)
-                row = cur.fetchone()
+                    print( "le login n'est pas bon")
+                    login_user = input("Entrez le login : ")
+                    sql22 = "SELECT login FROM Adherents WHERE login='%s'" %(login2,login2)
+                    cur.execute(sql22)
+                    row = cur.fetchone()
 
                 # menu des informations que le personnel pourrait modifier
                 information=input("Veuillez choisir l'information que vous voulez modifier : 1.Nom 2.Prenom 3.Adresse 4.Mail 5.Numéro de téléphone 6.Date de naissance 7.nombre de retard 8.nombre de dégradation 9.Numéro de carte 0.quitter \n")
@@ -241,33 +241,33 @@ if (not row) :
                         print("Le numéro de la carte '%s' a bien été enregistré") %Num_carte_n
                     
                 
-                elif (choix_2==3) :
-                    login_modif=input("Entrez le login de l'adhérent dont vous voulez modifier l'adhésion : ")
-                    date_fin=input("Entrez la nouvelle date de fin de l'adhésion : ")
-                    sql_adhesion="UPDATE Adhesions SET FIN = '%s' WHERE login = '%s' " % (date_fin,login_modif)
-                    cur.execute(sql_adhesion)
-                    print("L'adhésion de l'adhérent '%s' a bien été enregistrée") %login_modif
+            elif (choix_2==3) :
+                login_modif=input("Entrez le login de l'adhérent dont vous voulez modifier l'adhésion : ")
+                date_fin=input("Entrez la nouvelle date de fin de l'adhésion : ")
+                sql_adhesion="UPDATE Adhesions SET FIN = '%s' WHERE login = '%s' " % (date_fin,login_modif)
+                cur.execute(sql_adhesion)
+                print("L'adhésion de l'adhérent '%s' a bien été enregistrée") %login_modif
 
 
-                elif (choix_2==4) :
-                    login_info=input("Entrez le login de l'adhérent dont vous voulez consulter les informations : ")
+            elif (choix_2==4) :
+                login_info=input("Entrez le login de l'adhérent dont vous voulez consulter les informations : ")
+                sql_info= "SELECT Adherents.login,Adherents.Nom ,Adherents.Prenom ,Adherents.Adresse ,Adherents.Mail,Adherents.Num_telephone,Adherents.Date_de_naissance ,Adherents.Nb_retard ,Adherents.Nb_degradation,Adherents.carte, EMPRUNT.emprunt_enCours, Reservation.état_reservation, Sanction.En_sanction FROM ((((Adherents INNER JOIN Adhesions ON login= '%s')INNER JOIN EMPRUNT ON login= '%s')INNER JOIN Reservation ON login= '%s')INNER JOIN Sanction ON login= '%s')" % (login_info,login_info,login_info,login_info)
+                cur.execute(sql_info) 
+                raw = cur.fetchone()
+                while(not raw): 
+                    login_info=input("Mauvais login, Entrez le login de l'adhérent dont vous voulez consulter les informations : ")
                     sql_info= "SELECT Adherents.login,Adherents.Nom ,Adherents.Prenom ,Adherents.Adresse ,Adherents.Mail,Adherents.Num_telephone,Adherents.Date_de_naissance ,Adherents.Nb_retard ,Adherents.Nb_degradation,Adherents.carte, EMPRUNT.emprunt_enCours, Reservation.état_reservation, Sanction.En_sanction FROM ((((Adherents INNER JOIN Adhesions ON login= '%s')INNER JOIN EMPRUNT ON login= '%s')INNER JOIN Reservation ON login= '%s')INNER JOIN Sanction ON login= '%s')" % (login_info,login_info,login_info,login_info)
-                   cur.execute(sql_info) 
-                   raw = cur.fetchone()
-                   while(!raw): 
-                       login_info=input("Mauvais login, Entrez le login de l'adhérent dont vous voulez consulter les informations : ")
-                        sql_info= "SELECT Adherents.login,Adherents.Nom ,Adherents.Prenom ,Adherents.Adresse ,Adherents.Mail,Adherents.Num_telephone,Adherents.Date_de_naissance ,Adherents.Nb_retard ,Adherents.Nb_degradation,Adherents.carte, EMPRUNT.emprunt_enCours, Reservation.état_reservation, Sanction.En_sanction FROM ((((Adherents INNER JOIN Adhesions ON login= '%s')INNER JOIN EMPRUNT ON login= '%s')INNER JOIN Reservation ON login= '%s')INNER JOIN Sanction ON login= '%s')" % (login_info,login_info,login_info,login_info)
                     cur.execute(sql_info) 
                     raw = cur.fetchone()
                 print("login : %s \n Nom : %s \n Prenom : %s \n Adresse: : %s \n Mail: %s \n Numéro de telephone:  %s \n Date de naissance: %s \n Nombre de retard: %d \n Nombre de degradation: %d \n carte: %s \n Emprunt en Cours: %b \n reservation en cours: %b \n En sanction: %b \n") % (raw[0],raw[1],raw[2], raw[3],raw[4],raw[5],raw[6],raw[7],raw[8],raw[9],raw[10],raw[11],raw[12])
 
-                elif (choix_2==5) :
-                    sql="SELECT * FROM Adherents"
-                    cur.execute(sql)
-                    result = cursor.fetchall()
-                    for row in result:
-                        print(row)
-                        print("\n")
+            elif (choix_2==5) :
+                sql="SELECT * FROM Adherents"
+                cur.execute(sql)
+                result = cursor.fetchall()
+                for row in result:
+                    print(row)
+                    print("\n")
 
 
 
