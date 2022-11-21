@@ -379,7 +379,7 @@ else :
         #menu adhérents
         choix = -1
         while choix!=0 :
-            choix = int(input(" Que voulez-vous faire : \n 1.Consulter votre l'histoirique d'emprunt\n 2.Voir notre recommandation selon vos intérêts\n 3.rechercher un exemplaire \n 0. Sortir\n"))
+            choix = int(input(" Que voulez-vous faire : \n 1.Consulter votre l'historique d'emprunt\n 2.Voir notre recommandation selon vos intérêts\n 3.rechercher un exemplaire \n 0. Sortir\n"))
             if (choix == 1) :
                 sql5="SELECT * FROM Emprunt E Join Adherents A ON E.login = A.login WHERE E.login='%s'" %user_login
                 cur.execute(sql5)
