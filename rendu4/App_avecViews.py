@@ -6,7 +6,8 @@ conn = psycopg2.connect("dbname='mydb' user='my' host='tuxa.sme.utc' password='s
 cur = conn.cursor()
 
 login_user = input("Entrez votre login : ")
-sql = "SELECT login FROM Adherents WHERE login='%s' UNION SELECT login FROM Personnel WHERE login='%s'" %(login_user,login_user)
+#vérification que le login existe
+sql = "SELECT * FROM ExistenceLogin WHERE login='%s' " %(login_user)
 cur.execute(sql)
 row = cur.fetchone()
 
@@ -14,13 +15,13 @@ row = cur.fetchone()
 while not row :
     print( "le login n'est pas bon")
     login_user = input("Entrez votre login : ")
-    sql = "SELECT login FROM Adherents WHERE login='%s' UNION SELECT login FROM Personnel WHERE login='%s'" %(login_user,login_user)
+    sql = "SELECT * FROM ExistenceLogin WHERE login='%s' " %(login_user)
     cur.execute(sql)
     row = cur.fetchone()
 
 
 #on cherche si c'est un adhérent ou un personnel
-sql2="SELECT login FROM Adherents WHERE login='%s'" %login_user
+sql2="SELECT * FROM LoginAdherent WHERE login='%s'" %login_user
 cur.execute(sql2)
 row = cur.fetchone()
 if (not row) :
@@ -65,13 +66,10 @@ if (not row) :
             elif (choix_2==2):
                 Clé= raw_input("Entrez la clé de l'exemplaire : ")
                 Code_E= raw_input("Entrez le code de la ressource : ")
-                sql_type="SELECT Type FROM Ressource WHERE Ressource.Code = %s" %Code_E
+                sql_type="SELECT Type FROM Ressource WHERE Code = %s" %Code_E
                 cur.execute(sql_type)
                 row = cur.fetchone()
                 État= raw_input("Entrez l'état de l'exemplaire : ")
-                sql_type="SELECT Type FROM Ressource WHERE Ressource.Code = %s" %Code_E
-                cur.execute(sql_type)
-                row = cur.fetchone()
                 sql_ajout_exemplaire="INSERT INTO Exemplaire VALUES (%s,%s,%s,%s,%b,%d)"%(Clé,row[0], Code_E, État, true,0)
                 sql_titre="SELECT Titre FROM Ressource WHERE Ressource.Code = %s" %Code_E
                 cur.execute(sql_titre)
@@ -87,7 +85,7 @@ if (not row) :
             elif (choix_2==3):
 
                     #affichage des titres et de la clé de tous les exemplaires
-                sql_consult_exemplaire="SELECT Ressource.Titre, Exemplaire.Clé FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code"
+                sql_consult_exemplaire="SELECT * FROM RessourceExemplaire "
                 cur.execute(sql_consult_exemplaire)
                 result = cursor.fetchall()
                 for row in result:
@@ -145,7 +143,7 @@ if (not row) :
             
             elif(choix_2==5):
                 ressource_disp=raw_input("Titre de la ressource dont vous souhaitez vérifier la disponibilité")
-                sql_disponibilité = "SELECT COUNT(Exemplaire.Disponibilité) FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code WHERE (Ressource.Titre=%s AND Exemplaire.Disponibilité=%b  "%(ressource_disp,true)
+                sql_disponibilité = "SELECT COUNT(Exemplaire.Disponibilité) FROM CompteExemplaire WHERE Titre=%s " %ressource_disp
                 cur.execute(sql_disponibilité)
                 row = cur.fetchone()
                 print(" La ressource '%s' est disponible en %d exemplaires " %(ressource_disp, row[0]))
@@ -251,15 +249,15 @@ if (not row) :
 
             elif (choix_2==4) :
                 login_info=input("Entrez le login de l'adhérent dont vous voulez consulter les informations : ")
-                sql_info= "SELECT Adherents.login,Adherents.Nom ,Adherents.Prenom ,Adherents.Adresse ,Adherents.Mail,Adherents.Num_telephone,Adherents.Date_de_naissance ,Adherents.Nb_retard ,Adherents.Nb_degradation,Adherents.carte,Adhesions.Debut,Adhesions.FIN, EMPRUNT.emprunt_enCours, Reservation.état_reservation, Sanction.En_sanction FROM (((Adherents INNER JOIN Adhesions ON Adherents.login= Adhesions.login)INNER JOIN EMPRUNT ON EMPRUNT.login=Adhesions.login)INNER JOIN Reservation ON Reservation.login=Adhesions.login)INNER JOIN Sanction ON Sanction.login=Adhesions.login" %login_info
+                sql_info= "SELECT * FROM ConsultationAdherent WHERE login= '%s')" %login_info
                 cur.execute(sql_info) 
                 raw = cur.fetchone()
                 while(not raw): 
                     login_info=input("Mauvais login, Entrez le login de l'adhérent dont vous voulez consulter les informations : ")
-                    sql_info= "SELECT Adherents.login,Adherents.Nom ,Adherents.Prenom ,Adherents.Adresse ,Adherents.Mail,Adherents.Num_telephone,Adherents.Date_de_naissance ,Adherents.Nb_retard ,Adherents.Nb_degradation,Adherents.carte,Adhesions.Debut,Adhesions.FIN, EMPRUNT.emprunt_enCours, Reservation.état_reservation, Sanction.En_sanction FROM (((Adherents INNER JOIN Adhesions ON Adherents.login= Adhesions.login)INNER JOIN EMPRUNT ON EMPRUNT.login=Adhesions.login)INNER JOIN Reservation ON Reservation.login=Adhesions.login)INNER JOIN Sanction ON Sanction.login=Adhesions.login" %login_info
+                    sql_info= "SELECT * FROM ConsultationAdherent WHERE login= '%s')" %login_info
                     cur.execute(sql_info) 
                     raw = cur.fetchone()
-                print("login : %s \n Nom : %s \n Prenom : %s \n Adresse: : %s \n Mail: %s \n Numéro de telephone:  %s \n Date de naissance: %s \n Nombre de retard: %d \n Nombre de degradation: %d \n carte: %s \n Debut d'adhésion: %s \nFin d'adhésions: % \n Emprunt en Cours: %b \n reservation en cours: %b \n En sanction: %b \n") % (raw[0],raw[1],raw[2], raw[3],raw[4],raw[5],raw[6],raw[7],raw[8],raw[9],raw[10],raw[11],raw[12],raw[13],raw[14])
+                print("login : %s \n Nom : %s \n Prenom : %s \n Adresse: : %s \n Mail: %s \n Numéro de telephone:  %s \n Date de naissance: %s \n Nombre de retard: %d \n Nombre de degradation: %d \n carte: %s \n Emprunt en Cours: %b \n reservation en cours: %b \n En sanction: %b \n") % (raw[0],raw[1],raw[2], raw[3],raw[4],raw[5],raw[6],raw[7],raw[8],raw[9],raw[10],raw[11],raw[12])
 
             elif (choix_2==5) :
                 sql="SELECT * FROM Adherents"
@@ -344,7 +342,7 @@ if (not row) :
                     cur.execute(sql01)
                     conn.commit()
             elif choix_2 == 5:
-                sql = "SELECT Clé, login FROM EMPRUNT WHERE emprunt_enCours ='%b'" %(True)
+                sql = "SELECT * FROM EmpruntEnCours"
                 cur.execute(sql)
                 raw = cur.fetchone()
                 for i in range(len(raw)):
@@ -369,7 +367,7 @@ if (not row) :
             break
 else :
 #Vérifier d'abord si l'adhérent est en sanction
-    sql3="SELECT S.En_sanction FROM Sanction S JOIN Adherents A ON S.login = A.login WHERE S.login='%s'" %login_user
+    sql3="SELECT En_sanction FROM PersonneSanction WHERE S.login='%s'" %login_user
     cur.execute(sql3)
     row3 = cur.fetchone()
     if (row3 == "TRUE") :
@@ -381,20 +379,20 @@ else :
         while choix!=0 :
             choix = int(input(" Que voulez-vous faire : \n 1.Consulter votre l'historique d'emprunt\n 2.Voir notre recommandation selon vos intérêts\n 3.rechercher un exemplaire \n 0. Sortir\n"))
             if (choix == 1) :
-                sql5="SELECT * FROM Emprunt E Join Adherents A ON E.login = A.login WHERE E.login='%s'" %user_login
+                sql5="SELECT * FROM HistoriqueEmprunt WHERE login='%s'" %user_login
                 cur.execute(sql5)
                 row5 = cur.fetchone()
                 print("Votre historique est : \n")
                 print(row5)
                 print("\n")
             elif (choix == 2) :
-                sql_a="SELECT Clé FROM Emprunt E Join Adherents A ON E.login = A.login WHERE E.login='%s'" %user_login
+                sql_a="SELECT Clé FROM HistoriqueEmprunt WHERE login='%s'" %user_login
                 cur.execute(sql_a)
                 row5 = cur.fetchone()
                 sql0="SELECT Code FROM Exemplaire WHERE Clé='%s'" %row5
                 cur.execute(sql0)
                 row1 = cur.fetchone()
-                sql_a="SELECT MAX(COUNT(Genre)) FROM Ressource R Join Exemplaire E ON R.Code = A.Code GROUP BY Genre"
+                sql_a="SELECT MAX(COUNT(Genre)) FROM statistiques"
                 cur.execute(sql_a)
                 row4 = cur.fetchone()
                 print("Nous vous recomandon les ressourses suivantes: \n")
@@ -434,3 +432,4 @@ else :
     
 conn.commit()
 conn.close()
+
