@@ -6,30 +6,30 @@ conn = psycopg2.connect("dbname='dbnf18a057' user='nf18a057' host='tuxa.sme.utc'
 cur = conn.cursor()
 
 login_user = input("Entrez votre login : ")
-sql = "SELECT login FROM Adherents, Personnel WHERE login=%s" %login_user
+sql = "SELECT login FROM Adherents WHERE login='%s' UNION SELECT login FROM Personnel WHERE login='%s'" %(login_user,login_user)
 cur.execute(sql)
 row = cur.fetchone()
 
 #login faux : 
-while(not row) :
+while not row :
     print( "le login n'est pas bon")
     login_user = input("Entrez votre login : ")
-    sql = "SELECT login FROM Adherents, Personnel WHERE login=%s" %login_user
+    sql = "SELECT login FROM Adherents WHERE login='%s' UNION SELECT login FROM Personnel WHERE login='%s'" %(login_user,login_user)
     cur.execute(sql)
     row = cur.fetchone()
 
 
-#on cherche si c''est un adhérent ou un personnel
-sql2="SELECT login FROM Adherents WHERE login=%s" %login_user
+#on cherche si c'est un adhérent ou un personnel
+sql2="SELECT login FROM Adherents WHERE login='%s'" %login_user
 cur.execute(sql2)
 row = cur.fetchone()
 if (not row) :
     choix = -1
     while(choix!=0) :
-        choix = int(input(" Que voulez-vous faire : \n 1. Gestion des ressources \n 2. Gestion des adhérents \n 3. Gestion des Emprunts, Reservations et Sanctions\n 0. Sortir"))
+        choix = int(input(" Que voulez-vous faire : \n 1. Gestion des ressources \n 2. Gestion des adhérents \n 3. Gestion des Emprunts, Reservations et Sanctions\n 0. Sortir\n"))
         #menu des actions sur les ressources
         if (choix == 1) :
-            choix_2 = int(input(" Que voulez-vous faire : \n 1. Ajouter une ressource \n  2. Ajouter un exemplaire d'une ressource \n 3. Modifier un exemplaire \n 4. Visualiser une ressource \n 5. Nombre d'exemplaire disponible d'une ressource"))
+            choix_2 = int(input(" Que voulez-vous faire : \n 1. Ajouter une ressource \n  2. Ajouter un exemplaire d'une ressource \n 3. Modifier un exemplaire \n 4. Visualiser une ressource \n 5. Nombre d'exemplaire disponible d'une ressource\n"))
             #ajouter une ressource
             if (choix_2==1) :
                 Type=raw_input("Entrez le type de ressource : Film, Livre ou Oeuvremusicale ")
@@ -98,7 +98,7 @@ if (not row) :
                 sql_lecture="SELECT * FROM Exemplaire WHERE Clé=%s" %Clé
                 cur.execute(sql_lecture)
                 row = cur.fetchone()
-                while(not row):
+                while not row :
                     print("Cet exemplaire n'existe pas ")
                     Clé= raw_input("Entrez la clé de l'exemplaire à modifier: ")
                     sql_lecture="SELECT * FROM Exemplaire WHERE Clé=%s" %Clé
@@ -129,7 +129,7 @@ if (not row) :
                 row = cur.fetchone()
 
                 #test si la ressource existe, sinon on redemande 
-                while (not row) :
+                while not row :
                     print(" Cette ressource n'existe pas ")
                     Titre= raw_input("Entrez le Titre de la ressource à consulter: ")
                     sql_lecture="SELECT * FROM Ressource WHERE Titre=%s" %Titre
@@ -156,6 +156,101 @@ if (not row) :
         #menu des actions sur les adhérents
         elif (choix == 2) :
             choix_2 = int(input(" Que voulez-vous faire : \n 1. Ajouter un adhérent \n 2. Modifier les informations personnelles d'un adhérent \n 3. Modifier l'adhésion d'un adhérent \n 4. Accéder aux informations d'un adhérent \n 5. Afficher la liste des adhérents"))
+            if (choix_2==1) :
+                login=input("Entrez le login de l'adhérent : ")
+                Nom=input("Entrez le nom de l'adhérent : ")
+                Prenom=input("Entrez le prénom de l'adhérent : ")
+                Adresse= input("Entrez l'adresse de l'adhérent : ")
+                Mail=input("Entrez son mail : ")
+                Num_tele=input("Entrez le nombre de téléphone : ")
+                Date_naissance=input("Entrez la date de naissance de l'adhérent : ")
+                Nb_retard =int(input("Entrez le nombre de retard pour retourner une ressource : ")) 
+                Nb_degradation =int(input("Entrez le nombre de dégradation de la ressource : "))
+                Num_carte =input("Entrez le numéro de la carte : ")
+                sql_ajout_adherent="INSERT INTO Adherents VALUES (%s,%s,%s,%s,%s,%s,%s,%d,%d,%s)" % (login, Nom, Prenom, Adresse, Mail, Num_tele,Date_naissance,Nb_retard,Nb_dagradation, Num_carte)
+                cur.execute(sql_ajout_adherent)
+                print("L'adérent '%s''%s' a bien été ajouté") %(Nom,Prenom)
+                
+            elif (choix_2==2) :
+                login2 = input("Entrez le login de l'adhérent : ")
+                #vérifier si l'adhérent est déjà dans la liste des adhérents
+                sql22="SELECT login FROM Adherents WHERE login='%s'" %login2
+                cur.execute(sql22)
+                row = cur.fetchone()
+                while not row :
+                print( "le login n'est pas bon")
+                login_user = input("Entrez le login : ")
+                sql22 = "SELECT login FROM Adherents WHERE login='%s'" %(login2,login2)
+                cur.execute(sql22)
+                row = cur.fetchone()
+
+                # menu des informations que le personnel pourrait modifier
+                information=input("Veuillez choisir l'information que vous voulez modifier : 1.Nom 2.Prenom 3.Adresse 4.Mail 5.Numéro de téléphone 6.Date de naissance 7.nombre de retard 8.nombre de dégradation 9.Numéro de carte 0.quitter \n")
+
+                while information != 0 : #modifier plusieurs informations d'un adhérent
+                    if (information==1):
+                        Nom_n=input("Entrez le nom : ")
+                        sql_nom="UPDATE Adherents SET Nom = '%s' WHERE login = '%s' " % (Nom_n,login2)
+                        cur.execute(sql_nom)
+                        print("Le nom '%s' a bien été enregistré") %Nom_n
+                    elif(information==2):
+                        Prenom_n=input("Entrez le prenom : ")
+                        sql_prenom="UPDATE Adherents SET Prenom = '%s' WHERE login = '%s' " % (Prenom_n,login2)
+                        cur.execute(sql_prenom)
+                        print("Le prénom '%s' a bien été enregistré") %Prenom_n
+                    elif(information==3):
+                        Adresse_n= input("Entrez l'adresse de l'adhérent : ")
+                        sql_adr="UPDATE Adherents SET Adresse = '%s' WHERE login = '%s' " % (Adresse_n,login2)
+                        cur.execute(sql_adr)
+                        print("L'adresse '%s' a bien été enregistré") %Adresse_n
+
+                    elif(information==4):
+                        Mail=input("Entrez son mail : ")
+                        sql_mail="UPDATE Adherents SET Adresse = '%s' WHERE login = '%s' " % (Mail_n,login2)
+                        cur.execute(sql_mail)
+                        print("Le mail '%s' a bien été enregistré") %Mail_n
+
+                    elif(information==5):
+                        Num_tele_n=input("Entrez le nombre de téléphone : ")
+                        sql_numtele="UPDATE Adherents SET Num_telephone = '%s' WHERE login = '%s' " % (Num_tele_n,login2)
+                        cur.execute(sql_numtele)
+                        print("Le numéro de téléphone '%s' a bien été enregistré") %Num_tele_n
+
+                    elif(information==6):
+                        Date_naissance_n=input("Entrez la date de naissance de l'adhérent : ")
+                        sql_date="UPDATE Adherents SET Date_de_naissance = '%s' WHERE login = '%s' " % (Date_naissance_n,login2)
+                        cur.execute(sql_date)
+                        print("La date de naissance '%s' a bien été enregistré") %Date_naissance_n
+
+                    elif(information==7):
+                        Nb_retard_n =int(input("Entrez le nombre de retard pour retourner une ressource : "))
+                        sql_retard="UPDATE Adherents SET Nb_retard = '%s' WHERE login = '%s' " % (Nb_retard_n,login2)
+                        cur.execute(sql_retard)
+                        print("Le nombre de retard '%s' a bien été enregistré") %Nb_retard_n
+
+                    elif(information==8):
+                        Nb_degradation_n =int(input("Entrez le nombre de dégradation de la ressource : "))
+                        sql_degradation="UPDATE Adherents SET Nb_degradation = '%s' WHERE login = '%s' " % (Nb_degradation_n,login2)
+                        cur.execute(sql_degradation)
+                        print("Le nombre de degradation '%s' a bien été enregistré") %Nb_degradation_n
+
+                    elif(information==9):
+                        Num_carte_n =input("Entrez le numéro de la carte : ")
+                        sql_carte="UPDATE Adherents SET Adresse = '%s' WHERE login = '%s' " % (Num_carte_n,login2)
+                        cur.execute(sql_carte)
+                        print("Le numéro de la carte '%s' a bien été enregistré") %Num_carte_n
+                    
+                
+                elif (choix_2==3) :
+
+                elif (choix_2==4) :
+
+                elif (choix_2==5) :
+            
+
+
+
+
         #menu des actions sur emprunts, réservation et sanction
         elif (choix == 3) :
             choix_2 = int(input(" Que voulez-vous faire : \n 1. Ajouter un emprunt \n 2. Modifier (retour, et autres modifications) un emprunt \n 3. Ajouter une réservation \n 4. Modifier une réservation \n 5. Afficher la liste des emprunts en cours \n 6. Sanctionner "))
@@ -252,7 +347,7 @@ if (not row) :
             break
 else :
 #Vérifier d'abord si l'adhérent est en sanction
-    sql3="SELECT S.En_sanction FROM Sanction S JOIN Adherents A ON S.login = A.login WHERE S.login=%s" %login_user
+    sql3="SELECT S.En_sanction FROM Sanction S JOIN Adherents A ON S.login = A.login WHERE S.login='%s'" %login_user
     cur.execute(sql3)
     row3 = cur.fetchone()
     if (row3 == "TRUE") :
@@ -261,27 +356,27 @@ else :
     else : 
         #menu adhérents
         choix = -1
-        while(choix!=0) :
+        while choix!=0 :
             choix = int(input(" Que voulez-vous faire : \n 1.Consulter votre l'histoirique d'emprunt\n 2.Voir notre recommandation selon vos intérêts\n 3.rechercher un exemplaire \n 0. Sortir\n"))
             if (choix == 1) :
-                sql5="SELECT * FROM Emprunt E Join Adherents A ON E.login = A.login WHERE E.login=%s" %user_login
+                sql5="SELECT * FROM Emprunt E Join Adherents A ON E.login = A.login WHERE E.login='%s'" %user_login
                 cur.execute(sql5)
                 row5 = cur.fetchone()
                 print("Votre historique est : \n")
                 print(row5)
                 print("\n")
             elif (choix == 2) :
-                sql_a="SELECT Clé FROM Emprunt E Join Adherents A ON E.login = A.login WHERE E.login=%s" %user_login
+                sql_a="SELECT Clé FROM Emprunt E Join Adherents A ON E.login = A.login WHERE E.login='%s'" %user_login
                 cur.execute(sql_a)
                 row5 = cur.fetchone()
-                sql0="SELECT Code FROM Exemplaire WHERE Clé=%s" %row5
+                sql0="SELECT Code FROM Exemplaire WHERE Clé='%s'" %row5
                 cur.execute(sql0)
                 row1 = cur.fetchone()
                 sql_a="SELECT MAX(COUNT(Genre)) FROM Ressource R Join Exemplaire E ON R.Code = A.Code GROUP BY Genre"
                 cur.execute(sql_a)
                 row4 = cur.fetchone()
                 print("Nous vous recomandon les ressourses suivantes: \n")
-                sqlaff="SELECT Titre FROM Ressource WHERE Type=%s" %row4
+                sqlaff="SELECT Titre FROM Ressource WHERE Type='%s'" %row4
                 cur.execute(sqlaff)
                 row7 = cur.fetchone()
                 print(row7)
