@@ -2,7 +2,7 @@
 
 import psycopg2
 
-conn = psycopg2.connect("dbname='dbnf18a057' user='nf18a057' host='tuxa.sme.utc' password='XufOtXd0'")
+conn = psycopg2.connect("dbname='mydb' user='my' host='tuxa.sme.utc' password='secret'")
 cur = conn.cursor()
 
 login_user = input("Entrez votre login : ")
