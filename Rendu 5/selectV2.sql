@@ -99,12 +99,27 @@ CREATE VIEW Populaire AS
 SELECT Ressource.Code , Ressource.Titre , Ressource.Éditeur ,Ressource.Genre , Ressource.Type, MAX(Exemplaire.compteur) 
 FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code;
 
-CREATE VIEW Langue2 AS 
-SELECT Ressource.Genre, Genre1.Clé, Genre1.login
-FROM Genre1 Join Ressource ON Genre1.Code = Ressource.Code;
+/* On compte le nombre de films d'une même langue empruntés*/
+CREATE VIEW LangueFilm1 AS 
+SELECT Ressource.Langue_film, Genre1.Clé, Genre1.login
+FROM Genre1 Join Ressource ON Genre1.Code = Ressource.Code WHERE Ressource.Type = 'Film';
 
-CREATE VIEW LangueFilm AS
-SELECT 
+CREATE VIEW LangueFilm2 AS 
+SELECT login, Langue_film, COUNT(Clé) AS compteur
+FROM LangueFilm1 
+HAVING compteur >= 2
+GROUP BY Langue_film ;
+
+/* On compte le nombre de livres d'une même langue empruntés*/
+CREATE VIEW LangueLivre1 AS 
+SELECT Ressource.Langue_livre, Genre1.Clé, Genre1.login
+FROM Genre1 Join Ressource ON Genre1.Code = Ressource.Code WHERE Ressource.Type = 'Livre';
+
+CREATE VIEW LangueLivre2 AS 
+SELECT login, Langue_livre, COUNT(Clé) AS compteur
+FROM LangueLivre1
+HAVING compteur >= 3
+GROUP BY Langue_livre ;
 
 
 /*
