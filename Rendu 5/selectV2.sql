@@ -101,7 +101,7 @@ SELECT Ressource.Langue_film, Genre1.Clé, Genre1.login
 FROM Genre1 Join Ressource ON Genre1.Code = Ressource.Code WHERE Ressource.Type = 'Film';
 
 CREATE VIEW LangueFilm2 AS
-SELECT LangueFilm1.login, LangueFilm1.Langue_film, COUNT(LangueFilm1.Clé)
+SELECT login, Langue_film, COUNT(Clé)
 FROM LangueFilm1
 GROUP BY LangueFilm1.login, LangueFilm1.Langue_film
 HAVING COUNT(Clé) >= 2;
@@ -112,7 +112,7 @@ SELECT Ressource.Langue_livre, Genre1.Clé, Genre1.login
 FROM Genre1 Join Ressource ON Genre1.Code = Ressource.Code WHERE Ressource.Type = 'Livre';
 
 CREATE VIEW LangueLivre2 AS
-SELECT LangueLivre1.login, LangueLivre1.Langue_livre, COUNT(LangueLivre1.Clé)
+SELECT login, Langue_livre, COUNT(Clé)
 FROM LangueLivre1
 GROUP BY LangueLivre1.login, LangueLivre1.Langue_livre
 HAVING COUNT(Clé) >= 3;
