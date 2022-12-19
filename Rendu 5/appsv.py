@@ -2,7 +2,7 @@
 
 import psycopg2
 
-conn=psycopg2.connect("dbname='dbnf18a054' user='nf18a054'host='tuxa.sme.utc' password='L6FRUpdm'")
+conn=psycopg2.connect("dbname='dbidd' user='idd'host='tuxa.sme.utc' password='motdepasse'")
 cur=conn.cursor()
 
 login_user = input("Entrez votre login : \n")
@@ -48,6 +48,7 @@ if (not row) :
                     sql_ajout_livre="INSERT INTO Ressource VALUES ('%s','%s','%s','%s','%d','%d','%s','%s','%s',NULL,NULL,NULL,NULL,'%s')" % (Code, Titre, Éditeur, Genre, Date_appartion, Nb_exemplaire,ISBN,Langue_livre,Résumé, Type)
                     cur.execute(sql_ajout_livre)
                     print("La ressource ", Titre,  "a bien été ajoutée")
+                    conn.commit()
                 elif(Type=='Film'):
                     Synopsis=input("Entrez le synopsis du film : \n")
                     Langue_film=input("Entrez la langue du film : \n")
@@ -55,12 +56,13 @@ if (not row) :
                     sql_ajout_film="INSERT INTO Ressource VALUES ('%s','%s',NULL,'%s','%d','%d',NULL,NULL,NULL,'%s','%s','%s',NULL,'%s')" % (Code, Titre, Genre, Date_appartion, Nb_exemplaire,Synopsis,Langue_film,Durée_film, Type)
                     cur.execute(sql_ajout_film)
                     print("La ressource ", Titre,  "a bien été ajoutée")
+                    conn.commit()
                 elif(Type=='Oeuvremusicale'):
                     Durée_oeuvre=input("Entrez la durée de l'oeuvre sous le format HH:MM:SS :\n")
                     sql_ajout_OM="INSERT INTO Ressource VALUES ('%s','%s',NULL,'%s','%d','%d',NULL,NULL,NULL,NULL,NULL,NULL,'%s','%s')" % (Code, Titre, Genre, Date_appartion, Nb_exemplaire,Durée_oeuvre, Type)
                     cur.execute(sql_ajout_OM)
                     print("La ressource ", Titre,  "a bien été ajoutée")
-
+                    conn.commit()
             #ajout d'un exemplaire : ajout dans la table exemplaire et modification du nombre de 'exemplaire de la table ressource
             elif (choix_2==2):
                 Clé= input("Entrez la clé de l'exemplaire :\n")
@@ -82,7 +84,7 @@ if (not row) :
                 row = cur.fetchone()
                 sql_nb_exemplaire="UPDATE Ressource SET Nb_exemplaire= '%d' WHERE Code='%s' " %(row[0]+1,Code_E)
                 cur.execute(sql_nb_exemplaire)
-
+                conn.commit()
             #modification d'un exemplaire : on ne veut pas changer le code de la ressource, donc le type non plus, et la clé non plus: juste l'état et la Disponibilité
             elif (choix_2==3):
                 #affichage des titres et de la clé de tous les exemplaires
@@ -113,7 +115,7 @@ if (not row) :
                         sql_nb_exemplaire="UPDATE Exemplaire SET État='%s', Disponibilité='false' WHERE Clé= '%s' " %(État,Clé)
                         cur.execute(sql_nb_exemplaire)
                 print("L'exemplaire a été modifié \n")
-
+                conn.commit()
             elif (choix_2==4):
                 #affichage des titres de toutes les ressouprintrces
                 sql_consult="SELECT Titre FROM Ressource"
@@ -166,7 +168,7 @@ if (not row) :
                 sql_ajout_adherent="INSERT INTO Adherents VALUES ('%s','%s','%s','%s','%s','%s','%s','%d','%d','%s')" % (login, Nom, Prenom, Adresse, Mail, Num_tele,Date_naissance,0,0, Num_carte)
                 cur.execute(sql_ajout_adherent)
                 print("L'adérent ",Nom," ",Prenom," a bien été ajouté \n")
-
+                conn.commit()
             elif (choix_2==2) :
                 login2 = input("Entrez le login de l'adhérent : \n")
                 #vérifier si l'adhérent est déjà dans la liste des adhérents
@@ -190,7 +192,7 @@ if (not row) :
                         cur.execute(sql_nom)
                         print("Le nom ", Nom_n, " a bien été enregistré \n")
                         information=int(input("Veuillez choisir l'information que vous voulez modifier : 1.Nom 2.Prenom 3.Adresse 4.Mail 5.Numéro de téléphone 6.Date de naissance 7.nombre de retard 8.nombre de dégradation 9.Numéro de carte 0.quitter \n"))
-
+                        
                     elif(information==2):
                         Prenom_n=input("Entrez le prenom : \n")
                         sql_prenom="UPDATE Adherents SET Prenom = '%s' WHERE login = '%s' " % (Prenom_n,login2)
@@ -252,7 +254,7 @@ if (not row) :
                         cur.execute(sql_carte)
                         print("Le numéro de la carte ",Num_carte_n," a bien été enregistré \n")
                         information=int(input("Veuillez choisir l'information que vous voulez modifier : 1.Nom 2.Prenom 3.Adresse 4.Mail 5.Numéro de téléphone 6.Date de naissance 7.nombre de retard 8.nombre de dégradation 9.Numéro de carte 0.quitter \n"))
-
+                conn.commit()
 
 
             elif (choix_2==3) :
@@ -261,7 +263,7 @@ if (not row) :
                 sql_adhesion="UPDATE Adhesions SET FIN = '%s' WHERE login = '%s' " % (date_fin,login_modif)
                 cur.execute(sql_adhesion)
                 print("L'adhésion de l'adhérent ",login_modif, " a bien été enregistrée\n")
-
+                conn.commit()
 
             elif (choix_2==4) :
                 #affichage info adhérents
@@ -330,7 +332,7 @@ if (not row) :
                 cur.execute(sql)
                 row = cur.fetchone()
                 print(row,"\n")
-                date_retour = input("la date est-elle dépasser \n")
+                date_retour = input("la date est-elle dépasser (oui ou non) ? \n")
                 sanction=0
                 if date_retour=='oui':
                     sanction=1
