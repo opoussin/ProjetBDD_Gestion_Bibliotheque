@@ -71,29 +71,34 @@ CREATE VIEW statistiques2 AS
 SELECT MAX(COUNT(Genre)) 
 FROM Ressource R Join Exemplaire E ON R.Code = A.Code 
 GROUP BY Genre;
+
 /*now, à chaque fois on rejoute le login pour rajouter une condition WHERE dans le code python et pouvoir sélectionner à partir du login ce que l'on recherche*/
 
 CREATE VIEW Genre1 AS 
-SELECT Code, Clé, login
-FROM Emprunt JOIN Exemplaire ON Emprunt.Clé = Exemplaire.Clé
+SELECT Exemplaire.Code, Exemplaire.Clé, Emprunt.login
+FROM Emprunt JOIN Exemplaire ON Emprunt.Clé = Exemplaire.Clé;
 
 
 CREATE VIEW Genre2 AS 
-SELECT Genre, Clé, login
-FROM Genre1 Join Ressource ON Genre1.Code = Ressource.Code
+SELECT Ressource.Genre, Genre1.Clé, Genre1.login
+FROM Genre1 Join Ressource ON Genre1.Code = Ressource.Code;
 
 /* On compte le nombre d'exemplaire emprunté avec le même genre*/
 CREATE VIEW Genre3 AS 
-SELECT login, Genre, COUNT(Clé) 
+SELECT login, Genre, COUNT(Clé) AS compte
 FROM Genre2
-GROUP BY Genre 
+GROUP BY Genre ;
 
 /*On cherche le Max de la tables ensuite dans le python*/
 CREATE VIEW Genre4 AS
-SELECT login, MAX(COUNT(Clé))
-FROM Genre3
+SELECT login, Genre, MAX(compte)
+FROM Genre3;
 
-/* Stats par auteurs ? */
+/* Exemplaire le plus emprunté de la bibliothèque  */
+CREATE VIEW Populaire AS
+SELECT Ressource.Code , Ressource.Titre , Ressource.Éditeur ,Ressource.Genre , Ressource.Type, MAX(Exemplaire.compteur) 
+FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code;
+
 
 
 
