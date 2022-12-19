@@ -29,7 +29,7 @@ if (not row) :
         choix = int(input(" Que voulez-vous faire : \n 1. Gestion des ressources \n 2. Gestion des adhérents \n 3. Gestion des Emprunts, Reservations et Sanctions\n 0. Sortir \n"))
         #menu des actions sur les ressources
         if (choix == 1) :
-            choix_2 = int(input(" Que voulez-vous faire : \n 1. Ajouter une ressource \n  2. Ajouter un exemplaire d'une ressource \n 3. Modifier un exemplaire \n 4. Visualiser une ressource \n 5. Nombre d'exemplaire disponible d'une ressource \n"))
+            choix_2 = int(input(" Que voulez-vous faire : \n 1. Ajouter une ressource \n 2. Ajouter un exemplaire d'une ressource \n 3. Modifier un exemplaire \n 4. Visualiser une ressource \n 5. Nombre d'exemplaire disponible d'une ressource \n"))
             #ajouter une ressource
             if (choix_2==1) :
                 Type=input("Entrez le type de ressource : Film, Livre ou Oeuvremusicale \n")
