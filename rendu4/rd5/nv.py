@@ -281,7 +281,7 @@ if (not row) :
                 login = input("Entrez le login de la personne qui emprunte la ressource : ")
                 cle = input("Entrez la clé de l'exemplaire : ")
                 encours = True
-                sql_empr = "INSERT INTO EMPRUNT VALUES (%s, %s,%b, %s)" % (cle , login, encours, duré)
+                sql_empr = "INSERT INTO EMPRUNT VALUES (%s, %s,%b, %s)" % (cle , login, True, duré)
                 cur.execute(sql_empr)
                 sql00 = "UPDATE Exemplaire SET Disponibilité =%b WHERE Clé='%s'" % (False, cle)
                 cur.execute(sql00)
