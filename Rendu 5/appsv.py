@@ -264,17 +264,36 @@ if (not row) :
 
 
             elif (choix_2==4) :
+                #affichage info adhérents
                 login_info=input("Entrez le login de l'adhérent dont vous voulez consulter les informations : \n")
                 sql_info= "SELECT * FROM Adherents WHERE login = '%s' " %login_info
                 cur.execute(sql_info)
                 raw = cur.fetchone()
                 print(raw)
-                while(not raw):
-                    login_info=input("Mauvais login, Entrez le login de l'adhérent dont vous voulez consulter les informations : \n")
-                    sql_info= "SELECT Adherents.login,Adherents.Nom ,Adherents.Prenom ,Adherents.Adresse ,Adherents.Mail,Adherents.Num_telephone,Adherents.Date_de_naissance ,Adherents.Nb_retard ,Adherents.Nb_degradation,Adherents.carte,Adhesions.Debut,Adhesions.FIN, EMPRUNT.emprunt_enCours, Reservation.état_reservation, Sanction.En_sanction FROM (((Adherents INNER JOIN Adhesions ON Adherents.login= Adhesions.login)INNER JOIN EMPRUNT ON EMPRUNT.login=Adhesions.login)INNER JOIN Reservation ON Reservation.login=Adhesions.login)INNER JOIN Sanction ON Sanction.login=Adhesions.login" %login_info
-                    cur.execute(sql_info)
-                    raw = cur.fetchone()
-                print(" login : ", raw[0] ,"\nNom : ",raw[1],"\nPrenom : ",raw[2],"\nAdresse: ",raw[3],"\nMail: ",raw[4],"\nNuméro de telephone: ",raw[5],"\nDate de naissance: ",raw[6],"\nNombre de retard: ",raw[7],"\nNombre de degradation: ",raw[8],"\ncarte: ",raw[9],"\nDebut d'adhésion: ",raw[10],"\nFin d'adhésions: ",raw[11],"\n Emprunt en Cours: ",raw[12],"\n reservation en cours: ",raw[13],"\nEn sanction: ",raw[14]," \n")
+                #affichage liste d'emprunts de l'adhérent
+                sql_info= "SELECT * FROM Emprunt E Join Adherents A ON E.login = A.login WHERE E.login='%s'" %login_info
+                cur.execute(sql_info)
+                print("liste des emprunts : \n")
+                result = cur.fetchall()
+                for row in result:
+                    print(row,"\n")
+                #affichage liste de réservations de l'adhérent
+
+                sql_info= "SELECT * FROM Reservation R Join Adherents A ON R.login = A.login WHERE R.login='%s'" %login_info
+                cur.execute(sql_info)
+                print("liste des réservations : \n")
+                result = cur.fetchall()
+                for row in result:
+                    print(row,"\n")
+            
+             #affichage liste de sanctions de l'adhérent
+
+                sql_info= "SELECT * FROM Sanction S Join Adherents A ON S.login = A.login WHERE E.login='%s'" %login_info
+                cur.execute(sql_info)
+                print("liste des sanction : \n")
+                result = cur.fetchall()
+                for row in result:
+                    print(row,"\n")
 
             elif (choix_2==5) :
                 sql="SELECT * FROM Adherents"
