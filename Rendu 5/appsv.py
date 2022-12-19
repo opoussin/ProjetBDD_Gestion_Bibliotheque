@@ -72,7 +72,7 @@ if (not row) :
                 sql_type="SELECT Type FROM Ressource WHERE Ressource.Code = '%s'" %Code_E
                 cur.execute(sql_type)
                 row = cur.fetchone()
-                sql_ajout_exemplaire="INSERT INTO Exemplaire VALUES ('%s','%s','%s','%s','%b','%d')"%(Clé,row[0], Code_E, État, True,0)
+                sql_ajout_exemplaire="INSERT INTO Exemplaire VALUES ('%s','%s','%s','%s','true','%d')"%(Clé,row[0], Code_E, État, 0)
                 sql_titre="SELECT Titre FROM Ressource WHERE Ressource.Code = '%s'" %Code_E
                 cur.execute(sql_titre)
                 row = cur.fetchone()
@@ -107,7 +107,7 @@ if (not row) :
                 État= input("Entrez le nouvel état de l'exemplaire : \n")
                 disp=int(input("est-ce que l'exemplaire est encore disponible? 1 oui, 0 Non \n"))
                 if(disp==1) :
-                        sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= '%s' SET État='%s', Disponibilité='%b'" %(Clé,True)
+                        sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= '%s' SET État='%s', Disponibilité='true'" %(Clé)
                         cur.execute(sql_nb_exemplaire)
                 elif(disp==0) :
                         sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= '%s' SET État='%s', Disponibilité='%b'" %(Clé,False)
