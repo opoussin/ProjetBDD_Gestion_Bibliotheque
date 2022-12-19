@@ -67,37 +67,37 @@ INSERT INTO Contribue  VALUES ('Réalisateur','F4','Film','Jeunet','Jean-Pierre'
 INSERT INTO Contribue  VALUES ('Compositeur','OM1','Oeuvremusicale','Mozart','Wolfgang Amadeus', '1756-01-27');
 INSERT INTO Contribue  VALUES ('Compositeur','OM2','Oeuvremusicale','Vivaldi','Antonio Lucio', '1678-03-04');
 
-INSERT INTO Exemplaire VALUES ('L1_01', 'Livre', 'L1', 'Neuf',true , 0);
-INSERT INTO Exemplaire VALUES ('L1_02', 'Livre', 'L1', 'Bon',true , 0);
-INSERT INTO Exemplaire VALUES ('L1_03', 'Livre', 'L1', 'Bon',true , 0);
+INSERT INTO Exemplaire VALUES ('L1_01', 'Livre', 'L1', 'Neuf',True , 0);
+INSERT INTO Exemplaire VALUES ('L1_02', 'Livre', 'L1', 'Bon',True , 0);
+INSERT INTO Exemplaire VALUES ('L1_03', 'Livre', 'L1', 'Bon',True , 0);
 
-INSERT INTO Exemplaire VALUES ('L2_01', 'Livre', 'L2', 'Bon',true , 0);
-INSERT INTO Exemplaire VALUES ('L2_02', 'Livre', 'L2', 'Bon',true , 0);
+INSERT INTO Exemplaire VALUES ('L2_01', 'Livre', 'L2', 'Bon',True , 0);
+INSERT INTO Exemplaire VALUES ('L2_02', 'Livre', 'L2', 'Bon',True , 0);
 
-INSERT INTO Exemplaire VALUES ('L3_01', 'Livre', 'L3', 'Bon',true , 0);
-INSERT INTO Exemplaire VALUES ('L3_02', 'Livre', 'L3', 'Bon',true , 0);
-INSERT INTO Exemplaire VALUES ('L3_03', 'Livre', 'L3', 'Bon',true , 0);
-INSERT INTO Exemplaire VALUES ('L3_04', 'Livre', 'L3', 'Bon',true , 0);
+INSERT INTO Exemplaire VALUES ('L3_01', 'Livre', 'L3', 'Bon',True , 0);
+INSERT INTO Exemplaire VALUES ('L3_02', 'Livre', 'L3', 'Bon',True , 0);
+INSERT INTO Exemplaire VALUES ('L3_03', 'Livre', 'L3', 'Bon',True , 0);
+INSERT INTO Exemplaire VALUES ('L3_04', 'Livre', 'L3', 'Bon',True , 0);
 
-INSERT INTO Exemplaire VALUES ('L4_01', 'Livre', 'L4', 'Bon',true , 0);
-INSERT INTO Exemplaire VALUES ('L4_02', 'Livre', 'L4', 'Bon',true , 0);
-INSERT INTO Exemplaire VALUES ('L4_03', 'Livre', 'L4', 'Bon',true , 0);
+INSERT INTO Exemplaire VALUES ('L4_01', 'Livre', 'L4', 'Bon',True , 0);
+INSERT INTO Exemplaire VALUES ('L4_02', 'Livre', 'L4', 'Bon',True , 0);
+INSERT INTO Exemplaire VALUES ('L4_03', 'Livre', 'L4', 'Bon',True , 0);
 
-INSERT INTO Exemplaire VALUES ('F1_01', 'Film', 'F1', 'Neuf',true , 0);
+INSERT INTO Exemplaire VALUES ('F1_01', 'Film', 'F1', 'Neuf',True , 0);
 
-INSERT INTO Exemplaire VALUES ('F2_01', 'Film', 'F2', 'Neuf',true , 0);
+INSERT INTO Exemplaire VALUES ('F2_01', 'Film', 'F2', 'Neuf',True , 0);
 
-INSERT INTO Exemplaire VALUES ('F3_01', 'Film', 'F3', 'Neuf',true , 0);
-INSERT INTO Exemplaire VALUES ('F3_02', 'Film', 'F3', 'Neuf',true , 0);
-INSERT INTO Exemplaire VALUES ('F3_03', 'Film', 'F3', 'Neuf',true , 0);
+INSERT INTO Exemplaire VALUES ('F3_01', 'Film', 'F3', 'Neuf',True , 0);
+INSERT INTO Exemplaire VALUES ('F3_02', 'Film', 'F3', 'Neuf',True , 0);
+INSERT INTO Exemplaire VALUES ('F3_03', 'Film', 'F3', 'Neuf',True , 0);
 
 
-INSERT INTO Exemplaire VALUES ('F4_01', 'Film', 'F4', 'Neuf',true , 0);
-INSERT INTO Exemplaire VALUES ('F4_02', 'Film', 'F4', 'Neuf',true , 0);
+INSERT INTO Exemplaire VALUES ('F4_01', 'Film', 'F4', 'Neuf',True , 0);
+INSERT INTO Exemplaire VALUES ('F4_02', 'Film', 'F4', 'Neuf',True , 0);
 
-INSERT INTO Exemplaire VALUES ('OM1_01', 'Oeuvremusicale', 'OM1', 'Neuf',true , 0);
-INSERT INTO Exemplaire VALUES ('OM1_02', 'Oeuvremusicale', 'OM1', 'Neuf',true , 0);
+INSERT INTO Exemplaire VALUES ('OM1_01', 'Oeuvremusicale', 'OM1', 'Neuf',True , 0);
+INSERT INTO Exemplaire VALUES ('OM1_02', 'Oeuvremusicale', 'OM1', 'Neuf',True , 0);
 
-INSERT INTO Exemplaire VALUES ('OM2_01', 'Oeuvremusicale', 'OM2', 'Neuf',true , 0);
+INSERT INTO Exemplaire VALUES ('OM2_01', 'Oeuvremusicale', 'OM2', 'Neuf',True , 0);
 
 
