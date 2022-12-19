@@ -72,7 +72,7 @@ if (not row) :
                 sql_type="SELECT Type FROM Ressource WHERE Ressource.Code = '%s'" %Code_E
                 cur.execute(sql_type)
                 row = cur.fetchone()
-                sql_ajout_exemplaire="INSERT INTO Exemplaire VALUES ('%s','%s','%s','%s','%b','%d')"%(Clé,row[0], Code_E, État, True,0)
+                sql_ajout_exemplaire="INSERT INTO Exemplaire VALUES ('%s','%s','%s','%s',true,'%d')"%(Clé,row[0], Code_E, État,0)
                 sql_titre="SELECT Titre FROM Ressource WHERE Ressource.Code = '%s'" %Code_E
                 cur.execute(sql_titre)
                 row = cur.fetchone()
@@ -107,10 +107,10 @@ if (not row) :
                 État= input("Entrez le nouvel état de l'exemplaire : \n")
                 disp=int(input("est-ce que l'exemplaire est encore disponible? 1 oui, 0 Non \n"))
                 if(disp==1) :
-                        sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= '%s' SET État='%s', Disponibilité='%b'" %(Clé,True)
+                        sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= '%s' SET État='%s', Disponibilité='true'" %(Clé,État)
                         cur.execute(sql_nb_exemplaire)
                 elif(disp==0) :
-                        sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= '%s' SET État='%s', Disponibilité='%b'" %(Clé,False)
+                        sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= '%s' SET État='%s', Disponibilité='false'" %(Clé,État)
                         cur.execute(sql_nb_exemplaire)
                 print("L'exemplaire a été modifié \n")
 
@@ -143,7 +143,7 @@ if (not row) :
 
             elif(choix_2==5):
                 ressource_disp=input("Titre de la ressource dont vous souhaitez vérifier la disponibilité")
-                sql_disponibilité = "SELECT COUNT(Exemplaire.Disponibilité) FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code WHERE (Ressource.Titre='%s' AND Exemplaire.Disponibilité='%b'  "%(ressource_disp,True)
+                sql_disponibilité = "SELECT COUNT(Exemplaire.Disponibilité) FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code WHERE (Ressource.Titre='%s' AND Exemplaire.Disponibilité='true'  "%(ressource_disp)
                 cur.execute(sql_disponibilité)
                 row = cur.fetchone()
                 print(" La ressource ",ressource_disp," est disponible en ",row[0]," exemplaires \n")
@@ -275,7 +275,6 @@ if (not row) :
                 duré = input("Entrez la date limite de l'emprunt sous la forme YYYY-MM-DD : \n")
                 login = input("Entrez le login de la personne qui emprunte la ressource : \n")
                 cle = input("Entrez la clé de l'exemplaire : \n")
-                encours = True
                 sql_empr = "INSERT INTO EMPRUNT VALUES ('%s', '%s',true, '%s')" % (cle , login, duré)
                 cur.execute(sql_empr)
                 sql00 = "UPDATE Exemplaire SET Disponibilité =false WHERE Clé='%s'" % (cle)
@@ -306,17 +305,17 @@ if (not row) :
                     if row[i] < date_retour[i]:
                         sanction=1
                 if sanction == 1:
-                    sql_sanction = "INSERT INTO Sanction VALUES ('%s', '%s','%b','%b','%s', '%b','%s')" % (cle , login, True,True, date_retour, False, None)
+                    sql_sanction = "INSERT INTO Sanction VALUES ('%s', '%s',true,true,'%s', false,'%s')" % (cle , login, date_retour, None)
                     cur.execute(sql_sanction)
                     conn.commit()
             elif choix_2 == 3:
                 cle = input("Entrez la clé de l'exemplaire : \n")
                 login = input("Entrez le login de la personne qui réserve la ressource : \n")
                 date_effective = input("Entrez la date effective de la réservation sous la forme YYYY-MM-DD : \n")
-                sql01 = "UPDATE Exemplaire SET  Disponibilité ='%b' WHERE Clé='%s'" % (False, cle)
+                sql01 = "UPDATE Exemplaire SET  Disponibilité ='false' WHERE Clé='%s'" % (cle)
                 cur.execute(sql01)
                 conn.commit()
-                Sql_reserv = "INSERT INTO Reservation VALUES ('%s', '%s','%b', '%s')" % (cle , login, True, date_effective)
+                Sql_reserv = "INSERT INTO Reservation VALUES ('%s', '%s',true, '%s')" % (cle , login, date_effective)
                 cur.execute(Sql_reserv)
                 conn.commit()
             elif choix_2 == 4:
@@ -356,7 +355,7 @@ if (not row) :
                     cur.execute(sql_sanction)
                     conn.commit()
                 elif sanction==1:
-                    sql_sanction = "INSERT INTO Sanction VALUES ('%s', '%s','%b','%b','%s', '%b','%s')" % (cle , login, True,True, date_effective, False, None)
+                    sql_sanction = "INSERT INTO Sanction VALUES ('%s', '%s',true,true,'%s', false,'%s')" % (cle , login, date_effective, None)
                     cur.execute(sql_sanction)
                     conn.commit()
 
