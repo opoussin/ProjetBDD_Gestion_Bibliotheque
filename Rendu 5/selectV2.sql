@@ -95,25 +95,6 @@ FROM Genre3
 
 /* Stats par auteurs ? */
 
-CREATE VIEW Auteur1 AS 
-SELECT Code, login
-FROM Emprunt JOIN Exemplaire ON Emprunt.Clé = Exemplaire.Clé
-
-
-CREATE VIEW Genre2 AS 
-SELECT Genre, Clé, login
-FROM Genre1 Join Exemplaire ON Genre1.Code = Exemplaire.Code
-
-/* On compte le nombre d'exemplaire emprunté avec le même genre*/
-CREATE VIEW Genre3 AS 
-SELECT login, Genre, COUNT(Clé) 
-FROM Genre2
-GROUP BY Genre 
-
-/*On cherche le Max de la tables ensuite dans le python*/
-CREATE VIEW Genre4 AS
-SELECT login, MAX(COUNT(Clé))
-FROM Genre3
 
 
 
