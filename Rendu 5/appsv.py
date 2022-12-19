@@ -76,7 +76,7 @@ if (not row) :
                 sql_titre="SELECT Titre FROM Ressource WHERE Ressource.Code = '%s'" %Code_E
                 cur.execute(sql_titre)
                 row = cur.fetchone()
-                print("L'exemplaire ",Clé," de la ressource ",row[0]," a bien été ajouté\n") 
+                print("L'exemplaire ",Clé," de la ressource ",row[0]," a bien été ajouté\n")
                 sql_recuperation_nbexemplaire="SELECT Nb_exemplaire FROM Ressource WHERE Ressource.Code = '%s'" %Code_E
                 cur.execute(sql_recuperation_nbexemplaire)
                 row = cur.fetchone()
@@ -174,8 +174,8 @@ if (not row) :
                 row = cur.fetchone()
                 while not row :
                     print( "le login n'est pas bon \n")
-                    login2 = input("Entrez le login : \n")
-                    sql22 = "SELECT login FROM Adherents WHERE login='%s'" %(login2)
+                    login_user = input("Entrez le login : \n")
+                    sql22 = "SELECT login FROM Adherents WHERE login='%s'" %(login2,login2)
                     cur.execute(sql22)
                     row = cur.fetchone()
 
@@ -187,53 +187,53 @@ if (not row) :
                         Nom_n=input("Entrez le nom : \n")
                         sql_nom="UPDATE Adherents SET Nom = '%s' WHERE login = '%s' " % (Nom_n,login2)
                         cur.execute(sql_nom)
-                        print("Le nom ", Nom_n, " a bien été enregistré \n") 
+                        print("Le nom ", Nom_n, " a bien été enregistré \n")
                     elif(information==2):
                         Prenom_n=input("Entrez le prenom : \n")
                         sql_prenom="UPDATE Adherents SET Prenom = '%s' WHERE login = '%s' " % (Prenom_n,login2)
                         cur.execute(sql_prenom)
-                        print("Le prénom ",Prenom_n , " a bien été enregistré \n") 
+                        print("Le prénom ",Prenom_n , " a bien été enregistré \n")
                     elif(information==3):
                         Adresse_n= input("Entrez l'adresse de l'adhérent : \n")
                         sql_adr="UPDATE Adherents SET Adresse = '%s' WHERE login = '%s' " % (Adresse_n,login2)
                         cur.execute(sql_adr)
-                        print("L'adresse ", Adresse_n, " a bien été enregistré \n") 
+                        print("L'adresse ", Adresse_n, " a bien été enregistré \n")
 
                     elif(information==4):
                         Mail_n=input("Entrez son mail : \n")
                         sql_mail="UPDATE Adherents SET Adresse = '%s' WHERE login = '%s' " % (Mail_n,login2)
                         cur.execute(sql_mail)
-                        print("Le mail ",Mail_n ," a bien été enregistré \n") 
+                        print("Le mail ",Mail_n ," a bien été enregistré \n")
 
                     elif(information==5):
                         Num_tele_n=int(input("Entrez le nombre de téléphone : \n"))
                         sql_numtele="UPDATE Adherents SET Num_telephone = '%d' WHERE login = '%s' " % (Num_tele_n,login2)
                         cur.execute(sql_numtele)
-                        print("Le numéro de téléphone ",Num_tele_n," a bien été enregistré \n") 
+                        print("Le numéro de téléphone ",Num_tele_n," a bien été enregistré \n")
 
                     elif(information==6):
                         Date_naissance_n=input("Entrez la date de naissance de l'adhérent : \n")
                         sql_date="UPDATE Adherents SET Date_de_naissance = '%s' WHERE login = '%s' " % (Date_naissance_n,login2)
                         cur.execute(sql_date)
-                        print("La date de naissance ",Date_naissance_n," a bien été enregistré \n") 
+                        print("La date de naissance ",Date_naissance_n," a bien été enregistré \n")
 
                     elif(information==7):
                         Nb_retard_n =int(input("Entrez le nombre de retard pour retourner une ressource : \n"))
                         sql_retard="UPDATE Adherents SET Nb_retard = '%s' WHERE login = '%s' " % (Nb_retard_n,login2)
                         cur.execute(sql_retard)
-                        print("Le nombre de retard ",Nb_retard_n," a bien été enregistré \n") 
+                        print("Le nombre de retard ",Nb_retard_n," a bien été enregistré \n")
 
                     elif(information==8):
                         Nb_degradation_n =int(input("Entrez le nombre de dégradation de la ressource : \n"))
                         sql_degradation="UPDATE Adherents SET Nb_degradation = '%s' WHERE login = '%s' " % (Nb_degradation_n,login2)
                         cur.execute(sql_degradation)
-                        print("Le nombre de degradation ",Nb_degradation_n," a bien été enregistré \n") 
+                        print("Le nombre de degradation ",Nb_degradation_n," a bien été enregistré \n")
 
                     elif(information==9):
                         Num_carte_n =input("Entrez le numéro de la carte : \n")
                         sql_carte="UPDATE Adherents SET carte = '%s' WHERE login = '%s' " % (Num_carte_n,login2)
                         cur.execute(sql_carte)
-                        print("Le numéro de la carte ",Num_carte_n," a bien été enregistré \n") 
+                        print("Le numéro de la carte ",Num_carte_n," a bien été enregistré \n")
 
 
             elif (choix_2==3) :
@@ -276,9 +276,9 @@ if (not row) :
                 login = input("Entrez le login de la personne qui emprunte la ressource : \n")
                 cle = input("Entrez la clé de l'exemplaire : \n")
                 encours = True
-                sql_empr = "INSERT INTO EMPRUNT VALUES ('%s', '%s','%b', '%s')" % (cle , login, True, duré)
+                sql_empr = "INSERT INTO EMPRUNT VALUES ('%s', '%s',true, '%s')" % (cle , login, duré)
                 cur.execute(sql_empr)
-                sql00 = "UPDATE Exemplaire SET Disponibilité ='%b' WHERE Clé='%s'" % (False, cle)
+                sql00 = "UPDATE Exemplaire SET Disponibilité =false WHERE Clé='%s'" % (cle)
                 cur.execute(sql00)
                 sql = "SELECT compteur FROM Exemplaire WHERE Clé='%s'" % (cle)
                 cur.execute(sql)
@@ -335,11 +335,11 @@ if (not row) :
                     sql01 = "UPDATE Reservation SET  Clé ='%s' WHERE Clé='%s' AND login='%s'" % ( cle2, cle, login)
                     cur.execute(sql01)
                     conn.commit()
-                    sql01 = "UPDATE Exemplaire SET Disponibilité ='%b' WHERE Clé='%s'" % (True, cle)
+                    sql01 = "UPDATE Exemplaire SET Disponibilité ='true' WHERE Clé='%s'" % (cle)
                     cur.execute(sql01)
                     conn.commit()
             elif choix_2 == 5:
-                sql = "SELECT Clé, login FROM EMPRUNT WHERE emprunt_enCours ='%b'" %(True)
+                sql = "SELECT Clé, login FROM EMPRUNT WHERE emprunt_enCours ='true'"
                 cur.execute(sql)
                 raw = cur.fetchone()
                 for i in range(len(raw)):
@@ -352,7 +352,7 @@ if (not row) :
                 cle = input("Entrez la clé de l'exemplaire : \n")
                 sanction=int(input("Entrez 1 si la sanction est une degradation et 0 si c'est un retard \n"))
                 if sanction==0:
-                    sql_sanction = "INSERT INTO Sanction VALUES ('%s', '%s','%b','%b','%s', '%b','%s')" % (cle , login, True,False, None, True, date_effective)
+                    sql_sanction = "INSERT INTO Sanction VALUES ('%s', '%s',true,false,'%s', true,'%s')" % (cle , login, None, date_effective)
                     cur.execute(sql_sanction)
                     conn.commit()
                 elif sanction==1:
@@ -383,7 +383,7 @@ else :
                 for i in range(len(row5)):
                     print(row5[:][i], "\n")
             elif (choix == 2) :
-                #recommandations par genre 
+                #recommandations par genre
                 sql_a="SELECT * FROM Genre4 WHERE login='%s'" %login_user
                 cur.execute(sql_a)
                 row5 = cur.fetchone()
@@ -394,7 +394,7 @@ else :
                 for i in range(3):
                     # on affiche 3 Ressource pour pas surcharger
                     print(row[0][i],row[1][i],row[2][i]," \n")
-                #recommandations par langue 
+                #recommandations par langue
                 sql_a="SELECT * FROM LangueFilm2 WHERE login='%s'" %login_user
                 cur.execute(sql_a)
                 row5 = cur.fetchall()
