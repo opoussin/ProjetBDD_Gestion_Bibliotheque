@@ -174,8 +174,8 @@ if (not row) :
                 row = cur.fetchone()
                 while not row :
                     print( "le login n'est pas bon \n")
-                    login_user = input("Entrez le login : \n")
-                    sql22 = "SELECT login FROM Adherents WHERE login='%s'" %(login2,login2)
+                    login2 = input("Entrez le login : \n")
+                    sql22 = "SELECT login FROM Adherents WHERE login='%s'" %(login2)
                     cur.execute(sql22)
                     row = cur.fetchone()
 
