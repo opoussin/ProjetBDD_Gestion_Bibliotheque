@@ -99,6 +99,12 @@ CREATE VIEW Populaire AS
 SELECT Ressource.Code , Ressource.Titre , Ressource.Éditeur ,Ressource.Genre , Ressource.Type, MAX(Exemplaire.compteur) 
 FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code;
 
+/* Exemplaire emprunté plus de 10 fois de la bibliothèque  */
+CREATE VIEW Populaire2 AS
+SELECT Ressource.Code , Ressource.Titre ,Ressource.Genre , Ressource.Type, Exemplaire.compteur 
+FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code
+WHERE Exemplaire.compteur >= 10 ;
+
 /* On compte le nombre de films d'une même langue empruntés*/
 CREATE VIEW LangueFilm1 AS 
 SELECT Ressource.Langue_film, Genre1.Clé, Genre1.login
