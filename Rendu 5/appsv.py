@@ -80,7 +80,7 @@ if (not row) :
                 sql_recuperation_nbexemplaire="SELECT Nb_exemplaire FROM Ressource WHERE Ressource.Code = '%s'" %Code_E
                 cur.execute(sql_recuperation_nbexemplaire)
                 row = cur.fetchone()
-                sql_nb_exemplaire="UPDATE Ressource WHERE Code='%s' SET Nb_exemplaire= '%d' +1" %(Code_E, row[0])
+                sql_nb_exemplaire="UPDATE Ressource SET Nb_exemplaire= '%d' WHERE Code='%s' " %(row[0]+1,Code_E)
                 cur.execute(sql_nb_exemplaire)
 
             #modification d'un exemplaire : on ne veut pas changer le code de la ressource, donc le type non plus, et la clé non plus: juste l'état et la Disponibilité
@@ -107,10 +107,10 @@ if (not row) :
                 État= input("Entrez le nouvel état de l'exemplaire : \n")
                 disp=int(input("est-ce que l'exemplaire est encore disponible? 1 oui, 0 Non \n"))
                 if(disp==1) :
-                        sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= '%s' SET État='%s', Disponibilité='true'" %(Clé,État)
+                        sql_nb_exemplaire="UPDATE Exemplaire SET État='%s', Disponibilité='true' WHERE Clé= '%s' " %(État,Clé)
                         cur.execute(sql_nb_exemplaire)
                 elif(disp==0) :
-                        sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= '%s' SET État='%s', Disponibilité='false'" %(Clé,État)
+                        sql_nb_exemplaire="UPDATE Exemplaire SET État='%s', Disponibilité='false' WHERE Clé= '%s' " %(État,Clé)
                         cur.execute(sql_nb_exemplaire)
                 print("L'exemplaire a été modifié \n")
 
