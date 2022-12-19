@@ -72,7 +72,7 @@ if (not row) :
                 sql_type="SELECT Type FROM Ressource WHERE Ressource.Code = '%s'" %Code_E
                 cur.execute(sql_type)
                 row = cur.fetchone()
-                sql_ajout_exemplaire="INSERT INTO Exemplaire VALUES ('%s','%s','%s','%s','true','%d')"%(Clé,row[0], Code_E, État, 0)
+                sql_ajout_exemplaire="INSERT INTO Exemplaire VALUES ('%s','%s','%s','%s','%b','%d')"%(Clé,row[0], Code_E, État, True,0)
                 sql_titre="SELECT Titre FROM Ressource WHERE Ressource.Code = '%s'" %Code_E
                 cur.execute(sql_titre)
                 row = cur.fetchone()
@@ -107,7 +107,7 @@ if (not row) :
                 État= input("Entrez le nouvel état de l'exemplaire : \n")
                 disp=int(input("est-ce que l'exemplaire est encore disponible? 1 oui, 0 Non \n"))
                 if(disp==1) :
-                        sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= '%s' SET État='%s', Disponibilité='true'" %(Clé)
+                        sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= '%s' SET État='%s', Disponibilité='%b'" %(Clé,True)
                         cur.execute(sql_nb_exemplaire)
                 elif(disp==0) :
                         sql_nb_exemplaire="UPDATE Exemplaire WHERE Clé= '%s' SET État='%s', Disponibilité='%b'" %(Clé,False)
@@ -387,25 +387,24 @@ else :
                 sql_a="SELECT * FROM Genre4 WHERE login='%s'" %login_user
                 cur.execute(sql_a)
                 row5 = cur.fetchone()
-                sql0="SELECT Code,Titre,Type FROM Ressource WHERE Genre='%s'" %row5[1]
+                sql0="SELECT Code,Titre FROM Ressource WHERE Genre='%s'" %row5[1]
                 cur.execute(sql0)
                 row = cur.fetchall()
                 print("Nous vous recommandons les ressourses suivantes: \n")
-                for i in range(3):
+                for i in range(2):
                     # on affiche 3 Ressource pour pas surcharger
-                    print(row[0][i],row[1][i],row[2][i]," \n")
+                    print(row[i][0],row[i][1]," \n")
                 #recommandations par langue
-                sql_a="SELECT * FROM LangueFilm2 WHERE login='%s'" %login_user
-                cur.execute(sql_a)
-                row5 = cur.fetchall()
-                for k in range(3):
-                    sql0="SELECT Code,Titre,Type FROM Ressource WHERE Langue_film='%s'" %row5[1][i]
-                    cur.execute(sql0)
-                    row = cur.fetchall()
-                    print("Nous vous recommandons les ressourses suivantes: \n")
-                    for i in range(3):
-                        # on affiche 3 Ressource pour pas surcharger
-                        print(row[0][i],row[1][i],row[2][i]," \n")
+                #sql_a="SELECT * FROM LangueFilm2 WHERE login='%s'" %login_user
+                #cur.execute(sql_a)
+                #row5 = cur.fetchone()
+                #sql0="SELECT Code,Titre FROM Ressource WHERE Langue_film='%s'" %row5[1]
+                #cur.execute(sql0)
+                #row = cur.fetchall()
+                #print("Nous vous recommandons les ressourses suivantes: \n")
+                #for i in range(1):
+                    # on affiche 3 Ressource pour pas surcharger
+                #        print(row[i][0],row[i][1]," \n")
             elif (choix == 3) :
                 type_recherche=int(input("quel type de recherche voulez-vous faire ? \n 1. par titre \n 2. par Type (Livre, Film , Oeuvremusicale ) \n 3. par genre ? \n"))
                 if type_recherche == 1:
@@ -422,16 +421,16 @@ else :
                         print("La resource est disponible \n")
                 elif type_recherche ==2:
                     type = input("Entrez le type de la resource voulu : \n")
-                    sql = "SELECT * FROM Ressource WHERE Type ='%s'" %(type)
+                    sql = "SELECT Titre FROM Ressource WHERE Type ='%s'" %(type)
                     cur.execute(sql)
-                    raw = cur.fetchone()
+                    raw = cur.fetchall()
                     print("Les ressource corespondant à ",type," sont \n")
-                    print(raw)
+                    print(raw,"\n")
                 elif type_recherche == 3:
                     genre = input("Entrez le genre de la resource voulu : \n")
-                    sql = "SELECT * FROM Ressource WHERE Genre ='%s'" %(genre)
+                    sql = "SELECT Titre FROM Ressource WHERE Genre ='%s'" %(genre)
                     cur.execute(sql)
-                    raw = cur.fetchone()
+                    raw = cur.fetchall()
                     print("Les ressource corespondant à ",genre," sont \n")
                     print(raw, "\n")
 conn.commit()
