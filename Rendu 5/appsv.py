@@ -12,7 +12,7 @@ row = cur.fetchone()
 
 #login faux :
 while not row :
-    print( "le login n'est pas bon \n")
+    print("le login n'est pas bon \n")
     login_user = input("Entrez votre login : \n")
     sql = "SELECT login FROM Adherents WHERE login='%s' UNION SELECT login FROM Personnel WHERE login='%s'" %(login_user,login_user)
     cur.execute(sql)
@@ -120,8 +120,7 @@ if (not row) :
                 cur.execute(sql_consult)
                 result = cur.fetchall()
                 for row in result:
-                    print(row)
-                    print("\n")
+                    print(row[0][i], "\n")
                 Titre= input("Entrez le Titre de la ressource à consulter: \n")
                 sql_lecture="SELECT * FROM Ressource WHERE Titre='%s'" %Titre
                 cur.execute(sql_lecture)
@@ -148,9 +147,6 @@ if (not row) :
                 cur.execute(sql_disponibilité)
                 row = cur.fetchone()
                 print(" La ressource ",ressource_disp," est disponible en ",row[0]," exemplaires \n")
-
-
-
 
         #menu des actions sur les adhérents
         elif (choix == 2) :
@@ -382,10 +378,10 @@ else :
             if (choix == 1) :
                 sql5="SELECT * FROM Emprunt E Join Adherents A ON E.login = A.login WHERE E.login='%s'" %login_user
                 cur.execute(sql5)
-                row5 = cur.fetchone()
+                row5 = cur.fetchall()
                 print("Votre historique est : \n")
-                print(row5)
-                print("\n")
+                for i in range(len(row5)):
+                    print(row5[:][i], "\n")
             elif (choix == 2) :
                 #recommandations par genre 
                 sql_a="SELECT * FROM Genre4 WHERE login='%s'" %login_user
@@ -431,13 +427,12 @@ else :
                     raw = cur.fetchone()
                     print("Les ressource corespondant à ",type," sont \n")
                     print(raw)
-                elif type_recherche ==3:
+                elif type_recherche == 3:
                     genre = input("Entrez le genre de la resource voulu : \n")
                     sql = "SELECT * FROM Ressource WHERE Genre ='%s'" %(genre)
                     cur.execute(sql)
                     raw = cur.fetchone()
                     print("Les ressource corespondant à ",genre," sont \n")
-                    print(raw)
-                    print("\n")
+                    print(raw, "\n")
 conn.commit()
 conn.close()
