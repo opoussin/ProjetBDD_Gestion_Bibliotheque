@@ -285,10 +285,10 @@ if (not row) :
                 result = cur.fetchall()
                 for row in result:
                     print(row,"\n")
-            
+
              #affichage liste de sanctions de l'adhérent
 
-                sql_info= "SELECT * FROM Sanction S Join Adherents A ON S.login = A.login WHERE E.login='%s'" %login_info
+                sql_info= "SELECT * FROM Sanction S Join Adherents A ON S.login = A.login WHERE S.login='%s'" %login_info
                 cur.execute(sql_info)
                 print("liste des sanction : \n")
                 result = cur.fetchall()
@@ -322,6 +322,7 @@ if (not row) :
                 sql01 = "UPDATE Exemplaire SET compteur ='%s' WHERE Clé='%s'" % (cpt, cle)
                 cur.execute(sql01)
                 conn.commit()
+                print("Emprunt de la ressource",cle,"par ",login,"a bien été effectuer \n")
             elif choix_2 == 2:
                 login = input("Entrez le login de la personne qui emprunte la ressource : \n")
                 cle = input("Entrez la clé de l'exemplaire : \n")
@@ -372,22 +373,21 @@ if (not row) :
             elif choix_2 == 5:
                 sql = "SELECT Clé, login FROM EMPRUNT WHERE emprunt_enCours ='true'"
                 cur.execute(sql)
-                raw = cur.fetchone()
-                for i in range(len(raw)):
-                    Cle = raw[i][0]
-                    login = raw[i][1]
-                    print("Les emprunt en cours sont ",Cle, login,"\n")
+                raw = cur.fetchall()
+                print("Les emprunt en cours sont \n")
+                for i in raw:
+                    print(i,"\n")
             elif choix_2 == 6:
                 date_effective = input("Entrez la date du retour effective de la sanction sous la forme YYYY-MM-DD : \n")
                 login = input("Entrez le login de la personne qui sanctionner: \n")
                 cle = input("Entrez la clé de l'exemplaire : \n")
                 sanction=int(input("Entrez 1 si la sanction est une degradation et 0 si c'est un retard \n"))
                 if sanction==0:
-                    sql_sanction = "INSERT INTO Sanction VALUES ('%s', '%s',true,false,'%s', true,'%s')" % (cle , login, None, date_effective)
+                    sql_sanction = "INSERT INTO Sanction VALUES ('%s', '%s',true,false,NULL, true,'%s')" % (cle , login, date_effective)
                     cur.execute(sql_sanction)
                     conn.commit()
                 elif sanction==1:
-                    sql_sanction = "INSERT INTO Sanction VALUES ('%s', '%s',true,true,'%s', false,'%s')" % (cle , login, date_effective, None)
+                    sql_sanction = "INSERT INTO Sanction VALUES ('%s', '%s',true,true,'%s', false,NULL)" % (cle , login, date_effective)
                     cur.execute(sql_sanction)
                     conn.commit()
 
@@ -411,8 +411,8 @@ else :
                 cur.execute(sql5)
                 row5 = cur.fetchall()
                 print("Votre historique est : \n")
-                for i in range(len(row5)):
-                    print(row5[:][i], "\n")
+                for i in row5:
+                    print(i, "\n")
             elif (choix == 2) :
                 #recommandations par genre
                 sql_a="SELECT * FROM Genre4 WHERE login='%s'" %login_user
