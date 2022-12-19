@@ -99,9 +99,12 @@ CREATE VIEW Populaire AS
 SELECT Ressource.Code , Ressource.Titre , Ressource.Éditeur ,Ressource.Genre , Ressource.Type, MAX(Exemplaire.compteur) 
 FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code;
 
+CREATE VIEW Langue2 AS 
+SELECT Ressource.Genre, Genre1.Clé, Genre1.login
+FROM Genre1 Join Ressource ON Genre1.Code = Ressource.Code;
 
-
-
+CREATE VIEW LangueFilm AS
+SELECT 
 
 
 /*
