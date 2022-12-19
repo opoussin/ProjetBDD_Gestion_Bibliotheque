@@ -387,21 +387,29 @@ else :
                 print(row5)
                 print("\n")
             elif (choix == 2) :
-                sql_a="SELECT Clé FROM Emprunt E Join Adherents A ON E.login = A.login WHERE E.login='%s'" %login_user
+                #recommandations par genre 
+                sql_a="SELECT * FROM Genre4 WHERE login='%s'" %login_user
+                cur.execute(sql_a)
+                row5 = cur.fetchone()
+                sql0="SELECT Code,Titre,Type FROM Ressource WHERE Genre='%s'" %row5[1]
+                cur.execute(sql0)
+                row = cur.fetchall()
+                print("Nous vous recommandons les ressourses suivantes: \n")
+                for i in range(3):
+                    # on affiche 3 Ressource pour pas surcharger
+                    print(row[0][i],row[1][i],row[2][i]," \n")
+                #recommandations par langue 
+                sql_a="SELECT * FROM LangueFilm2 WHERE login='%s'" %login_user
                 cur.execute(sql_a)
                 row5 = cur.fetchall()
-                for i in row5:
-                    sql0="SELECT Code FROM Exemplaire WHERE Clé='%s'" %i
+                for k in range(3):
+                    sql0="SELECT Code,Titre,Type FROM Ressource WHERE Langue_film='%s'" %row5[1][i]
                     cur.execute(sql0)
-                    row1 = cur.fetchone()
-                sql_a="SELECT Genre FROM Ressource R Join Exemplaire E ON R.Code = '%s' GROUP BY Genre" %row1[0]
-                cur.execute(sql_a)
-                row4 = cur.fetchone()
-                print("Nous vous recomandon les ressourses suivantes: \n")
-                sqlaff="SELECT Titre FROM Ressource WHERE Type='%s'" %row4
-                cur.execute(sqlaff)
-                row7 = cur.fetchone()
-                print(row7)
+                    row = cur.fetchall()
+                    print("Nous vous recommandons les ressourses suivantes: \n")
+                    for i in range(3):
+                        # on affiche 3 Ressource pour pas surcharger
+                        print(row[0][i],row[1][i],row[2][i]," \n")
             elif (choix == 3) :
                 type_recherche=int(input("quel type de recherche voulez-vous faire ? \n 1. par titre \n 2. par Type (Livre, Film , Oeuvremusicale ) \n 3. par genre ? \n"))
                 if type_recherche == 1:
