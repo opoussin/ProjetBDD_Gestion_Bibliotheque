@@ -323,23 +323,19 @@ if (not row) :
                 cur.execute(sql01)
                 conn.commit()
             elif choix_2 == 2:
-                date_retour = input("Entrez la date du retour de l'emprunt sous la forme YYYY-MM-DD : \n")
                 login = input("Entrez le login de la personne qui emprunte la ressource : \n")
                 cle = input("Entrez la clé de l'exemplaire : \n")
                 sql = "SELECT Durée_limite FROM EMPRUNT WHERE login='%s' AND Clé='%s'" % (login,cle)
                 cur.execute(sql)
                 row = cur.fetchone()
+                print(row,"\n")
+                date_retour = input("la date est-elle dépasser \n")
                 sanction=0
-                for i in range(4):
-                    if row[i] < date_retour[i]:
-                        sanction=1
-                if row[6] < date_retour[6]:
-                        sanction=1
-                elif row[7] < date_retour[7]:
-                        sanction=1
-                for i in range(8,10):
-                    if row[i] < date_retour[i]:
-                        sanction=1
+                if date_retour=='oui':
+                    sanction=1
+                    date_retour = input("entrez la date de fin de sanction sous la forme YYYY-MM-DD \n")
+                elif date_retour=='non':
+                    sanction=0
                 if sanction == 1:
                     sql_sanction = "INSERT INTO Sanction VALUES ('%s', '%s',true,true,'%s', false,'%s')" % (cle , login, date_retour, None)
                     cur.execute(sql_sanction)
