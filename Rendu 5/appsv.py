@@ -120,7 +120,7 @@ if (not row) :
                 cur.execute(sql_consult)
                 result = cur.fetchall()
                 for row in result:
-                    print(row[0][i], "\n")
+                    print(row, "\n")
                 Titre= input("Entrez le Titre de la ressource à consulter: \n")
                 sql_lecture="SELECT * FROM Ressource WHERE Titre='%s'" %Titre
                 cur.execute(sql_lecture)
@@ -142,8 +142,8 @@ if (not row) :
                     print("Titre: ",row[1],", Éditeur: ",row[2],", Genre: ",row[3],", Date_apparition: ",row[4],", Nb_exemplaire: ",row[5],",  Durée_oeuvre:",row[12],"\n")
 
             elif(choix_2==5):
-                ressource_disp=input("Titre de la ressource dont vous souhaitez vérifier la disponibilité")
-                sql_disponibilité = "SELECT COUNT(Exemplaire.Disponibilité) FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code WHERE (Ressource.Titre='%s' AND Exemplaire.Disponibilité='true'  "%(ressource_disp)
+                ressource_disp=input("Titre de la ressource dont vous souhaitez vérifier la disponibilité : \n")
+                sql_disponibilité = "SELECT COUNT(Exemplaire.Disponibilité) FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code WHERE (Ressource.Titre='%s' AND Exemplaire.Disponibilité='true' ) "%(ressource_disp)
                 cur.execute(sql_disponibilité)
                 row = cur.fetchone()
                 print(" La ressource ",ressource_disp," est disponible en ",row[0]," exemplaires \n")
@@ -153,16 +153,17 @@ if (not row) :
             choix_2 = int(input(" Que voulez-vous faire : \n 1. Ajouter un adhérent \n 2. Modifier les informations personnelles d'un adhérent \n 3. Modifier l'adhésion d'un adhérent \n 4. Accéder aux informations d'un adhérent \n 5. Afficher la liste des adhérents \n"))
             if (choix_2==1) :
                 login=input("Entrez le login de l'adhérent : \n")
+                mdp=input("Entrez le mot de passe de l'adhérent : \n")
                 Nom=input("Entrez le nom de l'adhérent : \n")
                 Prenom=input("Entrez le prénom de l'adhérent : \n")
                 Adresse= input("Entrez l'adresse de l'adhérent : \n")
                 Mail=input("Entrez son mail : \n")
-                Num_tele=input("Entrez le nombre de téléphone : \n")
-                Date_naissance=input("Entrez la date de naissance de l'adhérent : \n")
-                Nb_retard =int(input("Entrez le nombre de retard pour retourner une ressource : \n"))
-                Nb_degradation =int(input("Entrez le nombre de dégradation de la ressource : \n"))
+                Num_tele=input("Entrez le numero de téléphone : \n")
+                Date_naissance=input("Entrez la date de naissance de l'adhérent sous la forme YYYY-MM-DD: \n")
                 Num_carte =input("Entrez le numéro de la carte : \n")
-                sql_ajout_adherent="INSERT INTO Adherents VALUES ('%s','%s','%s','%s','%s','%s','%s','%d','%d','%s')" % (login, Nom, Prenom, Adresse, Mail, Num_tele,Date_naissance,Nb_retard,Nb_degradation, Num_carte)
+                sqlajout="INSERT INTO Compte_utilisateur VALUES ('%s', '%s')"%(login, mdp)
+                cur.execute(sqlajout)
+                sql_ajout_adherent="INSERT INTO Adherents VALUES ('%s','%s','%s','%s','%s','%s','%s','%d','%d','%s')" % (login, Nom, Prenom, Adresse, Mail, Num_tele,Date_naissance,0,0, Num_carte)
                 cur.execute(sql_ajout_adherent)
                 print("L'adérent ",Nom," ",Prenom," a bien été ajouté \n")
 
@@ -174,8 +175,8 @@ if (not row) :
                 row = cur.fetchone()
                 while not row :
                     print( "le login n'est pas bon \n")
-                    login_user = input("Entrez le login : \n")
-                    sql22 = "SELECT login FROM Adherents WHERE login='%s'" %(login2,login2)
+                    login2 = input("Entrez le login : \n")
+                    sql22 = "SELECT login FROM Adherents WHERE login='%s'" %(login2)
                     cur.execute(sql22)
                     row = cur.fetchone()
 
@@ -188,52 +189,70 @@ if (not row) :
                         sql_nom="UPDATE Adherents SET Nom = '%s' WHERE login = '%s' " % (Nom_n,login2)
                         cur.execute(sql_nom)
                         print("Le nom ", Nom_n, " a bien été enregistré \n")
+                        information=int(input("Veuillez choisir l'information que vous voulez modifier : 1.Nom 2.Prenom 3.Adresse 4.Mail 5.Numéro de téléphone 6.Date de naissance 7.nombre de retard 8.nombre de dégradation 9.Numéro de carte 0.quitter \n"))
+
                     elif(information==2):
                         Prenom_n=input("Entrez le prenom : \n")
                         sql_prenom="UPDATE Adherents SET Prenom = '%s' WHERE login = '%s' " % (Prenom_n,login2)
                         cur.execute(sql_prenom)
                         print("Le prénom ",Prenom_n , " a bien été enregistré \n")
+                        information=int(input("Veuillez choisir l'information que vous voulez modifier : 1.Nom 2.Prenom 3.Adresse 4.Mail 5.Numéro de téléphone 6.Date de naissance 7.nombre de retard 8.nombre de dégradation 9.Numéro de carte 0.quitter \n"))
+
                     elif(information==3):
                         Adresse_n= input("Entrez l'adresse de l'adhérent : \n")
                         sql_adr="UPDATE Adherents SET Adresse = '%s' WHERE login = '%s' " % (Adresse_n,login2)
                         cur.execute(sql_adr)
                         print("L'adresse ", Adresse_n, " a bien été enregistré \n")
+                        information=int(input("Veuillez choisir l'information que vous voulez modifier : 1.Nom 2.Prenom 3.Adresse 4.Mail 5.Numéro de téléphone 6.Date de naissance 7.nombre de retard 8.nombre de dégradation 9.Numéro de carte 0.quitter \n"))
+
 
                     elif(information==4):
                         Mail_n=input("Entrez son mail : \n")
-                        sql_mail="UPDATE Adherents SET Adresse = '%s' WHERE login = '%s' " % (Mail_n,login2)
+                        sql_mail="UPDATE Adherents SET Mail = '%s' WHERE login = '%s' " % (Mail_n,login2)
                         cur.execute(sql_mail)
                         print("Le mail ",Mail_n ," a bien été enregistré \n")
+                        information=int(input("Veuillez choisir l'information que vous voulez modifier : 1.Nom 2.Prenom 3.Adresse 4.Mail 5.Numéro de téléphone 6.Date de naissance 7.nombre de retard 8.nombre de dégradation 9.Numéro de carte 0.quitter \n"))
+
 
                     elif(information==5):
                         Num_tele_n=int(input("Entrez le nombre de téléphone : \n"))
                         sql_numtele="UPDATE Adherents SET Num_telephone = '%d' WHERE login = '%s' " % (Num_tele_n,login2)
                         cur.execute(sql_numtele)
                         print("Le numéro de téléphone ",Num_tele_n," a bien été enregistré \n")
+                        information=int(input("Veuillez choisir l'information que vous voulez modifier : 1.Nom 2.Prenom 3.Adresse 4.Mail 5.Numéro de téléphone 6.Date de naissance 7.nombre de retard 8.nombre de dégradation 9.Numéro de carte 0.quitter \n"))
+
 
                     elif(information==6):
-                        Date_naissance_n=input("Entrez la date de naissance de l'adhérent : \n")
+                        Date_naissance_n=input("Entrez la date de naissance de l'adhérent sous la forme YYYY-MM-DD: \n")
                         sql_date="UPDATE Adherents SET Date_de_naissance = '%s' WHERE login = '%s' " % (Date_naissance_n,login2)
                         cur.execute(sql_date)
                         print("La date de naissance ",Date_naissance_n," a bien été enregistré \n")
+                        information=int(input("Veuillez choisir l'information que vous voulez modifier : 1.Nom 2.Prenom 3.Adresse 4.Mail 5.Numéro de téléphone 6.Date de naissance 7.nombre de retard 8.nombre de dégradation 9.Numéro de carte 0.quitter \n"))
+
 
                     elif(information==7):
                         Nb_retard_n =int(input("Entrez le nombre de retard pour retourner une ressource : \n"))
                         sql_retard="UPDATE Adherents SET Nb_retard = '%s' WHERE login = '%s' " % (Nb_retard_n,login2)
                         cur.execute(sql_retard)
                         print("Le nombre de retard ",Nb_retard_n," a bien été enregistré \n")
+                        information=int(input("Veuillez choisir l'information que vous voulez modifier : 1.Nom 2.Prenom 3.Adresse 4.Mail 5.Numéro de téléphone 6.Date de naissance 7.nombre de retard 8.nombre de dégradation 9.Numéro de carte 0.quitter \n"))
+
 
                     elif(information==8):
                         Nb_degradation_n =int(input("Entrez le nombre de dégradation de la ressource : \n"))
                         sql_degradation="UPDATE Adherents SET Nb_degradation = '%s' WHERE login = '%s' " % (Nb_degradation_n,login2)
                         cur.execute(sql_degradation)
                         print("Le nombre de degradation ",Nb_degradation_n," a bien été enregistré \n")
+                        information=int(input("Veuillez choisir l'information que vous voulez modifier : 1.Nom 2.Prenom 3.Adresse 4.Mail 5.Numéro de téléphone 6.Date de naissance 7.nombre de retard 8.nombre de dégradation 9.Numéro de carte 0.quitter \n"))
+
 
                     elif(information==9):
                         Num_carte_n =input("Entrez le numéro de la carte : \n")
                         sql_carte="UPDATE Adherents SET carte = '%s' WHERE login = '%s' " % (Num_carte_n,login2)
                         cur.execute(sql_carte)
                         print("Le numéro de la carte ",Num_carte_n," a bien été enregistré \n")
+                        information=int(input("Veuillez choisir l'information que vous voulez modifier : 1.Nom 2.Prenom 3.Adresse 4.Mail 5.Numéro de téléphone 6.Date de naissance 7.nombre de retard 8.nombre de dégradation 9.Numéro de carte 0.quitter \n"))
+
 
 
             elif (choix_2==3) :
@@ -261,10 +280,7 @@ if (not row) :
                 cur.execute(sql)
                 result = cur.fetchall()
                 for row in result:
-                    print(row)
-                    print("\n")
-
-
+                    print(row,"\n")
 
 
 
