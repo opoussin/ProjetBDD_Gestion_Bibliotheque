@@ -29,15 +29,18 @@ SELECT login
 FROM Adherents;
 
 /* jointure ressource _ Exemplaire */
+
+/* plus besoin de cette table puisque exemplaire est déja dans ressource
 CREATE VIEW RessourceExemplaire AS
 SELECT Ressource.Titre, Exemplaire.Clé
 FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code ;
+*/
 
 /* Compte le nombre d'exemplaire disponible  */
 CREATE VIEW CompteExemplaire AS
-SELECT Ressource.Titre, COUNT(Exemplaire.Disponibilité)
-FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code
-WHERE Exemplaire.Disponibilité=true
+SELECT Ressource.Titre, COUNT(Exemplaire->>'Disponibilité' AS Disponibilité)
+FROM Ressource, JSON_ARRAY_ELEMENTS(Ressource.Exemplaire) Exemplaire
+WHERE Disponibilité=true
 GROUP BY Ressource.Titre;
 
 /* View pour consulter un adhérent */
