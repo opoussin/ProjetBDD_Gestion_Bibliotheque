@@ -342,21 +342,11 @@ if (not row) :
             elif choix_2 == 2:
                 login = input("Entrez le login de la personne qui emprunte la ressource : \n")
                 cle = input("Entrez la clé de l'exemplaire : \n")
-                sql = "SELECT Durée_limite FROM EMPRUNT WHERE login='%s' AND Clé='%s'" % (login,cle)
+                date = input("Entrez la nouvelle date effective de retour de l'emprunt : \n")
+                sql = "UPDATE EMPRUNT SET Durée_limite ='%s' WHERE login='%s' AND Clé='%s'" %(date, login, cle)
                 cur.execute(sql)
-                row = cur.fetchone()
-                print(row,"\n")
-                date_retour = input("la date est-elle dépasser (oui ou non) ? \n")
-                sanction=0
-                if date_retour=='oui':
-                    sanction=1
-                    date_retour = input("entrez la date de fin de sanction sous la forme YYYY-MM-DD \n")
-                elif date_retour=='non':
-                    sanction=0
-                if sanction == 1:
-                    sql_sanction = "INSERT INTO Sanction VALUES ('%s', '%s',true,true,'%s', false,'%s')" % (cle , login, date_retour, None)
-                    cur.execute(sql_sanction)
-                    conn.commit()
+                conn.commit()
+                print("la date de retour de l'emprunt à bien été mis a jour au ",date," \n")
             elif choix_2 == 3:
                 cle = input("Entrez la clé de l'exemplaire : \n")
                 login = input("Entrez le login de la personne qui réserve la ressource : \n")
