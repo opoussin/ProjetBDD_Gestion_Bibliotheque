@@ -18,14 +18,10 @@ INSERT INTO Adhesions VALUES ('agatheo', '2021-8-13', '2023-8-17');
 INSERT INTO Adhesions VALUES ('arthurdr', '2021-8-13', '2023-8-17');
 INSERT INTO Adhesions VALUES ('juleskin', '2022-12-15', NULL);
 
-INSERT INTO Ressource VALUES ('L1','Les Fleurs du Mal', 'Pierre Brunel', 'Poésie', 1868,3, '9782702182888', 'Français', 'recueil de poèmes de Charles Baudelaire reprenant la quasi-totalité de sa production en vers de 1840 jusque sa mort survenue fin août 1867',NULL,NULL,NULL,NULL, 'Livre','[{"Clé":"L1_01","Type":"Livre","Code":"L1","État":"Neuf","Disponibilité":"True","compteur":0},{"Clé":"L1_02","Type":"Livre","Code":"L1","État":"Bon","Disponibilité":"True","compteur":0},[{"Clé":"L1_03","Type":"Livre","Code":"L1","État":"Bon","Disponibilité":"True","compteur":0}]);
-
-
-'[{"Clé":"","Type":"","Code":"","État":"","Disponibilité":"","compteur":""},{});'
-
+INSERT INTO Ressource VALUES ('L1','Les Fleurs du Mal', 'Pierre Brunel', 'Poésie', 1868,3, '9782702182888', 'Français', 'recueil de poèmes de Charles Baudelaire reprenant la quasi-totalité de sa production en vers de 1840 jusque sa mort survenue fin août 1867',NULL,NULL,NULL,NULL, 'Livre','[{"Clé":"L1_01","Type":"Livre","Code":"L1","État":"Neuf","Disponibilité":"True","compteur":0},{"Clé":"L1_02","Type":"Livre","Code":"L1","État":"Bon","Disponibilité":"True","compteur":0},[{"Clé":"L1_03","Type":"Livre","Code":"L1","État":"Bon","Disponibilité":"True","compteur":0}]');
 
 INSERT INTO Ressource VALUES ('L2','L''étranger', 'Gallimard', 'Roman', 1942,2, '9782070360024', 'Français', 'Condamné à mort, Meursault. Sur une plage algérienne, il a tué un Arabe. À cause du soleil, dira-t-il, parce qu''il faisait chaud. On n''en tirera rien d''autre. Rien ne le fera plus réagir : ni l''annonce de sa condamnation, ni la mort de sa mère, ni les paroles du prêtre avant la fin. Comme si, sur cette plage, il avait soudain eu la révélation de l''universelle équivalence du tout et du rien.
-La conscience de n''être sur la terre qu''en sursis, d''une mort qui, quoi qu''il arrive, arrivera, sans espoir de salut. Et comment être autre chose qu''indifférent à tout après ça ?',NULL,NULL,NULL,NULL, 'Livre');
+La conscience de n''être sur la terre qu''en sursis, d''une mort qui, quoi qu''il arrive, arrivera, sans espoir de salut. Et comment être autre chose qu''indifférent à tout après ça ?',NULL,NULL,NULL,NULL, 'Livre', );
 
 INSERT INTO Ressource VALUES ('L3','Les Misérables', 'Ldp jeunesse', 'Roman', 1862,4, '2010008995', 'Français', 'Le destin de Jean Valjean, forçat échappé du bagne, est bouleversé par sa rencontre avec Fantine. Mourante et sans le sou, celle-ci lui demande de prendre soin de Cosette, sa fille confiée aux Thénardier. Ce couple d’aubergistes, malhonnête et sans scrupules, exploitent la fillette jusqu’à ce que Jean Valjean tienne sa promesse et l’adopte. Cosette devient alors sa raison de vivre. Mais son passé le rattrape et l’inspecteur Javert le traque…',NULL,NULL,NULL,NULL, 'Livre');
 
@@ -71,9 +67,6 @@ INSERT INTO Contribue  VALUES ('Réalisateur','F4','Film','Jeunet','Jean-Pierre'
 INSERT INTO Contribue  VALUES ('Compositeur','OM1','Oeuvremusicale','Mozart','Wolfgang Amadeus', '1756-01-27');
 INSERT INTO Contribue  VALUES ('Compositeur','OM2','Oeuvremusicale','Vivaldi','Antonio Lucio', '1678-03-04');
 
-INSERT INTO Exemplaire VALUES ('L1_01', 'Livre', 'L1', 'Neuf',True , 0);
-INSERT INTO Exemplaire VALUES ('L1_02', 'Livre', 'L1', 'Bon',True , 0);
-INSERT INTO Exemplaire VALUES ('L1_03', 'Livre', 'L1', 'Bon',True , 0);
 
 INSERT INTO Exemplaire VALUES ('L2_01', 'Livre', 'L2', 'Bon',True , 0);
 INSERT INTO Exemplaire VALUES ('L2_02', 'Livre', 'L2', 'Bon',True , 0);
