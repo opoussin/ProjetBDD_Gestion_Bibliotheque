@@ -50,8 +50,8 @@ FROM (((Adherents INNER JOIN Adhesions ON Adherents.login= Adhesions.login)INNER
 
 /* Afficher la liste des emprunts en cours */
 CREATE VIEW EmpruntEnCours AS
-SELECT Clé, login
-FROM EMPRUNT
+SELECT Exemplaire->>'Clé', login
+FROM EMPRUNT, JSON_ARRAY_ELEMENTS(EMPRUNT.Exemplaire) Exemplaire
 WHERE emprunt_enCours = true;
 
 /*Views pour avoir les personnes en cours de sanction*/
