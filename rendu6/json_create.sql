@@ -56,7 +56,8 @@ CREATE TABLE Ressource(
   Durée_film TIME,
   Durée_oeuvre TIME,
   Type type,
-  PRIMARY KEY (Type, Code),
+  Exemplaire JSON,
+  PRIMARY KEY (Type, Code, Exemplaire),
 CHECK ((Type = 'Livre' AND ISBN is NOT NULL AND Langue_livre is NOT NULL AND Résumé is NOT NULL AND Durée_oeuvre IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL)
         OR (Type = 'Oeuvremusicale' AND Durée_oeuvre is NOT NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Synopsis IS NULL AND Langue_film IS NULL AND Durée_film IS NULL )
         OR (Type = 'Film' AND Synopsis is NOT NULL AND Langue_film is NOT NULL AND Durée_film is NOT NULL AND ISBN IS NULL AND Langue_livre IS NULL AND Résumé IS NULL AND Durée_oeuvre IS NULL ))
@@ -84,7 +85,7 @@ CREATE TABLE Contribue (
   CHECK ((Type='Livre' AND Rôle='Auteur') OR (Type='Film' AND (Rôle='Acteur' OR Rôle='Réalisateur')) OR (Type='Oeuvremusicale' AND (Rôle='Compositeur' OR Rôle='Interprète')))
 );
 
-CREATE TABLE Exemplaire(
+/*CREATE TABLE Exemplaire(
   Clé VARCHAR PRIMARY KEY,
   Type type,
   Code VARCHAR,
@@ -92,12 +93,12 @@ CREATE TABLE Exemplaire(
   État etat NOT NULL,
   Disponibilité BOOLEAN NOT NULL,
   compteur INTEGER NOT NULL
-);
+);*/
 
 CREATE TABLE EMPRUNT (
-  Clé VARCHAR,
+  Exemplaire JSON,
   login VARCHAR,
-  FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
+  FOREIGN KEY ( Exemplaire ) REFERENCES Ressource(Exemplaire),
   FOREIGN KEY ( login ) REFERENCES Adherents(login),
   emprunt_enCours BOOLEAN NOT NULL,
   Durée_limite DATE,
@@ -105,20 +106,20 @@ CREATE TABLE EMPRUNT (
 );
 
 CREATE TABLE Reservation (
-  Clé VARCHAR,
+  Exemplaire JSON,
   login VARCHAR,
-  FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
+  FOREIGN KEY ( Exemplaire ) REFERENCES Ressource(Exemplaire),
   FOREIGN KEY ( login ) REFERENCES Adherents(login),
   état_reservation BOOLEAN NOT NULL,
   reserv_date DATE
 );
 
 CREATE TABLE Sanction(
-  Clé VARCHAR,
+  Exemplaire JSON,
   login VARCHAR,
   PRIMARY KEY (Clé, login),
   FOREIGN KEY ( login ) REFERENCES Adherents(login),
-  FOREIGN KEY ( Clé ) REFERENCES Exemplaire(Clé),
+  FOREIGN KEY ( Exemplaire ) REFERENCES Ressource(Exemplaire),
   En_sanction BOOLEAN NOT NULL,
   En_Retard BOOLEAN NOT NULL,
   Debut_retard DATE,
