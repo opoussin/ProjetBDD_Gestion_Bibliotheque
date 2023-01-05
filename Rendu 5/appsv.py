@@ -71,10 +71,8 @@ if (not row) :
                 cur.execute(sql_type)
                 row = cur.fetchone()
                 État= input("Entrez l'état de l'exemplaire : \n")
-                sql_type="SELECT Type FROM Ressource WHERE Ressource.Code = '%s'" %Code_E
-                cur.execute(sql_type)
-                row = cur.fetchone()
-                sql_ajout_exemplaire="INSERT INTO Exemplaire VALUES ('%s','%s','%s','%s',true,'%d')"%(Clé,row[0], Code_E, État,0)
+                sql_ajout_exemplaire="INSERT INTO Exemplaire VALUES ('%s','%s','%s','%s',true,'%d')" %(Clé,row[0], Code_E, État,0)
+                cur.execute(sql_ajout_exemplaire)
                 sql_titre="SELECT Titre FROM Ressource WHERE Ressource.Code = '%s'" %Code_E
                 cur.execute(sql_titre)
                 row = cur.fetchone()
