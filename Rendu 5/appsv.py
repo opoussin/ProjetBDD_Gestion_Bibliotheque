@@ -465,4 +465,4 @@ else :
                     print("Les ressource corespondant à ",genre," sont \n")
                     print(raw, "\n")
 conn.commit()
-conn.close()
+conn.close() 
