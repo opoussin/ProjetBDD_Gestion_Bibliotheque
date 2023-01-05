@@ -66,10 +66,10 @@ FROM Emprunt E Join Adherents A ON E.login = A.login ;
 
 
 /*now, à chaque fois on rejoute le login pour rajouter une condition WHERE dans le code python et pouvoir sélectionner à partir du login ce que l'on recherche*/
-
+/* modification avec JSON*/
 CREATE VIEW Genre1 AS
-SELECT Exemplaire.Code, Exemplaire.Clé, Emprunt.login
-FROM Emprunt JOIN Exemplaire ON Emprunt.Clé = Exemplaire.Clé;
+SELECT Exemplaire->>'Code' AS Code, Exemplaire->>'Clé' AS Clé , Emprunt.login
+FROM Emprunt , JSON_ARRAY_ELEMENTS(Ressource.Exemplaire) Exemplaire ;
 
 
 CREATE VIEW Genre2 AS
@@ -89,14 +89,15 @@ FROM Genre3 GROUP BY Genre3.login, Genre3.Genre;
 
 /* Exemplaire le plus emprunté de la bibliothèque  */
 CREATE VIEW Populaire AS
-SELECT Ressource.Code , Ressource.Titre , Ressource.Éditeur ,Ressource.Genre , Ressource.Type, MAX(Exemplaire.compteur)
-FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code GROUP BY Ressource.Code, Ressource.Titre, Ressource.Éditeur, Ressource.Genre , Ressource.Type;
+SELECT Ressource.Code , Ressource.Titre , Ressource.Éditeur ,Ressource.Genre , Ressource.Type, MAX(Exemplaire->>'compteur')
+FROM Ressource , JSON_ARRAY_ELEMENTS(Ressource.Exemplaire) Exemplaire 
+GROUP BY Ressource.Code, Ressource.Titre, Ressource.Éditeur, Ressource.Genre , Ressource.Type;
 
 /* Exemplaire emprunté plus de 10 fois de la bibliothèque  */
 CREATE VIEW Populaire2 AS
-SELECT Ressource.Code , Ressource.Titre ,Ressource.Genre , Ressource.Type, Exemplaire.compteur
-FROM Ressource INNER JOIN Exemplaire ON Ressource.Code=Exemplaire.Code
-WHERE Exemplaire.compteur >= 10 ;
+SELECT Ressource.Code , Ressource.Titre ,Ressource.Genre , Ressource.Type,Exemplaire->>'compteur' AS compteur
+FROM Ressource , JSON_ARRAY_ELEMENTS(Ressource.Exemplaire) Exemplaire 
+WHERE compteur >= 10 ;
 
 /* On compte le nombre de films d'une même langue empruntés*/
 CREATE VIEW LangueFilm1 AS
